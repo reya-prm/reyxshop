@@ -81,7 +81,7 @@ test('product detail page displays product information, variants, and marketplac
     $response->assertStatus(200);
     $response->assertSee('Jersey Fox Legion Enduro');
     $response->assertSee('Ukuran: L');
-    $response->assertSee('Beli di Shopee Official');
+    $response->assertSee('Buka Produk di Shopee Official');
 });
 
 test('customer can submit product review with validation', function () {
