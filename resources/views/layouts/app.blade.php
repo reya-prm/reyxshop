@@ -3,8 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>@yield('title', 'ReyxShop — Official Motocross & Off-Road Gear Store')</title>
-    <meta name="description" content="@yield('meta_description', 'Katalog resmi ReyxShop: Toko perlengkapan motocross, jersey set, helm trail, goggle, sepatu boots enduro, dan body protector original. Pesan via Shopee, Lazada, atau WhatsApp.')">
+    {!! SEO::generate() !!}
 
     <!-- Open Graph Meta -->
     <meta property="og:title" content="@yield('title', 'ReyxShop — Official Motocross & Off-Road Gear Store')">
