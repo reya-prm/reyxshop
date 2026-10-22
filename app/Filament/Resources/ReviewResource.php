@@ -4,6 +4,7 @@ namespace App\Filament\Resources;
 
 use App\Filament\Resources\ReviewResource\Pages;
 use App\Filament\Resources\ReviewResource\RelationManagers;
+use App\Filament\Resources\ReviewResource\RelationManagers\RepliesRelationManager;
 use App\Models\Review;
 use Filament\Forms;
 use Filament\Forms\Form;
@@ -86,7 +87,7 @@ class ReviewResource extends Resource
     public static function getRelations(): array
     {
         return [
-            //
+            RelationManagers\RepliesRelationManager::class,
         ];
     }
 

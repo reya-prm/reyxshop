@@ -18,9 +18,11 @@ class ImagesRelationManager extends RelationManager
     {
         return $form
             ->schema([
-                Forms\Components\TextInput::make('image_path')
+                Forms\Components\FileUpload::make('image_path')
+                    ->image()
+                    ->directory('products')
                     ->required()
-                    ->maxLength(255),
+                    ->columnSpanFull(),
             ]);
     }
 
