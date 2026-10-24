@@ -246,7 +246,7 @@
                                         </select>
                                     </div>
                                     <div>
-                                        <textarea name="content" rows="3" required placeholder="Bagikan pengalaman Anda..." class="w-full px-3 py-2 text-xs rounded-xl border border-border focus:outline-hidden focus:ring-2 focus:ring-coral"></textarea>
+                                        <textarea name="content" rows="3" placeholder="Bagikan pengalaman Anda (opsional)..." class="w-full px-3 py-2 text-xs rounded-xl border border-border focus:outline-hidden focus:ring-2 focus:ring-coral"></textarea>
                                     </div>
                                     <button type="submit" class="w-full py-2 px-4 rounded-pill bg-coral hover:bg-coral-hover text-white font-bold text-xs transition">Kirim Ulasan</button>
                                 </form>

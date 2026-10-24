@@ -24,8 +24,8 @@ class StoreReviewRequest extends FormRequest
         return [
             // rating 1‑5 integer
             'rating' => ['required', 'integer', \Illuminate\Validation\Rule::in([1,2,3,4,5])],
-            // content required, trimmed, max 1000 chars
-            'content' => ['required', 'string', 'min:5', 'max:1000'],
+            // content optional, trimmed, max 1000 chars
+            'content' => ['nullable', 'string', 'max:1000'],
         ];
     }
 
