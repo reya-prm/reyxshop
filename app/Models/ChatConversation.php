@@ -17,6 +17,7 @@ class ChatConversation extends Model
         'assigned_user_id',
         'status',
         'last_message_at',
++        'user_id',
     ];
 
     protected function casts(): array
