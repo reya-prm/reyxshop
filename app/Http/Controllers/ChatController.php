@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\MessageSent;
 use App\Models\ChatConversation;
 use App\Models\ChatMessage;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
-use Illuminate\Support\Str;
 
 class ChatController extends Controller
 {
@@ -15,17 +15,14 @@ class ChatController extends Controller
      */
     public function getMessages(Request $request): JsonResponse
     {
-        $guestToken = $request->query('guest_token') ?: session()->get('chat_guest_token');
-
-        if (!$guestToken) {
-            $guestToken = Str::uuid()->toString();
-            session()->put('chat_guest_token', $guestToken);
+        // Only authenticated and verified users can access
+        if (! $request->user() || ! $request->user()->hasVerifiedEmail()) {
+            abort(403, 'Login required');
         }
 
         $conversation = ChatConversation::firstOrCreate(
-            ['guest_token' => $guestToken],
+            ['user_id' => $request->user()->id],
             [
-                'customer_name' => $request->query('customer_name') ?: 'Guest Rider',
                 'status' => 'open',
                 'last_message_at' => now(),
             ]
@@ -33,10 +30,10 @@ class ChatController extends Controller
 
         $messages = $conversation->messages()
             ->select(['id', 'sender_type', 'message', 'created_at'])
+            ->orderBy('created_at')
             ->get();
 
         return response()->json([
-            'guest_token' => $guestToken,
             'conversation_id' => $conversation->id,
             'messages' => $messages,
         ]);
@@ -47,41 +44,33 @@ class ChatController extends Controller
      */
     public function sendMessage(Request $request): JsonResponse
     {
-        $validated = $request->validate([
-            'message' => ['required', 'string', 'max:1000'],
-            'guest_token' => ['nullable', 'string'],
-            'customer_name' => ['nullable', 'string', 'max:100'],
-        ]);
-
-        $guestToken = ($validated['guest_token'] ?? null) ?: session()->get('chat_guest_token');
-        if (!$guestToken) {
-            $guestToken = Str::uuid()->toString();
-            session()->put('chat_guest_token', $guestToken);
+        // Ensure authenticated and verified user
+        if (! $request->user() || ! $request->user()->hasVerifiedEmail()) {
+            abort(403, 'Login required');
         }
 
+        $validated = $request->validate([
+            'message' => ['required', 'string', 'min:1', 'max:2000'],
+        ]);
+
         $conversation = ChatConversation::firstOrCreate(
-            ['guest_token' => $guestToken],
+            ['user_id' => $request->user()->id],
             [
-                'customer_name' => $validated['customer_name'] ?? 'Guest Rider',
                 'status' => 'open',
                 'last_message_at' => now(),
             ]
         );
 
         $message = $conversation->messages()->create([
+            'user_id' => $request->user()->id,
             'sender_type' => 'customer',
             'message' => $validated['message'],
         ]);
 
         $conversation->update(['last_message_at' => now()]);
 
-        // Auto-reply bot greeting for immediate response if this is first customer message
-        if ($conversation->messages()->count() === 1) {
-            $conversation->messages()->create([
-                'sender_type' => 'system',
-                'message' => 'Terima kasih telah menghubungi ReyxShop! Admin kami sedang mengecek pesan Anda. Untuk respon super cepat, Anda juga bisa langsung chat kami via WhatsApp di nomor resmi toko.',
-            ]);
-        }
+        // Broadcast to private channel
+        event(new MessageSent($message));
 
         return response()->json([
             'status' => 'success',

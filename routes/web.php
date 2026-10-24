@@ -32,7 +32,9 @@ Route::middleware('auth')->group(function () {
 
     // Live Chat API endpoints
     Route::get('/chat/messages', [ChatController::class, 'getMessages'])->name('chat.messages');
-    Route::post('/chat/send', [ChatController::class, 'sendMessage'])->name('chat.send');
+    Route::post('/chat/send', [ChatController::class, 'sendMessage'])
+        ->middleware('throttle:10,1')
+        ->name('chat.send');
 });
 
 // SEO & Search Engine routes (placeholder - controller not present)
