@@ -25,7 +25,7 @@
                     </h1>
 
                     <p class="text-slate text-base sm:text-lg max-w-2xl mx-auto lg:mx-0 leading-relaxed font-normal">
-                        Koleksi lengkap jersey motocross, helm trail, sepatu boots enduro, dan body protector original. Pesan mudah, hangat, dan terpercaya langsung via <span class="font-semibold text-charcoal">Shopee</span>, <span class="font-semibold text-charcoal">Lazada</span>, atau <span class="font-semibold text-charcoal">WhatsApp</span>.
+                        Koleksi lengkap jersey motocross, helm trail, sepatu boots enduro, dan body protector original. Pesan mudah, hangat, dan terpercaya langsung via <span class="font-semibold text-charcoal">Shopee</span>, <span class="font-semibold text-charcoal">Lazada</span>, atau <span class="font-semibold text-charcoal">Email</span>.
                     </p>
 
                     <!-- Store Status Quick Notice -->
@@ -137,7 +137,7 @@
                         Produk Terpopuler ReyxShop
                     </h2>
                     <p class="text-xs text-slate mt-1">
-                        Pilih produk dan nikmati kemudahan bertransaksi via Shopee, Lazada, atau WhatsApp.
+                        Pilih produk dan nikmati kemudahan bertransaksi via Shopee, Lazada, atau email.
                     </p>
                 </div>
 
