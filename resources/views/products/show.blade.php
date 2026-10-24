@@ -234,22 +234,26 @@
                         <h4 class="text-xs font-bold text-charcoal uppercase tracking-wider mb-3">Tulis Ulasan Anda</h4>
                         @auth
                             @if(Auth::user()->hasVerifiedEmail())
-                                <form action="{{ route('products.reviews.store', $product->slug) }}" method="POST" class="space-y-3">
-                                    @csrf
-                                    <div>
-                                        <select name="rating" required class="w-full px-3 py-2 text-xs rounded-xl border border-border focus:outline-hidden focus:ring-2 focus:ring-coral bg-white">
-                                            <option value="5">★★★★★ — Sangat Puas (5 Bintang)</option>
-                                            <option value="4">★★★★☆ — Puas (4 Bintang)</option>
-                                            <option value="3">★★★☆☆ — Cukup (3 Bintang)</option>
-                                            <option value="2">★★☆☆☆ — Kurang (2 Bintang)</option>
-                                            <option value="1">★☆☆☆☆ — Kecewa (1 Bintang)</option>
-                                        </select>
-                                    </div>
-                                    <div>
-                                        <textarea name="content" rows="3" placeholder="Bagikan pengalaman Anda (opsional)..." class="w-full px-3 py-2 text-xs rounded-xl border border-border focus:outline-hidden focus:ring-2 focus:ring-coral"></textarea>
-                                    </div>
-                                    <button type="submit" class="w-full py-2 px-4 rounded-pill bg-coral hover:bg-coral-hover text-white font-bold text-xs transition">Kirim Ulasan</button>
-                                </form>
+                                @if(!$product->reviews()->where('user_id', \Illuminate\Support\Facades\Auth::id())->exists())
+                                    <form action="{{ route('products.reviews.store', $product->slug) }}" method="POST" class="space-y-3">
+                                        @csrf
+                                        <div>
+                                            <select name="rating" required class="w-full px-3 py-2 text-xs rounded-xl border border-border focus:outline-hidden focus:ring-2 focus:ring-coral bg-white">
+                                                <option value="5">★★★★★ — Sangat Puas (5 Bintang)</option>
+                                                <option value="4">★★★★☆ — Puas (4 Bintang)</option>
+                                                <option value="3">★★★☆☆ — Cukup (3 Bintang)</option>
+                                                <option value="2">★★☆☆☆ — Kurang (2 Bintang)</option>
+                                                <option value="1">★☆☆☆☆ — Kecewa (1 Bintang)</option>
+                                            </select>
+                                        </div>
+                                        <div>
+                                            <textarea name="content" rows="3" placeholder="Bagikan pengalaman Anda (opsional)..." class="w-full px-3 py-2 text-xs rounded-xl border border-border focus:outline-hidden focus:ring-2 focus:ring-coral"></textarea>
+                                        </div>
+                                        <button type="submit" class="w-full py-2 px-4 rounded-pill bg-coral hover:bg-coral-hover text-white font-bold text-xs transition">Kirim Ulasan</button>
+                                    </form>
+                                @else
+                                    <div class="p-4 bg-green-100 text-green-800 text-xs rounded-card">Anda sudah memberi rating untuk produk ini.</div>
+                                @endif
                             @else
                                 <div class="p-4 bg-yellow-100 text-yellow-800 text-xs rounded-card">Verifikasi email Anda untuk dapat menulis ulasan.</div>
                             @endif
