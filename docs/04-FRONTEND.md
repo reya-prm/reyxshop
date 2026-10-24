@@ -21,8 +21,16 @@ Functionality lebih dahulu daripada visual polish.
 
 ## Main Pages
 
+### Auth Pages
+- Login (`/login`)
+- Register (`/register`) – form: name, email, password, password confirmation
+- Forgot Password (`/forgot-password`)
+- Reset Password (`/reset-password/{token}`)
+- Email Verification (`/email/verify`) – notice dan resend link
+- Layout konsisten dengan storefront, Tailwind, mobile‑first.
+
 ### Home
-- navbar
+- navbar (dengan auth state: Login/Register bila guest, nama user + Logout bila sudah login)
 - store status/notice
 - hero/banner
 - featured products
@@ -30,7 +38,7 @@ Functionality lebih dahulu daripada visual polish.
 - promotions
 - marketplace/contact CTA
 - footer
-- floating chat
+- floating chat (hanya untuk user yang sudah login & verified)
 
 ### Product Listing
 - search

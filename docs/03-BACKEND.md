@@ -47,7 +47,14 @@ Validasi product, category, image, review, question, chat, banner, marketplace U
 Jangan mengandalkan client-side validation.
 
 ## Authorization
-Gunakan policies/authorization untuk admin actions. Guest tidak boleh mengakses admin.
+Gunakan policies/authorization untuk admin actions.
+
+- **Guest tidak boleh mengakses admin.**
+- **Review, Q&A (tanya produk), dan Live Chat memerlukan login & email terverifikasi.**
+- Role `customer` otomatis diberikan saat registrasi.
+- Model `User` menggunakan `MustVerifyEmail`.
+- Admin panel (`/admin`) hanya dapat diakses oleh role `admin` dan `operator`.
+- Middleware `auth` + `verified` wajib pada route untuk review, question, chat.
 
 ## Filament
 Bangun bertahap:
@@ -75,7 +82,7 @@ Gunakan Blade/Livewire sesuai kompleksitas.
 
 ## Live Chat
 ```text
-Customer
+Customer (login & verified)
   ↓
 ChatConversation
   ↓
@@ -88,7 +95,7 @@ Laravel Reverb
 Admin / Customer
 ```
 
-Guest identification memakai session/token aman. Jangan expose admin data.
+Customer harus login untuk menggunakan live chat. Jangan expose admin data.
 
 ## Marketplace & WhatsApp
 URL marketplace berasal dari database. WhatsApp number berasal dari store settings, bukan hardcode di banyak file.

@@ -1,7 +1,7 @@
 # ReyxShop — System Requirements
 
 ## Customer
-Customer dapat:
+Customer dapat (tanpa login):
 - Browse produk.
 - Search.
 - Filter kategori.
@@ -9,12 +9,15 @@ Customer dapat:
 - Melihat gambar, harga, stok, variasi.
 - Membaca review.
 - Membaca Q&A.
-- Bertanya tentang produk.
 - Membuka marketplace.
 - Chat WhatsApp.
-- Menggunakan live chat.
 
-Browsing dan live chat tidak boleh dibuat bergantung pada registrasi yang rumit.
+Customer yang sudah login & verified dapat:
+- Menulis review dan rating produk.
+- Bertanya tentang produk (Q&A).
+- Menggunakan live chat dengan admin.
+
+**Guest (tidak login) tidak boleh membuat review, pertanyaan, atau memulai chat.**
 
 ## Admin / Operator
 Admin dapat:
@@ -72,7 +75,7 @@ Admin dapat moderate dan memberi official reply.
 Customer dapat bertanya tentang produk. Admin dapat menjawab. Simpan product, question, customer data bila ada, answer, admin, status/timestamps.
 
 ## Live Chat
-Customer:
+Customer (login & verified):
 - buka floating widget
 - mulai conversation
 - kirim pesan
@@ -83,7 +86,7 @@ Admin:
 - membuka conversation
 - membalas
 
-Gunakan Laravel Reverb untuk realtime. Guest chat diperbolehkan menggunakan session/token yang aman.
+Gunakan Laravel Reverb untuk realtime.
 
 ## Store Settings
 Admin mengatur:

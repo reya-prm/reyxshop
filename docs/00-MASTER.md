@@ -4,16 +4,24 @@
 ReyxShop adalah website resmi katalog/toko online untuk toko keluarga. Website menjadi storefront resmi yang menampilkan produk dan mengarahkan pembeli ke marketplace/WhatsApp.
 
 ## Stack
-- Laravel 13
-- PHP kompatibel Laravel 13
-- MySQL
+- Laravel 13.38.0
+- PHP 8.5.4
+- MySQL 8.0+
 - Blade
-- Tailwind CSS
-- Livewire bila diperlukan
-- Filament
+- Tailwind CSS 4.x
+- Livewire 3.x
+- Filament 3.2
+- Spatie Laravel-Permission 6.10.3
+- Artesaos SEOTools 1.3.3
 - Laravel Reverb
 - Vite
 - Composer + NPM
+
+## KEPUTUSAN TERBARU (Instruksi User)
+- **Review/rating, Q&A (tanya), dan Live Chat WAJIB login.** Guest tidak diperbolehkan membuat review, pertanyaan, atau memulai chat. Mencegah user mengatasnamakan orang lain.
+- **Tetap Publik Tanpa Login:** Browsing katalog, search, filter kategori, detail produk, membaca review & Q&A, serta tombol marketplace/WhatsApp.
+- **Customer Auth:** Registrasi dengan role `customer` otomatis, login, logout, reset password, dan verifikasi email (`MustVerifyEmail`). Guest/Customer dilarang mengakses panel admin Filament (`/admin`).
+
 
 Arsitektur utama **full Laravel**, bukan React frontend terpisah dan bukan REST API sebagai aplikasi terpisah.
 

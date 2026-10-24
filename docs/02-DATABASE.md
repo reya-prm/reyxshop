@@ -37,22 +37,30 @@ Laravel users/admin.
 `id, title, description, image_path, link_url, sort_order, is_active, starts_at, ends_at, timestamps`
 
 ### reviews
-`id, product_id, user_id nullable, customer_name nullable, rating, content, status, timestamps`
+`id, product_id, user_id, rating, content, status, timestamps`
+
+(Catatan: `user_id` wajib untuk data baru. Legacy data lama mungkin masih memiliki `customer_name nullable`, tapi fitur baru mewajibkan login.)
 
 ### review_replies
 `id, review_id, user_id, content, timestamps`
 
 ### product_questions
-`id, product_id, user_id nullable, customer_name nullable, question, status, timestamps`
+`id, product_id, user_id, question, status, timestamps`
+
+(Catatan: `user_id` wajib untuk data baru. Legacy data lama mungkin masih memiliki `customer_name nullable`, tapi fitur baru mewajibkan login.)
 
 ### question_answers
 `id, question_id, user_id, answer, timestamps`
 
 ### chat_conversations
-`id, customer_name nullable, guest_token nullable, assigned_user_id nullable, status, last_message_at nullable, timestamps`
+`id, user_id, assigned_user_id nullable, status, last_message_at nullable, timestamps`
+
+(Catatan: `user_id` wajib untuk data baru. Legacy data lama mungkin masih memiliki `customer_name nullable`, tapi fitur baru mewajibkan login.)
 
 ### chat_messages
-`id, conversation_id, user_id nullable, sender_type, message, read_at nullable, timestamps`
+`id, conversation_id, user_id, sender_type, message, read_at nullable, timestamps`
+
+(Catatan: `user_id` wajib untuk data baru. Legacy data lama mungkin masih memiliki `customer_name nullable`, tapi fitur baru mewajibkan login.)
 
 ### store_settings
 `id, key, value, type, timestamps`
