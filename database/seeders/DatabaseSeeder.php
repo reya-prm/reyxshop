@@ -349,10 +349,20 @@ class DatabaseSeeder extends Seeder
 
             // Reviews & Replies
             foreach ($pData['reviews'] as $revData) {
+                // Create or get customer user for this review
+                $customer = User::firstOrCreate(
+                    ['email' => strtolower(str_replace([' ', '(', ')'], ['', '', ''], $revData['customer_name'])) . '@customer.test'],
+                    [
+                        'name' => $revData['customer_name'],
+                        'password' => bcrypt('password'),
+                        'email_verified_at' => now(),
+                    ]
+                );
+                
                 $review = Review::updateOrCreate(
                     [
                         'product_id' => $product->id,
-                        'customer_name' => $revData['customer_name'],
+                        'user_id' => $customer->id,
                     ],
                     [
                         'rating' => $revData['rating'],
@@ -374,10 +384,20 @@ class DatabaseSeeder extends Seeder
 
             // Q&A
             foreach ($pData['questions'] as $qData) {
+                // Create or get customer user for this question
+                $customer = User::firstOrCreate(
+                    ['email' => strtolower(str_replace([' ', '(', ')'], ['', '', ''], $qData['customer_name'])) . '@customer.test'],
+                    [
+                        'name' => $qData['customer_name'],
+                        'password' => bcrypt('password'),
+                        'email_verified_at' => now(),
+                    ]
+                );
+                
                 $question = ProductQuestion::updateOrCreate(
                     [
                         'product_id' => $product->id,
-                        'customer_name' => $qData['customer_name'],
+                        'user_id' => $customer->id,
                         'question' => $qData['question'],
                     ],
                     [
