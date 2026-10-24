@@ -10,12 +10,37 @@ Production memakai production env, database, storage, cache/session/queue sesuai
 Jangan commit `.env` atau secrets.
 
 ## Production
-Set minimal:
-- `APP_ENV=production`
-- `APP_DEBUG=false`
-- `APP_URL`
-- production DB credentials
-- application secrets
++### SMTP untuk email verification
++Set mail driver ke `smtp` dengan kredensial produksi:
++```
++MAIL_MAILER=smtp
++MAIL_HOST=smtp.example.com
++MAIL_PORT=587
++MAIL_USERNAME=you@example.com
++MAIL_PASSWORD=very-secret
++MAIL_ENCRYPTION=tls
++MAIL_FROM_ADDRESS=no-reply@reyxshop.com
++MAIL_FROM_NAME="ReyxShop"
++```
++Pastikan `queue` dijalankan untuk mengirim email secara async.
++
++### Reverb production configuration
++Pada `.env` produksi tambahkan:
++```
++BROADCAST_CONNECTION=reverb
++REVERB_APP_KEY=prod_key
++REVERB_APP_ID=prod_id
++REVERB_APP_SECRET=prod_secret
++REVERB_HOST=your-reverb-host.com
++REVERB_PORT=443
++REVERB_SCHEME=wss
++```
++Jalankan Reverb daemon atau supervisor service:
++```bash
++php artisan reverb:start --daemon
++```
++Pastikan firewall memperbolehkan port WebSocket (443) dan gunakan TLS.
++```
 
 Gunakan PHP/extensions yang kompatibel dengan Laravel 13.
 

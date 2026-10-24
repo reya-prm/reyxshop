@@ -54,7 +54,7 @@ class User extends Authenticatable implements MustVerifyEmail
      */
     public function isAdmin(): bool
     {
-        return $this->role === 'admin';
+        return $this->hasRole('admin');
     }
 
     /**
@@ -62,6 +62,15 @@ class User extends Authenticatable implements MustVerifyEmail
      */
     public function isOperator(): bool
     {
-        return in_array($this->role, ['admin', 'operator']);
+        return $this->hasAnyRole(['admin', 'operator']);
     }
+
+    /**
+     * Determine if user can access Filament admin panel.
+     */
+    public function canAccessFilament(): bool
+    {
+        return $this->isAdmin() || $this->hasRole('operator');
+    }
+
 }
