@@ -13,17 +13,17 @@
     @endif
 
     <!-- Breadcrumb -->
-    <div class="bg-slate-100 border-b border-slate-200 py-3 text-xs text-slate-500">
+    <div class="bg-ash border-b border-border py-3 text-xs text-slate">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center gap-2">
-            <a href="{{ route('home') }}" class="hover:text-red-600 transition">Beranda</a>
+            <a href="{{ route('home') }}" class="hover:text-coral transition">Beranda</a>
             <span>/</span>
-            <a href="{{ route('products.index') }}" class="hover:text-red-600 transition">Katalog</a>
+            <a href="{{ route('products.index') }}" class="hover:text-coral transition">Katalog</a>
             <span>/</span>
-            <a href="{{ route('products.index', ['category' => $product->category->slug]) }}" class="hover:text-red-600 transition">
+            <a href="{{ route('products.index', ['category' => $product->category->slug]) }}" class="hover:text-coral transition">
                 {{ $product->category->name }}
             </a>
             <span>/</span>
-            <span class="text-slate-800 font-semibold truncate">{{ $product->name }}</span>
+            <span class="text-charcoal font-semibold truncate">{{ $product->name }}</span>
         </div>
     </div>
 
@@ -33,7 +33,7 @@
             
             <!-- Left Col: Gallery -->
             <div class="lg:col-span-6 space-y-4">
-                <div class="rounded-3xl border border-slate-200 overflow-hidden bg-slate-100 aspect-4/3 relative shadow-xs">
+                <div class="rounded-card border border-border overflow-hidden bg-ash aspect-4/3 relative shadow-floating">
                     <img 
                         id="main-product-image"
                         src="{{ $product->image_url }}" 
@@ -41,7 +41,7 @@
                         class="w-full h-full object-cover object-center transition-all duration-300"
                     >
                     <div class="absolute top-4 left-4">
-                        <span class="px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider bg-slate-900 text-white shadow-sm">
+                        <span class="px-3 py-1 rounded-pill text-xs font-bold uppercase tracking-wider bg-charcoal text-white shadow-xs">
                             {{ $product->category->name }}
                         </span>
                     </div>
@@ -54,7 +54,7 @@
                             <button 
                                 type="button" 
                                 onclick="document.getElementById('main-product-image').src='{{ $img->url }}'"
-                                class="w-20 h-20 rounded-xl overflow-hidden border-2 border-slate-200 hover:border-red-500 focus:border-red-600 transition shrink-0 cursor-pointer"
+                                class="w-20 h-20 rounded-card overflow-hidden border-2 border-border hover:border-coral focus:border-coral-hover transition shrink-0 cursor-pointer"
                             >
                                 <img src="{{ $img->url }}" alt="Thumbnail {{ $index + 1 }}" class="w-full h-full object-cover">
                             </button>
@@ -63,20 +63,20 @@
                 @endif
 
                 <!-- Store Guarantee Badges -->
-                <div class="grid grid-cols-3 gap-3 pt-4 border-t border-slate-200 text-center text-xs text-slate-600">
-                    <div class="p-3 rounded-xl bg-slate-50 border border-slate-200/60">
+                <div class="grid grid-cols-3 gap-3 pt-4 border-t border-border text-center text-xs text-slate">
+                    <div class="p-3 rounded-card bg-white border border-border">
                         <span class="block text-base mb-1">🛡️</span>
-                        <strong class="text-slate-900 block">100% Original</strong>
+                        <strong class="text-charcoal block">100% Original</strong>
                         <span>Garansi uang kembali</span>
                     </div>
-                    <div class="p-3 rounded-xl bg-slate-50 border border-slate-200/60">
+                    <div class="p-3 rounded-card bg-white border border-border">
                         <span class="block text-base mb-1">📦</span>
-                        <strong class="text-slate-900 block">Packing Aman</strong>
+                        <strong class="text-charcoal block">Packing Aman</strong>
                         <span>Kardus + bubble wrap</span>
                     </div>
-                    <div class="p-3 rounded-xl bg-slate-50 border border-slate-200/60">
+                    <div class="p-3 rounded-card bg-white border border-border">
                         <span class="block text-base mb-1">⚡</span>
-                        <strong class="text-slate-900 block">Kirim Hari Ini</strong>
+                        <strong class="text-charcoal block">Kirim Hari Ini</strong>
                         <span>Order s/d 15:00 WIB</span>
                     </div>
                 </div>
@@ -88,33 +88,33 @@
                 <div>
                     <!-- Badge & Rating -->
                     <div class="flex items-center gap-2 mb-2">
-                        <span class="px-2.5 py-0.5 rounded-full text-[10px] font-bold uppercase bg-red-100 text-red-600">
+                        <span class="px-2.5 py-0.5 rounded-pill text-[10px] font-bold uppercase bg-coral text-white">
                             ReyxShop Official
                         </span>
                         <div class="flex items-center gap-1 text-xs text-amber-500 font-bold">
                             <span>★</span>
-                            <span class="text-slate-800">{{ $product->average_rating }}</span>
-                            <span class="text-slate-400 font-normal">({{ $product->approvedReviews->count() }} ulasan)</span>
+                            <span class="text-charcoal">{{ $product->average_rating }}</span>
+                            <span class="text-slate font-normal">({{ $product->approvedReviews->count() }} ulasan)</span>
                         </div>
                     </div>
 
-                    <h1 class="text-2xl sm:text-3xl font-black text-slate-900 tracking-tight leading-tight">
+                    <h1 class="text-2xl sm:text-3xl font-extrabold text-charcoal tracking-tight leading-tight">
                         {{ $product->name }}
                     </h1>
                 </div>
 
                 <!-- Price Box -->
-                <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 flex items-baseline justify-between">
+                <div class="p-4 rounded-card bg-white border border-border flex items-baseline justify-between">
                     <div>
-                        <span class="text-xs text-slate-500 block mb-1">Harga Resmi:</span>
+                        <span class="text-xs text-slate block mb-1">Harga Resmi:</span>
                         <div class="flex items-baseline gap-3">
-                            <span class="text-3xl font-black text-slate-950">
+                            <span class="text-3xl font-extrabold text-charcoal">
                                 Rp {{ number_format($product->price, 0, ',', '.') }}
                             </span>
                         </div>
                     </div>
                     <div class="text-right">
-                        <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-emerald-100 text-emerald-800">
+                        <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-pill text-xs font-semibold bg-white text-charcoal border border-border shadow-xs">
                             <span class="w-2 h-2 rounded-full bg-emerald-500"></span>
                             Stok: {{ $product->stock }} Tersedia
                         </span>
@@ -124,18 +124,18 @@
                 <!-- Variant Selector -->
                 @if($product->variants->count() > 0)
                     <div class="space-y-2">
-                        <label class="text-xs font-bold text-slate-900 uppercase tracking-wider block">
+                        <label class="text-xs font-bold text-charcoal uppercase tracking-wider block">
                             Pilihan Varian / Ukuran:
                         </label>
                         <div class="flex flex-wrap gap-2">
                             @foreach($product->variants as $v)
                                 <button 
                                     type="button" 
-                                    class="px-4 py-2 rounded-xl text-xs font-semibold border border-slate-300 hover:border-red-500 bg-white hover:bg-red-50 transition cursor-pointer text-slate-800"
+                                    class="px-4 py-2 rounded-card text-xs font-semibold border border-border hover:border-coral bg-white hover:bg-orange-50 transition cursor-pointer text-charcoal"
                                 >
                                     {{ $v->name }}: {{ $v->value }}
                                     @if($v->additional_price > 0)
-                                        <span class="text-[10px] text-red-600 font-bold">(+Rp {{ number_format($v->additional_price, 0, ',', '.') }})</span>
+                                        <span class="text-[10px] text-coral font-bold">(+Rp {{ number_format($v->additional_price, 0, ',', '.') }})</span>
                                     @endif
                                 </button>
                             @endforeach
@@ -144,8 +144,8 @@
                 @endif
 
                 <!-- Official Marketplace Purchase Buttons (Notice: No Native Cart) -->
-                <div class="space-y-3 pt-4 border-t border-slate-200">
-                    <p class="text-xs font-bold text-slate-900 uppercase tracking-wider">
+                <div class="space-y-3 pt-4 border-t border-border">
+                    <p class="text-xs font-bold text-charcoal uppercase tracking-wider">
                         Pesan Langsung Melalui Kanal Resmi:
                     </p>
 
@@ -159,7 +159,7 @@
                         href="{{ $shopeeUrl }}" 
                         target="_blank" 
                         rel="noopener" 
-                        class="flex items-center justify-between p-3.5 rounded-2xl bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 text-white font-bold text-sm shadow-md shadow-orange-500/20 transition transform hover:-translate-y-0.5"
+                        class="flex items-center justify-between p-3.5 rounded-card bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 text-white font-bold text-sm shadow-md shadow-orange-500/20 transition transform hover:-translate-y-0.5"
                     >
                         <div class="flex items-center gap-3">
                             <span class="w-8 h-8 rounded-lg bg-white/20 flex items-center justify-center font-black">S</span>
@@ -176,7 +176,7 @@
                         href="{{ $lazadaUrl }}" 
                         target="_blank" 
                         rel="noopener" 
-                        class="flex items-center justify-between p-3.5 rounded-2xl bg-gradient-to-r from-indigo-600 to-indigo-700 hover:from-indigo-700 hover:to-indigo-800 text-white font-bold text-sm shadow-md shadow-indigo-600/20 transition transform hover:-translate-y-0.5"
+                        class="flex items-center justify-between p-3.5 rounded-card bg-gradient-to-r from-indigo-600 to-indigo-700 hover:from-indigo-700 hover:to-indigo-800 text-white font-bold text-sm shadow-md shadow-indigo-600/20 transition transform hover:-translate-y-0.5"
                     >
                         <div class="flex items-center gap-3">
                             <span class="w-8 h-8 rounded-lg bg-white/20 flex items-center justify-center font-black">L</span>
@@ -192,7 +192,7 @@
                     <a 
                         href="https://wa.me/{{ $storeSettings['whatsapp_number'] }}?text=Halo%20Admin%20ReyxShop%2C%20saya%20tertarik%20dengan%20produk%20{{ urlencode($product->name) }}%20(Harga%20Rp%20{{ number_format($product->price, 0, ',', '.') }}).%20Apakah%20stok%20masih%20tersedia%3F" 
                         target="_blank" 
-                        class="flex items-center justify-between p-3.5 rounded-2xl bg-gradient-to-r from-emerald-600 to-emerald-700 hover:from-emerald-700 hover:to-emerald-800 text-white font-bold text-sm shadow-md shadow-emerald-600/20 transition transform hover:-translate-y-0.5"
+                        class="flex items-center justify-between p-3.5 rounded-card bg-gradient-to-r from-emerald-600 to-emerald-700 hover:from-emerald-700 hover:to-emerald-800 text-white font-bold text-sm shadow-md shadow-emerald-600/20 transition transform hover:-translate-y-0.5"
                     >
                         <div class="flex items-center gap-3">
                             <span class="w-8 h-8 rounded-lg bg-white/20 flex items-center justify-center font-black">💬</span>
@@ -206,9 +206,9 @@
                 </div>
 
                 <!-- Description -->
-                <div class="pt-6 border-t border-slate-200">
-                    <h3 class="text-sm font-bold text-slate-900 uppercase tracking-wider mb-2">Deskripsi Produk:</h3>
-                    <div class="text-xs text-slate-600 leading-relaxed whitespace-pre-line bg-slate-50 p-4 rounded-xl border border-slate-200">
+                <div class="pt-6 border-t border-border">
+                    <h3 class="text-sm font-bold text-charcoal uppercase tracking-wider mb-2">Deskripsi Produk:</h3>
+                    <div class="text-xs text-slate leading-relaxed whitespace-pre-line bg-white p-4 rounded-card border border-border">
                         {{ $product->description }}
                     </div>
                 </div>
@@ -218,26 +218,26 @@
         </div>
 
         <!-- REVIEWS & Q&A TABS SECTION -->
-        <div class="mt-16 pt-10 border-t border-slate-200">
+        <div class="mt-16 pt-10 border-t border-border">
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-10">
                 
                 <!-- Reviews Column -->
                 <div class="space-y-6">
                     <div class="flex items-center justify-between">
-                        <h3 class="text-lg font-bold text-slate-900 flex items-center gap-2">
+                        <h3 class="text-lg font-bold text-charcoal flex items-center gap-2">
                             <span>⭐</span> Ulasan Pembeli ({{ $product->approvedReviews->count() }})
                         </h3>
                     </div>
 
                     <!-- Review Submission Form -->
-                    <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-2xs">
-                        <h4 class="text-xs font-bold text-slate-900 uppercase tracking-wider mb-3">Tulis Ulasan Anda</h4>
+                    <div class="bg-white p-5 rounded-card border border-border shadow-xs">
+                        <h4 class="text-xs font-bold text-charcoal uppercase tracking-wider mb-3">Tulis Ulasan Anda</h4>
                         @auth
                             @if(Auth::user()->hasVerifiedEmail())
                                 <form action="{{ route('products.reviews.store', $product->slug) }}" method="POST" class="space-y-3">
                                     @csrf
                                     <div>
-                                        <select name="rating" required class="w-full px-3 py-2 text-xs rounded-xl border border-slate-300 focus:outline-hidden focus:ring-2 focus:ring-red-500 bg-white">
+                                        <select name="rating" required class="w-full px-3 py-2 text-xs rounded-xl border border-border focus:outline-hidden focus:ring-2 focus:ring-coral bg-white">
                                             <option value="5">★★★★★ — Sangat Puas (5 Bintang)</option>
                                             <option value="4">★★★★☆ — Puas (4 Bintang)</option>
                                             <option value="3">★★★☆☆ — Cukup (3 Bintang)</option>
@@ -246,15 +246,15 @@
                                         </select>
                                     </div>
                                     <div>
-                                        <textarea name="content" rows="3" required placeholder="Bagikan pengalaman Anda..." class="w-full px-3 py-2 text-xs rounded-xl border border-slate-300 focus:outline-hidden focus:ring-2 focus:ring-red-500"></textarea>
+                                        <textarea name="content" rows="3" required placeholder="Bagikan pengalaman Anda..." class="w-full px-3 py-2 text-xs rounded-xl border border-border focus:outline-hidden focus:ring-2 focus:ring-coral"></textarea>
                                     </div>
-                                    <button type="submit" class="w-full py-2 px-4 rounded-xl bg-slate-900 hover:bg-slate-800 text-white font-bold text-xs transition">Kirim Ulasan</button>
+                                    <button type="submit" class="w-full py-2 px-4 rounded-pill bg-coral hover:bg-coral-hover text-white font-bold text-xs transition">Kirim Ulasan</button>
                                 </form>
                             @else
-                                <div class="p-4 bg-yellow-100 text-yellow-800 text-xs rounded">Verifikasi email Anda untuk dapat menulis ulasan.</div>
+                                <div class="p-4 bg-yellow-100 text-yellow-800 text-xs rounded-card">Verifikasi email Anda untuk dapat menulis ulasan.</div>
                             @endif
                         @else
-                            <a href="{{ route('login') }}" class="block w-full py-2 px-4 bg-slate-900 text-white text-center rounded hover:bg-slate-800 text-xs font-bold">Login untuk menulis review</a>
+                            <a href="{{ route('login') }}" class="block w-full py-2 px-4 bg-coral text-white text-center rounded-pill hover:bg-coral-hover text-xs font-bold">Login untuk menulis review</a>
                         @endauth
                     </div>
 
@@ -262,19 +262,19 @@
                     @if($product->approvedReviews->count() > 0)
                         <div class="space-y-3">
                             @foreach($product->approvedReviews as $rev)
-                                <div class="bg-white p-4 rounded-2xl border border-slate-200 space-y-2">
+                                <div class="bg-white p-4 rounded-card border border-border space-y-2">
                                     <div class="flex items-center justify-between text-xs">
-                                        <strong class="text-slate-900">{{ $rev->user->name ?? 'Pelanggan Terverifikasi' }}</strong>
-                                        <span class="text-slate-400">{{ $rev->created_at->diffForHumans() }}</span>
+                                        <strong class="text-charcoal">{{ $rev->user->name ?? 'Pelanggan Terverifikasi' }}</strong>
+                                        <span class="text-slate">{{ $rev->created_at->diffForHumans() }}</span>
                                     </div>
                                     <div class="text-amber-500 text-xs">
                                         @for($i = 0; $i < $rev->rating; $i++) ★ @endfor
                                     </div>
-                                    <p class="text-xs text-slate-600 leading-relaxed">{{ $rev->content }}</p>
+                                    <p class="text-xs text-slate leading-relaxed">{{ $rev->content }}</p>
                                     
                                     @if($rev->reply)
-                                        <div class="mt-2 pt-2 border-t border-slate-100 pl-3 border-l-2 border-red-500 bg-slate-50 p-2 rounded text-[11px] text-slate-600">
-                                            <strong class="text-red-600 block mb-0.5">Balasan Resmi Admin ReyxShop:</strong>
+                                        <div class="mt-2 pt-2 border-t border-border pl-3 border-l-2 border-coral bg-ash p-2 rounded-card text-[11px] text-slate">
+                                            <strong class="text-coral block mb-0.5">Balasan Resmi Admin ReyxShop:</strong>
                                             {{ $rev->reply->content }}
                                         </div>
                                     @endif
@@ -282,7 +282,7 @@
                             @endforeach
                         </div>
                     @else
-                        <div class="p-6 bg-slate-50 rounded-2xl border border-slate-200 text-center text-xs text-slate-500">
+                        <div class="p-6 bg-white rounded-card border border-border text-center text-xs text-slate">
                             Belum ada ulasan untuk produk ini. Jadilah yang pertama memberikan ulasan!
                         </div>
                     @endif
@@ -291,28 +291,28 @@
                 <!-- Q&A Column -->
                 <div class="space-y-6">
                     <div class="flex items-center justify-between">
-                        <h3 class="text-lg font-bold text-slate-900 flex items-center gap-2">
+                        <h3 class="text-lg font-bold text-charcoal flex items-center gap-2">
                             <span>❓</span> Tanya Jawab Produk (Q&A)
                         </h3>
                     </div>
 
                     <!-- Ask Question Form -->
-                    <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-2xs">
-                        <h4 class="text-xs font-bold text-slate-900 uppercase tracking-wider mb-3">Ajukan Pertanyaan ke Admin</h4>
+                    <div class="bg-white p-5 rounded-card border border-border shadow-xs">
+                        <h4 class="text-xs font-bold text-charcoal uppercase tracking-wider mb-3">Ajukan Pertanyaan ke Admin</h4>
                         @auth
                             @if(Auth::user()->hasVerifiedEmail())
                                 <form action="{{ route('products.questions.store', $product->slug) }}" method="POST" class="space-y-3">
                                     @csrf
                                     <div>
-                                        <textarea name="question" rows="3" required placeholder="Tanyakan spesifikasi ukuran, kompatibilitas motor..." class="w-full px-3 py-2 text-xs rounded-xl border border-slate-300 focus:outline-hidden focus:ring-2 focus:ring-red-500"></textarea>
+                                        <textarea name="question" rows="3" required placeholder="Tanyakan spesifikasi ukuran, kompatibilitas motor..." class="w-full px-3 py-2 text-xs rounded-xl border border-border focus:outline-hidden focus:ring-2 focus:ring-coral"></textarea>
                                     </div>
-                                    <button type="submit" class="w-full py-2 px-4 rounded-xl bg-red-600 hover:bg-red-700 text-white font-bold text-xs transition">Kirim Pertanyaan</button>
+                                    <button type="submit" class="w-full py-2 px-4 rounded-pill bg-coral hover:bg-coral-hover text-white font-bold text-xs transition">Kirim Pertanyaan</button>
                                 </form>
                             @else
-                                <div class="p-4 bg-yellow-100 text-yellow-800 text-xs rounded">Verifikasi email Anda untuk dapat bertanya.</div>
+                                <div class="p-4 bg-yellow-100 text-yellow-800 text-xs rounded-card">Verifikasi email Anda untuk dapat bertanya.</div>
                             @endif
                         @else
-                            <a href="{{ route('login') }}" class="block w-full py-2 px-4 bg-red-600 text-white text-center rounded hover:bg-red-700 text-xs font-bold">Login untuk bertanya</a>
+                            <a href="{{ route('login') }}" class="block w-full py-2 px-4 bg-coral text-white text-center rounded-pill hover:bg-coral-hover text-xs font-bold">Login untuk bertanya</a>
                         @endauth
                     </div>
 
@@ -320,14 +320,14 @@
                     @if($product->answeredQuestions->count() > 0)
                         <div class="space-y-3">
                             @foreach($product->answeredQuestions as $q)
-                                <div class="bg-white p-4 rounded-2xl border border-slate-200 space-y-2">
-                                    <div class="flex items-center justify-between text-xs text-slate-500">
-                                        <span class="font-semibold text-slate-800">{{ $q->user->name ?? 'Rider' }} bertanya:</span>
+                                <div class="bg-white p-4 rounded-card border border-border space-y-2">
+                                    <div class="flex items-center justify-between text-xs text-slate">
+                                        <span class="font-semibold text-charcoal">{{ $q->user->name ?? 'Rider' }} bertanya:</span>
                                         <span>{{ $q->created_at->diffForHumans() }}</span>
                                     </div>
-                                    <p class="text-xs font-medium text-slate-900">"{{ $q->question }}"</p>
+                                    <p class="text-xs font-medium text-charcoal">"{{ $q->question }}"</p>
                                     @if($q->answer)
-                                        <div class="mt-2 pl-3 border-l-2 border-emerald-500 bg-emerald-50/50 p-2 rounded text-[11px] text-slate-700">
+                                        <div class="mt-2 pl-3 border-l-2 border-emerald-500 bg-emerald-50/50 p-2 rounded-card text-[11px] text-slate">
                                             <strong class="text-emerald-700 block mb-0.5">Jawaban Admin:</strong>
                                             {{ $q->answer->answer }}
                                         </div>
@@ -336,7 +336,7 @@
                             @endforeach
                         </div>
                     @else
-                        <div class="p-6 bg-slate-50 rounded-2xl border border-slate-200 text-center text-xs text-slate-500">
+                        <div class="p-6 bg-white rounded-card border border-border text-center text-xs text-slate">
                             Punya pertanyaan tentang spesifikasi atau kecocokan produk ini? Tuliskan pertanyaan Anda di atas atau langsung hubungi kami via WhatsApp.
                         </div>
                     @endif
@@ -347,16 +347,16 @@
 
         <!-- RELATED PRODUCTS SECTION -->
         @if($relatedProducts->count() > 0)
-            <div class="mt-20 pt-10 border-t border-slate-200">
-                <h3 class="text-xl font-black text-slate-950 mb-6">Produk Terkait di Kategori Ini</h3>
+            <div class="mt-20 pt-10 border-t border-border">
+                <h3 class="text-xl font-extrabold text-charcoal mb-6">Produk Terkait di Kategori Ini</h3>
                 <div class="grid grid-cols-1 sm:grid-cols-3 gap-6">
                     @foreach($relatedProducts as $rel)
-                        <a href="{{ route('products.show', $rel->slug) }}" class="group bg-white p-4 rounded-2xl border border-slate-200 hover:shadow-md transition">
-                            <div class="aspect-4/3 rounded-xl overflow-hidden bg-slate-100 mb-3">
+                        <a href="{{ route('products.show', $rel->slug) }}" class="group bg-white p-4 rounded-card border border-border hover:shadow-floating transition">
+                            <div class="aspect-4/3 rounded-card overflow-hidden bg-ash mb-3">
                                 <img src="{{ $rel->image_url }}" alt="{{ $rel->name }}" class="w-full h-full object-cover group-hover:scale-105 transition duration-300">
                             </div>
-                            <h4 class="font-bold text-xs text-slate-900 group-hover:text-red-600 transition line-clamp-1">{{ $rel->name }}</h4>
-                            <p class="font-black text-slate-950 text-sm mt-1">Rp {{ number_format($rel->price, 0, ',', '.') }}</p>
+                            <h4 class="font-bold text-xs text-charcoal group-hover:text-coral transition line-clamp-1">{{ $rel->name }}</h4>
+                            <p class="font-extrabold text-charcoal text-sm mt-1">Rp {{ number_format($rel->price, 0, ',', '.') }}</p>
                         </a>
                     @endforeach
                 </div>
