@@ -332,4 +332,181 @@
         </div>
     </section>
 
+    <!-- ABOUT SECTION -->
+    <section class="py-16 bg-white border-t border-border" id="about">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                <!-- Image -->
+                <div class="order-2 lg:order-1">
+                    <div class="relative rounded-card border border-border shadow-floating overflow-hidden bg-ash">
+                        <div class="aspect-4/3 overflow-hidden">
+                            <img 
+                                src="https://images.unsplash.com/photo-1561056044-89a68f3fa279?w=900&auto=format&fit=crop&q=80" 
+                                alt="Toko ReyxShop" 
+                                class="w-full h-full object-cover object-center"
+                            >
+                        </div>
+                        <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-white to-transparent p-4">
+                            <span class="px-3 py-1 rounded-pill text-[10px] font-bold uppercase bg-coral text-white">
+                                Lokasi Nyata
+                            </span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Content -->
+                <div class="order-1 lg:order-2">
+                    <p class="text-xs font-bold text-coral uppercase tracking-wider mb-3">Tentang Toko Kami</p>
+                    <h2 class="text-2xl sm:text-3xl font-extrabold tracking-tight text-charcoal mb-4">
+                        ReyxShop – Toko Keluarga Pelestari Hobi Off-Road
+                    </h2>
+                    <div class="space-y-3 text-xs text-slate leading-relaxed">
+                        <p>
+                            Didirikan di Klapanunggal sejak 2018, ReyxShop adalah toko spesialis yang didedikasikan untuk komunitas trail dan motocross Indonesia. Kami lebih dari sekadar penjual gear—kami adalah sesama rider yang paham betul rintangan trek basah, tanjakan batu, dan medan ekstrem.
+                        </p>
+                        <p>
+                            Setiap produk kami melalui seleksi ketat: helm dengan standar SNI, jersey dengan bahan quick-dry, boots dengan perlindungan ankle, dan armor yang tidak menghalangi gerak. Kami memastikan safety tidak dikorbankan demi harga murah.
+                        </p>
+                        <p>
+                            Melalui katalog online ini, kami ingin menyebarkan akses ke gear berkualitas tanpa harus ke kota besar. Anda bisa jelajahi koleksi, bandingkan varian, dan dapatkan saran dari admin yang berpengalaman.
+                        </p>
+                    </div>
+                    <div class="mt-6 flex flex-wrap gap-3">
+                        <a href="{{ route('products.index') }}" class="px-5 py-2.5 rounded-pill bg-coral hover:bg-coral-hover text-white text-xs font-bold transition">
+                            Lihat Katalog Lengkap
+                        </a>
+                        <a href="#contact" class="px-5 py-2.5 rounded-pill bg-white hover:bg-ash text-charcoal border border-border text-xs font-bold transition">
+                            Hubungi Kami
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CONTACT SECTION -->
+    <section class="py-16 bg-ash border-t border-border" id="contact">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                <!-- Left: Contact Details -->
+                <div class="lg:col-span-2">
+                    <p class="text-xs font-bold text-coral uppercase tracking-wider mb-3">Kontak & Lokasi</p>
+                    <h2 class="text-2xl sm:text-3xl font-extrabold tracking-tight text-charcoal mb-6">
+                        Datang, Telepon, atau Chat—Kami Siap Melayani
+                    </h2>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <!-- Address -->
+                        <div class="p-5 rounded-card border border-border bg-white space-y-2">
+                            <div class="w-10 h-10 rounded-xl bg-coral/10 text-coral flex items-center justify-center text-lg font-bold">
+                                📍
+                            </div>
+                            <h4 class="font-bold text-sm text-charcoal">Lokasi Toko</h4>
+                            <p class="text-xs text-slate leading-relaxed">
+                                Jl. Komp. Alam Satria 3 No 560<br>
+                                Klapanunggal I, Mekarjaya City<br>
+                                Kabupaten Bandung, Jawa Barat 30096
+                            </p>
+                            <a 
+                                href="https://www.google.com/maps/search/?api=1&query=Jl.+Komp.+Alam+Satria+3+No+560,+Klapanunggal+I,+Mekarjaya+City+Kabupaten+Bandung,+Jawa+Barat+30096" 
+                                target="_blank"
+                                class="inline-flex items-center gap-1 text-xs font-bold text-coral hover:underline mt-2"
+                            >
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M9 6.75V15m6-6v8.25m.503 3.498 4.875-2.437c.381-.19.622-.58.622-1.006V4.82c0-.836-.88-1.38-1.628-1.006l-3.869 1.934a1.125 1.125 0 0 1-1.006 0L9.503 3.252a1.125 1.125 0 0 0-1.006 0L3.622 5.689C2.88 6.064 2 5.52 2 4.82v8.25c0 .426.241.816.622 1.006l4.875 2.437a1.125 1.125 0 0 0 1.006 0Z" />
+                                </svg>
+                                Buka di Google Maps
+                            </a>
+                        </div>
+
+                        <!-- Hours -->
+                        <div class="p-5 rounded-card border border-border bg-white space-y-2">
+                            <div class="w-10 h-10 rounded-xl bg-coral/10 text-coral flex items-center justify-center text-lg font-bold">
+                                🕒
+                            </div>
+                            <h4 class="font-bold text-sm text-charcoal">Jam Operasional</h4>
+                            <p class="text-xs text-slate leading-relaxed">
+                                <strong class="text-charcoal">Senin–Jumat:</strong> 09:00–21:00 WIB<br>
+                                <strong class="text-charcoal">Sabtu:</strong> 08:00–22:00 WIB<br>
+                                <strong class="text-charcoal">Minggu & Hari Libur:</strong> 10:00–18:00 WIB
+                            </p>
+                        </div>
+
+                        <!-- Phone & WhatsApp -->
+                        <div class="p-5 rounded-card border border-border bg-white space-y-2">
+                            <div class="w-10 h-10 rounded-xl bg-coral/10 text-coral flex items-center justify-center text-lg font-bold">
+                                📞
+                            </div>
+                            <h4 class="font-bold text-sm text-charcoal">Telepon & WhatsApp</h4>
+                            <p class="text-xs text-slate leading-relaxed">
+                                Konsultasi ukuran, ready stock, atau pertanyaan produk:
+                            </p>
+                            <div class="space-y-2">
+                                <a href="tel:+6281234567890" class="block text-xs font-bold text-charcoal hover:text-coral transition">
+                                    📞 +62 812‑3456‑7890
+                                </a>
+                                <a href="https://wa.me/6281234567890?text=Halo%20ReyxShop%2C%20saya%20ingin%20konsultasi%20ukuran%20gear." 
+                                   target="_blank"
+                                   class="inline-flex items-center gap-2 px-4 py-2 rounded-pill bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold transition">
+                                    💬 Chat via WhatsApp
+                                </a>
+                            </div>
+                        </div>
+
+                        <!-- Email & Social -->
+                        <div class="p-5 rounded-card border border-border bg-white space-y-2">
+                            <div class="w-10 h-10 rounded-xl bg-coral/10 text-coral flex items-center justify-center text-lg font-bold">
+                                ✉️
+                            </div>
+                            <h4 class="font-bold text-sm text-charcoal">Email & Sosial Media</h4>
+                            <p class="text-xs text-slate leading-relaxed">
+                                Pertanyaan formal, kerjasama, atau bulk order:
+                            </p>
+                            <div class="space-y-2 mt-2">
+                                <a href="mailto:admin@reyxshop.local" class="block text-xs font-bold text-charcoal hover:text-coral transition">
+                                    ✉️ admin@reyxshop.local
+                                </a>
+                                <div class="flex items-center gap-3">
+                                    <a href="https://instagram.com/reyxshop" target="_blank" class="text-slate hover:text-coral transition">
+                                        <span class="text-xs font-bold">📷 Instagram</span>
+                                    </a>
+                                    <a href="https://facebook.com/reyxshop" target="_blank" class="text-slate hover:text-coral transition">
+                                        <span class="text-xs font-bold">👥 Facebook</span>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right: Quick Message -->
+                <div class="lg:col-span-1">
+                    <div class="p-5 rounded-card border border-border bg-white sticky top-24">
+                        <h4 class="font-bold text-sm text-charcoal mb-3">Kirim Pesan Cepat</h4>
+                        <p class="text-xs text-slate mb-4">
+                            Ada pertanyaan spesifik? Tulis di sini, admin kami akan balas via email atau WhatsApp.
+                        </p>
+                        <form action="#" method="POST" class="space-y-3">
+                            @csrf
+                            <div>
+                                <input type="text" placeholder="Nama Anda" class="w-full px-3 py-2 text-xs rounded-xl border border-border focus:outline-hidden focus:ring-2 focus:ring-coral bg-white">
+                            </div>
+                            <div>
+                                <input type="email" placeholder="Email / WhatsApp" class="w-full px-3 py-2 text-xs rounded-xl border border-border focus:outline-hidden focus:ring-2 focus:ring-coral bg-white">
+                            </div>
+                            <div>
+                                <textarea rows="3" placeholder="Pesan..." class="w-full px-3 py-2 text-xs rounded-xl border border-border focus:outline-hidden focus:ring-2 focus:ring-coral bg-white"></textarea>
+                            </div>
+                            <button type="submit" class="w-full py-2.5 px-4 rounded-pill bg-coral hover:bg-coral-hover text-white text-xs font-bold transition">
+                                Kirim Pesan
+                            </button>
+                        </form>
+                        <p class="text-[10px] text-slate mt-4 text-center">
+                            Atau langsung chat via WhatsApp untuk respons lebih cepat.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
 @endsection
