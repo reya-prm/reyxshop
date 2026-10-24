@@ -232,43 +232,30 @@
                     <!-- Review Submission Form -->
                     <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-2xs">
                         <h4 class="text-xs font-bold text-slate-900 uppercase tracking-wider mb-3">Tulis Ulasan Anda</h4>
-                        <form action="{{ route('products.reviews.store', $product->slug) }}" method="POST" class="space-y-3">
-                            @csrf
-                            <div>
-                                <input 
-                                    type="text" 
-                                    name="customer_name" 
-                                    required 
-                                    placeholder="Nama Anda (contoh: Deni / Rider Bandung)" 
-                                    class="w-full px-3 py-2 text-xs rounded-xl border border-slate-300 focus:outline-hidden focus:ring-2 focus:ring-red-500"
-                                >
-                            </div>
-                            <div>
-                                <select 
-                                    name="rating" 
-                                    required 
-                                    class="w-full px-3 py-2 text-xs rounded-xl border border-slate-300 focus:outline-hidden focus:ring-2 focus:ring-red-500 bg-white"
-                                >
-                                    <option value="5">★★★★★ — Sangat Puas (5 Bintang)</option>
-                                    <option value="4">★★★★☆ — Puas (4 Bintang)</option>
-                                    <option value="3">★★★☆☆ — Cukup (3 Bintang)</option>
-                                    <option value="2">★★☆☆☆ — Kurang (2 Bintang)</option>
-                                    <option value="1">★☆☆☆☆ — Kecewa (1 Bintang)</option>
-                                </select>
-                            </div>
-                            <div>
-                                <textarea 
-                                    name="content" 
-                                    rows="3" 
-                                    required 
-                                    placeholder="Bagikan pengalaman Anda tentang bahan, fitting, kenyamanan saat trabas..." 
-                                    class="w-full px-3 py-2 text-xs rounded-xl border border-slate-300 focus:outline-hidden focus:ring-2 focus:ring-red-500"
-                                ></textarea>
-                            </div>
-                            <button type="submit" class="w-full py-2 px-4 rounded-xl bg-slate-900 hover:bg-slate-800 text-white font-bold text-xs transition">
-                                Kirim Ulasan
-                            </button>
-                        </form>
+                        @auth
+                            @if(Auth::user()->hasVerifiedEmail())
+                                <form action="{{ route('products.reviews.store', $product->slug) }}" method="POST" class="space-y-3">
+                                    @csrf
+                                    <div>
+                                        <select name="rating" required class="w-full px-3 py-2 text-xs rounded-xl border border-slate-300 focus:outline-hidden focus:ring-2 focus:ring-red-500 bg-white">
+                                            <option value="5">★★★★★ — Sangat Puas (5 Bintang)</option>
+                                            <option value="4">★★★★☆ — Puas (4 Bintang)</option>
+                                            <option value="3">★★★☆☆ — Cukup (3 Bintang)</option>
+                                            <option value="2">★★☆☆☆ — Kurang (2 Bintang)</option>
+                                            <option value="1">★☆☆☆☆ — Kecewa (1 Bintang)</option>
+                                        </select>
+                                    </div>
+                                    <div>
+                                        <textarea name="content" rows="3" required placeholder="Bagikan pengalaman Anda..." class="w-full px-3 py-2 text-xs rounded-xl border border-slate-300 focus:outline-hidden focus:ring-2 focus:ring-red-500"></textarea>
+                                    </div>
+                                    <button type="submit" class="w-full py-2 px-4 rounded-xl bg-slate-900 hover:bg-slate-800 text-white font-bold text-xs transition">Kirim Ulasan</button>
+                                </form>
+                            @else
+                                <div class="p-4 bg-yellow-100 text-yellow-800 text-xs rounded">Verifikasi email Anda untuk dapat menulis ulasan.</div>
+                            @endif
+                        @else
+                            <a href="{{ route('login') }}" class="block w-full py-2 px-4 bg-slate-900 text-white text-center rounded hover:bg-slate-800 text-xs font-bold">Login untuk menulis review</a>
+                        @endauth
                     </div>
 
                     <!-- Reviews List -->
@@ -277,7 +264,7 @@
                             @foreach($product->approvedReviews as $rev)
                                 <div class="bg-white p-4 rounded-2xl border border-slate-200 space-y-2">
                                     <div class="flex items-center justify-between text-xs">
-                                        <strong class="text-slate-900">{{ $rev->customer_name ?? 'Pelanggan Terverifikasi' }}</strong>
+                                        <strong class="text-slate-900">{{ $rev->user->name ?? 'Pelanggan Terverifikasi' }}</strong>
                                         <span class="text-slate-400">{{ $rev->created_at->diffForHumans() }}</span>
                                     </div>
                                     <div class="text-amber-500 text-xs">
@@ -312,30 +299,21 @@
                     <!-- Ask Question Form -->
                     <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-2xs">
                         <h4 class="text-xs font-bold text-slate-900 uppercase tracking-wider mb-3">Ajukan Pertanyaan ke Admin</h4>
-                        <form action="{{ route('products.questions.store', $product->slug) }}" method="POST" class="space-y-3">
-                            @csrf
-                            <div>
-                                <input 
-                                    type="text" 
-                                    name="customer_name" 
-                                    required 
-                                    placeholder="Nama Anda (contoh: Fajar)" 
-                                    class="w-full px-3 py-2 text-xs rounded-xl border border-slate-300 focus:outline-hidden focus:ring-2 focus:ring-red-500"
-                                >
-                            </div>
-                            <div>
-                                <textarea 
-                                    name="question" 
-                                    rows="3" 
-                                    required 
-                                    placeholder="Tanyakan spesifikasi ukuran, kompatibilitas motor, atau ketersediaan warna..." 
-                                    class="w-full px-3 py-2 text-xs rounded-xl border border-slate-300 focus:outline-hidden focus:ring-2 focus:ring-red-500"
-                                ></textarea>
-                            </div>
-                            <button type="submit" class="w-full py-2 px-4 rounded-xl bg-red-600 hover:bg-red-700 text-white font-bold text-xs transition">
-                                Kirim Pertanyaan
-                            </button>
-                        </form>
+                        @auth
+                            @if(Auth::user()->hasVerifiedEmail())
+                                <form action="{{ route('products.questions.store', $product->slug) }}" method="POST" class="space-y-3">
+                                    @csrf
+                                    <div>
+                                        <textarea name="question" rows="3" required placeholder="Tanyakan spesifikasi ukuran, kompatibilitas motor..." class="w-full px-3 py-2 text-xs rounded-xl border border-slate-300 focus:outline-hidden focus:ring-2 focus:ring-red-500"></textarea>
+                                    </div>
+                                    <button type="submit" class="w-full py-2 px-4 rounded-xl bg-red-600 hover:bg-red-700 text-white font-bold text-xs transition">Kirim Pertanyaan</button>
+                                </form>
+                            @else
+                                <div class="p-4 bg-yellow-100 text-yellow-800 text-xs rounded">Verifikasi email Anda untuk dapat bertanya.</div>
+                            @endif
+                        @else
+                            <a href="{{ route('login') }}" class="block w-full py-2 px-4 bg-red-600 text-white text-center rounded hover:bg-red-700 text-xs font-bold">Login untuk bertanya</a>
+                        @endauth
                     </div>
 
                     <!-- Questions List -->
@@ -344,7 +322,7 @@
                             @foreach($product->answeredQuestions as $q)
                                 <div class="bg-white p-4 rounded-2xl border border-slate-200 space-y-2">
                                     <div class="flex items-center justify-between text-xs text-slate-500">
-                                        <span class="font-semibold text-slate-800">{{ $q->customer_name ?? 'Rider' }} bertanya:</span>
+                                        <span class="font-semibold text-slate-800">{{ $q->user->name ?? 'Rider' }} bertanya:</span>
                                         <span>{{ $q->created_at->diffForHumans() }}</span>
                                     </div>
                                     <p class="text-xs font-medium text-slate-900">"{{ $q->question }}"</p>

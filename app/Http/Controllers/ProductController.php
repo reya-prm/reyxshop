@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreProductQuestionRequest;
+use App\Http\Requests\StoreReviewRequest;
 use App\Models\Category;
 use App\Models\Product;
 use App\Models\ProductQuestion;
@@ -105,41 +107,40 @@ class ProductController extends Controller
     /**
      * Store customer review in database with validation.
      */
-    public function storeReview(Request $request, string $slug): RedirectResponse
+    public function storeReview(StoreReviewRequest $request, string $slug): RedirectResponse
     {
         $product = Product::where('slug', $slug)->firstOrFail();
 
-        $validated = $request->validate([
-            'customer_name' => ['required', 'string', 'max:100'],
-            'rating' => ['required', 'integer', 'min:1', 'max:5'],
-            'content' => ['required', 'string', 'min:5', 'max:1000'],
-        ]);
+        $validated = $request->validated();
+
+        // Check if user already reviewed this product (unique constraint)
+        if ($product->reviews()->where('user_id', auth()->id())->exists()) {
+            return redirect()->route('products.show', $product->slug)
+                ->withErrors(['review' => 'Anda sudah memberikan ulasan untuk produk ini.']);
+        }
 
         $product->reviews()->create([
-            'customer_name' => $validated['customer_name'],
+            'user_id' => auth()->id(),
             'rating' => $validated['rating'],
             'content' => $validated['content'],
-            'status' => 'approved', // Auto-approved for verified catalog experience
+            'status' => 'pending', // Pending moderation
         ]);
 
         return redirect()->route('products.show', $product->slug)
-            ->with('success', 'Ulasan Anda berhasil dikirim dan ditayangkan. Terima kasih atas feedback-nya!');
+            ->with('success', 'Ulasan Anda berhasil dikirim dan sedang menunggu moderasi. Terima kasih!');
     }
 
     /**
      * Store customer question (Q&A) in database with validation.
      */
-    public function storeQuestion(Request $request, string $slug): RedirectResponse
+    public function storeQuestion(StoreProductQuestionRequest $request, string $slug): RedirectResponse
     {
         $product = Product::where('slug', $slug)->firstOrFail();
 
-        $validated = $request->validate([
-            'customer_name' => ['required', 'string', 'max:100'],
-            'question' => ['required', 'string', 'min:5', 'max:1000'],
-        ]);
+        $validated = $request->validated();
 
         $product->questions()->create([
-            'customer_name' => $validated['customer_name'],
+            'user_id' => auth()->id(),
             'question' => $validated['question'],
             'status' => 'pending',
         ]);
