@@ -68,6 +68,14 @@ class User extends Authenticatable implements MustVerifyEmail
     /**
      * Determine if user can access Filament admin panel.
      */
+    public function canAccessPanel(\Filament\Panel $panel): bool
+    {
+        return $this->isAdmin() || $this->hasRole('operator');
+    }
+
+    /**
+     * Legacy method for backwards compatibility.
+     */
     public function canAccessFilament(): bool
     {
         return $this->isAdmin() || $this->hasRole('operator');

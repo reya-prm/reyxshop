@@ -7,10 +7,15 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\SitemapController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    return view('welcome');
+Route::get('/', [HomeController::class, 'index'])->name('home');
+
+// Redirect legacy /home to the new home route
+Route::get('/home', function () {
+    return redirect()->route('home');
 });
 
+// Product catalog and detail pages
+Route::get('/products', [ProductController::class, 'index'])->name('products.index');
 Route::get('/products/{slug}', [ProductController::class, 'show'])->name('products.show');
 
 Route::get('/dashboard', function () {
