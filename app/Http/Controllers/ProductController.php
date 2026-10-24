@@ -7,6 +7,8 @@ use App\Models\Product;
 use App\Models\ProductQuestion;
 use App\Models\Review;
 use App\Models\StoreSetting;
+use Artesaos\SEOTools\Facades\SEOMeta;
+use Artesaos\SEOTools\Facades\OpenGraph;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
@@ -41,6 +43,15 @@ class ProductController extends Controller
 
         $products = $query->latest()->paginate(9)->withQueryString();
 
+        // SEO meta tags for catalog page
+        SEOMeta::setTitle('Katalog Produk – ' . config('app.name'));
+        SEOMeta::setDescription('Jelajahi semua produk off‑road, motor, dan aksesoris di ReyxShop. Filter kategori, cari, baca ulasan, beli via marketplace.');
+        SEOMeta::addKeyword(['off‑road','motor','helm','baju','sparepart','competizione','apex','fox','racing']);
+        OpenGraph::setTitle('Katalog Produk ReyxShop');
+        OpenGraph::setDescription(SEOMeta::getDescription());
+        OpenGraph::setUrl(url()->current());
+        OpenGraph::addProperty('type', 'website');
+
         return view('products.index', compact('products', 'categories', 'search', 'selectedCategory'));
     }
 
@@ -60,6 +71,19 @@ class ProductController extends Controller
                 'answeredQuestions.answer',
             ])
             ->firstOrFail();
+
+        // SEO meta for product detail page
+        SEOMeta::setTitle($product->name . ' – ReyxShop');
+        SEOMeta::setDescription(substr(strip_tags($product->description ?? ''), 0, 150));
+        SEOMeta::setCanonical(url()->current());
+        SEOMeta::addKeyword(['off‑road', $product->category->name ?? 'product', $product->name]);
+        OpenGraph::setTitle($product->name);
+        OpenGraph::setDescription(SEOMeta::getDescription());
+        OpenGraph::setUrl(url()->current());
+        if ($product->images->first()) {
+            OpenGraph::addImage(url('storage/' . $product->images->first()->image_path));
+        }
+        OpenGraph::addProperty('type', 'product');
 
         $relatedProducts = Product::where('category_id', $product->category_id)
             ->where('id', '!=', $product->id)

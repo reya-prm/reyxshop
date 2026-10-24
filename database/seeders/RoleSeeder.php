@@ -8,8 +8,14 @@ use Spatie\Permission\Models\Permission;
 
 class RoleSeeder extends Seeder
 {
+    /**
+     * Run the database seeds.
+     */
     public function run(): void
     {
+        // Reset cached roles and permissions
+        app()[\Spatie\Permission\PermissionRegistrar::class]->forgetCachedPermissions();
+
         // Create permissions
         $permissions = [
             'view products',
@@ -58,7 +64,7 @@ class RoleSeeder extends Seeder
             'respond chats',
         ]);
 
-        // Customer gets no admin permissions (only for auth)
+        // Customer gets no admin permissions (auth only)
         $customerRole->syncPermissions([]);
     }
 }

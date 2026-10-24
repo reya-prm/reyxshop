@@ -19,6 +19,9 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        //
+        // Register SEO facade alias for Blade templates
+        if (!class_exists('SEO')) {
+            class_alias(\Artesaos\SEOTools\Facades\SEOTools::class, 'SEO');
+        }
     }
 }
