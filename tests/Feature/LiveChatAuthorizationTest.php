@@ -18,34 +18,30 @@ test('customer can send and retrieve own messages, isolated from others', functi
     $customerB->assignRole('customer');
     $customerB->markEmailAsVerified();
 
-    // A sends a message (creates conversation)
+    // A sends a message
     $this->actingAs($customerA);
     $sendA = $this->postJson(route('chat.send'), ['message' => 'Message from A'])->assertCreated();
-    $convIdA = $sendA->json('conversation_id');
-
-    // B sends a message (different conversation)
+    
+    // B sends a message
     $this->actingAs($customerB);
     $sendB = $this->postJson(route('chat.send'), ['message' => 'Message from B'])->assertCreated();
-    $convIdB = $sendB->json('conversation_id');
-
-    $this->assertNotEquals($convIdA, $convIdB);
 
     // A fetches its own messages
     $this->actingAs($customerA);
-    $responseA = $this->getJson(route('chat.messages'));
-    $responseA->assertOk();
-    $jsonA = $responseA->json();
-    $this->assertEquals($convIdA, $jsonA['conversation_id']);
-    $this->assertIsArray($jsonA['messages']);
+    $responseA = $this->getJson(route('chat.messages'))->assertOk();
+    $convA = $responseA->json('conversation_id');
+    $this->assertIsInt($convA);
+    $this->assertIsArray($responseA->json('messages'));
+    $this->assertCount(1, $responseA->json('messages')); // Only A's message
 
     // B fetches its own messages
     $this->actingAs($customerB);
-    $responseB = $this->getJson(route('chat.messages'));
-    $responseB->assertOk();
-    $jsonB = $responseB->json();
-    $this->assertEquals($convIdB, $jsonB['conversation_id']);
-    $this->assertIsArray($jsonB['messages']);
+    $responseB = $this->getJson(route('chat.messages'))->assertOk();
+    $convB = $responseB->json('conversation_id');
+    $this->assertIsInt($convB);
+    $this->assertIsArray($responseB->json('messages'));
+    $this->assertCount(1, $responseB->json('messages')); // Only B's message
 
-    // Ensure different conversation IDs
-    $this->assertNotEquals($convIdA, $convIdB);
+    // Ensure different conversations
+    $this->assertNotEquals($convA, $convB);
 });

@@ -142,5 +142,8 @@ test('customer can send and retrieve live chat messages', function () {
         'conversation_id',
         'messages',
     ]);
-    $this->assertEquals($conversationId, $messagesResponse->json('conversation_id'));
+    // Verify conversation exists in DB and matches sent ID
+    $dbConversationId = \App\Models\ChatConversation::where('user_id', $user->id)->value('id');
+    $this->assertEquals($conversationId, $dbConversationId);
+    $this->assertEquals($dbConversationId, $messagesResponse->json('conversation_id'));
 });
