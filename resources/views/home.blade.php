@@ -283,54 +283,7 @@
         </div>
     </section>
 
-    <!-- VALUE PROPOSITIONS SECTION -->
-    <section class="py-16 bg-ash border-t border-border">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
-                
-                <div class="p-6 rounded-card bg-white border border-border space-y-3">
-                    <div class="w-10 h-10 rounded-xl bg-orange-50 text-coral flex items-center justify-center text-lg font-bold">
-                        🛡️
-                    </div>
-                    <h4 class="font-bold text-sm text-charcoal">100% Produk Original</h4>
-                    <p class="text-xs text-slate leading-relaxed">
-                        Seluruh jersey, helm, boots, dan armor kami dipasok langsung dari distributor resmi bersertifikasi.
-                    </p>
-                </div>
 
-                <div class="p-6 rounded-card bg-white border border-border space-y-3">
-                    <div class="w-10 h-10 rounded-xl bg-orange-50 text-coral flex items-center justify-center text-lg font-bold">
-                        📏
-                    </div>
-                    <h4 class="font-bold text-sm text-charcoal">Konsultasi Ukuran Akurat</h4>
-                    <p class="text-xs text-slate leading-relaxed">
-                        Ragu memilih size helm atau boots? CS kami siap memandu pengukuran lingkar kepala dan kaki secara tepat.
-                    </p>
-                </div>
-
-                <div class="p-6 rounded-card bg-white border border-border space-y-3">
-                    <div class="w-10 h-10 rounded-xl bg-orange-50 text-coral flex items-center justify-center text-lg font-bold">
-                        🚀
-                    </div>
-                    <h4 class="font-bold text-sm text-charcoal">Pengiriman Cepat & Aman</h4>
-                    <p class="text-xs text-slate leading-relaxed">
-                        Packing kardus tebal dan bubble wrap berlapis untuk menjamin helm dan gear sampai tanpa goresan.
-                    </p>
-                </div>
-
-                <div class="p-6 rounded-card bg-white border border-border space-y-3">
-                    <div class="w-10 h-10 rounded-xl bg-orange-50 text-coral flex items-center justify-center text-lg font-bold">
-                        🤝
-                    </div>
-                    <h4 class="font-bold text-sm text-charcoal">Dukungan Trabas & Komunitas</h4>
-                    <p class="text-xs text-slate leading-relaxed">
-                        Toko spesialis yang memahami kebutuhan real rider di lintasan bebatuan, tanah basah, dan tanjakan ekstrem.
-                    </p>
-                </div>
-
-            </div>
-        </div>
-    </section>
 
     <!-- ABOUT SECTION -->
     <section class="py-16 bg-white border-t border-border" id="about">
