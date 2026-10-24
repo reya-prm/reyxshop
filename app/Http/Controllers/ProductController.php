@@ -123,11 +123,11 @@ class ProductController extends Controller
             'user_id' => auth()->id(),
             'rating' => $validated['rating'],
             'content' => $validated['content'],
-            'status' => 'pending', // Pending moderation
+            'status' => 'approved', // Auto-approve, no moderation
         ]);
 
         return redirect()->route('products.show', $product->slug)
-            ->with('success', 'Ulasan Anda berhasil dikirim dan sedang menunggu moderasi. Terima kasih!');
+            ->with('success', 'Ulasan Anda berhasil dikirim. Terima kasih!');
     }
 
     /**
