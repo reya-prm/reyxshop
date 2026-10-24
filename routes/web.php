@@ -19,7 +19,12 @@ Route::get('/products', [ProductController::class, 'index'])->name('products.ind
 Route::get('/products/{slug}', [ProductController::class, 'show'])->name('products.show');
 
 Route::get('/dashboard', function () {
-    return view('dashboard');
+    // Admin uses Filament dashboard at /admin
+    // Customer redirects to storefront home
+    if (auth()->user()->hasRole('admin') || auth()->user()->hasRole('operator')) {
+        return redirect('/admin');
+    }
+    return redirect()->route('home');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {

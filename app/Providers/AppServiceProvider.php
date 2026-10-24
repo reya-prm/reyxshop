@@ -19,9 +19,14 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        // Register SEO facade alias for Blade templates
-        if (!class_exists('SEO')) {
-            class_alias(\Artesaos\SEOTools\Facades\SEOTools::class, 'SEO');
-        }
+        // Filament panel access – admin & operator allowed, customer denied
+        \Illuminate\Support\Facades\Gate::define('viewFilament', function ($user) {
+            return $user->hasAnyRole(['admin', 'operator']);
+        });
+        // Ensure default roles exist
+        \Spatie\Permission\Models\Role::firstOrCreate(['name' => 'admin']);
+        \Spatie\Permission\Models\Role::firstOrCreate(['name' => 'operator']);
+        \Spatie\Permission\Models\Role::firstOrCreate(['name' => 'customer']);
+
     }
 }
