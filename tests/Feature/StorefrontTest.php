@@ -6,6 +6,7 @@ use App\Models\ProductImage;
 use App\Models\ProductVariant;
 use App\Models\MarketplaceLink;
 use App\Models\StoreSetting;
+use App\Models\User;
 
 beforeEach(function () {
     StoreSetting::setValue('store_name', 'ReyxShop Off-Road Gear');
@@ -85,8 +86,10 @@ test('product detail page displays product information, variants, and marketplac
 });
 
 test('customer can submit product review with validation', function () {
-    $response = $this->post('/products/' . $this->product->slug . '/reviews', [
-        'customer_name' => 'Doni Rider',
+    $user = User::factory()->create();
+    $user->markEmailAsVerified();
+
+    $response = $this->actingAs($user)->post('/products/' . $this->product->slug . '/reviews', [
         'rating' => 5,
         'content' => 'Barang sangat bagus, jahitan rapi untuk trabas!',
     ]);
@@ -96,14 +99,16 @@ test('customer can submit product review with validation', function () {
 
     $this->assertDatabaseHas('reviews', [
         'product_id' => $this->product->id,
-        'customer_name' => 'Doni Rider',
+        'user_id' => $user->id,
         'rating' => 5,
     ]);
 });
 
 test('customer can submit product question with validation', function () {
-    $response = $this->post('/products/' . $this->product->slug . '/questions', [
-        'customer_name' => 'Andi',
+    $user = User::factory()->create();
+    $user->markEmailAsVerified();
+
+    $response = $this->actingAs($user)->post('/products/' . $this->product->slug . '/questions', [
         'question' => 'Apakah celananya anti air saat melewati sungai?',
     ]);
 
@@ -112,30 +117,30 @@ test('customer can submit product question with validation', function () {
 
     $this->assertDatabaseHas('product_questions', [
         'product_id' => $this->product->id,
-        'customer_name' => 'Andi',
+        'user_id' => $user->id,
         'status' => 'pending',
     ]);
 });
 
 test('customer can send and retrieve live chat messages', function () {
+    $user = User::factory()->create();
+    $user->markEmailAsVerified();
+
     // 1. Send message
-    $sendResponse = $this->postJson('/chat/send', [
+    $sendResponse = $this->actingAs($user)->postJson('/chat/send', [
         'message' => 'Halo admin, apakah produk ini ready?',
-        'customer_name' => 'Guest Tester',
     ]);
 
     $sendResponse->assertStatus(201);
     $sendResponse->assertJsonPath('status', 'success');
-
-    $guestToken = session()->get('chat_guest_token');
-    expect($guestToken)->not->toBeNull();
+    $conversationId = $sendResponse->json('conversation_id');
 
     // 2. Retrieve messages
-    $messagesResponse = $this->getJson('/chat/messages');
+    $messagesResponse = $this->actingAs($user)->getJson('/chat/messages');
     $messagesResponse->assertStatus(200);
     $messagesResponse->assertJsonStructure([
-        'guest_token',
         'conversation_id',
         'messages',
     ]);
+    $this->assertEquals($conversationId, $messagesResponse->json('conversation_id'));
 });

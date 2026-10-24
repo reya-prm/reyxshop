@@ -30,8 +30,22 @@ test('customer can send and retrieve own messages, isolated from others', functi
 
     $this->assertNotEquals($convIdA, $convIdB);
 
-    // A fetches messages, should see only its own
+    // A fetches its own messages
     $this->actingAs($customerA);
-    $this->getJson(route('chat.messages'))->assertJsonFragment(['conversation_id' => $convIdA])
-        ->assertJsonMissing(['conversation_id' => $convIdB]);
+    $responseA = $this->getJson(route('chat.messages'));
+    $responseA->assertOk();
+    $jsonA = $responseA->json();
+    $this->assertEquals($convIdA, $jsonA['conversation_id']);
+    $this->assertIsArray($jsonA['messages']);
+
+    // B fetches its own messages
+    $this->actingAs($customerB);
+    $responseB = $this->getJson(route('chat.messages'));
+    $responseB->assertOk();
+    $jsonB = $responseB->json();
+    $this->assertEquals($convIdB, $jsonB['conversation_id']);
+    $this->assertIsArray($jsonB['messages']);
+
+    // Ensure different conversation IDs
+    $this->assertNotEquals($convIdA, $convIdB);
 });
