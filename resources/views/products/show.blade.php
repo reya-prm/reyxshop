@@ -188,17 +188,17 @@
                         <span class="text-base">&rarr;</span>
                     </a>
 
-                    <!-- WhatsApp Direct Order -->
+                    <!-- Email Direct Contact -->
                     <a 
-                        href="https://wa.me/{{ $storeSettings['whatsapp_number'] }}?text=Halo%20Admin%20ReyxShop%2C%20saya%20tertarik%20dengan%20produk%20{{ urlencode($product->name) }}%20(Harga%20Rp%20{{ number_format($product->price, 0, ',', '.') }}).%20Apakah%20stok%20masih%20tersedia%3F" 
+                        href="mailto:admin@reyxshop.local?subject=Pertanyaan%20Produk%20{{ urlencode($product->name) }}" 
                         target="_blank" 
-                        class="flex items-center justify-between p-3.5 rounded-card bg-gradient-to-r from-emerald-600 to-emerald-700 hover:from-emerald-700 hover:to-emerald-800 text-white font-bold text-sm shadow-md shadow-emerald-600/20 transition transform hover:-translate-y-0.5"
+                        class="flex items-center justify-between p-3.5 rounded-card bg-gradient-to-r from-coral to-coral-hover hover:from-coral-hover hover:to-coral text-white font-bold text-sm shadow-md shadow-coral/20 transition transform hover:-translate-y-0.5"
                     >
                         <div class="flex items-center gap-3">
-                            <span class="w-8 h-8 rounded-lg bg-white/20 flex items-center justify-center font-black">💬</span>
+                            <span class="w-8 h-8 rounded-lg bg-white/20 flex items-center justify-center font-black">✉️</span>
                             <div>
                                 <span class="block text-xs uppercase tracking-wide opacity-90">Konsultasi / Order Cepat</span>
-                                <span class="font-bold text-sm">Chat Admin via WhatsApp</span>
+                                <span class="font-bold text-sm">Email Admin ReyxShop</span>
                             </div>
                         </div>
                         <span class="text-base">&rarr;</span>

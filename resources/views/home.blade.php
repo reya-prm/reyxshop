@@ -47,14 +47,14 @@
                             Jelajahi Katalog ↓
                         </a>
                         <a 
-                            href="https://wa.me/{{ $storeSettings['whatsapp_number'] }}?text=Halo%20Admin%20ReyxShop%2C%20saya%20ingin%20konsultasi%20ukuran%20gear%20motocross" 
+                            href="mailto:admin@reyxshop.local" 
                             target="_blank" 
-                            class="w-full sm:w-auto px-6 py-3.5 rounded-pill font-bold text-sm bg-white hover:bg-ash text-charcoal border border-border transition text-center flex items-center justify-center gap-2"
+                            class="px-6 py-3.5 rounded-pill font-bold text-sm bg-white hover:bg-ash text-charcoal border border-border transition text-center flex items-center justify-center gap-2"
                         >
-                            <span class="text-emerald-600">💬</span>
-                            Tanya via WhatsApp
+                            <span class="text-coral">✉️</span>
+                            Email Admin
                         </a>
-                    </div>
+                                </div>
                 </div>
 
                 <!-- Right Column: Visual Hero Card -->
@@ -244,12 +244,12 @@
                                                 Lazada
                                             </a>
                                             <a 
-                                                href="https://wa.me/{{ $storeSettings['whatsapp_number'] }}?text=Halo%20ReyxShop%2C%20apakah%20produk%20{{ urlencode($product->name) }}%20ready%20stock%3F" 
+                                                href="mailto:admin@reyxshop.local?subject=Pertanyaan%20Produk%20{{ urlencode($product->name) }}" 
                                                 target="_blank" 
-                                                class="py-2 text-center rounded-xl bg-emerald-50 hover:bg-emerald-100 text-emerald-700 text-[11px] font-bold border border-emerald-200 transition"
-                                                title="WhatsApp"
+                                                class="py-2 text-center rounded-xl bg-coral/10 hover:bg-coral/20 text-coral text-[11px] font-bold border border-coral/20 transition"
+                                                title="Email"
                                             >
-                                                WhatsApp
+                                                Email
                                             </a>
                                         </div>
                                     </div>
@@ -444,10 +444,10 @@
                                 <a href="tel:+6281234567890" class="block text-xs font-bold text-charcoal hover:text-coral transition">
                                     📞 +62 812‑3456‑7890
                                 </a>
-                                <a href="https://wa.me/6281234567890?text=Halo%20ReyxShop%2C%20saya%20ingin%20konsultasi%20ukuran%20gear." 
+                                <a href="mailto:admin@reyxshop.local" 
                                    target="_blank"
-                                   class="inline-flex items-center gap-2 px-4 py-2 rounded-pill bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold transition">
-                                    💬 Chat via WhatsApp
+                                   class="inline-flex items-center gap-2 px-4 py-2 rounded-pill bg-coral hover:bg-coral-hover text-white text-xs font-bold transition">
+                                    ✉️ Email Admin
                                 </a>
                             </div>
                         </div>
