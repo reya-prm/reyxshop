@@ -18,9 +18,9 @@ class RepliesRelationManager extends RelationManager
     {
         return $form
             ->schema([
-                Forms\Components\TextInput::make('content')
+                Forms\Components\Textarea::make('content')
                     ->required()
-                    ->maxLength(255),
+                    ->maxLength(1000),
             ]);
     }
 
@@ -35,7 +35,12 @@ class RepliesRelationManager extends RelationManager
                 //
             ])
             ->headerActions([
-                Tables\Actions\CreateAction::make(),
+                Tables\Actions\CreateAction::make()
+                    ->using(function (array $data) {
+                        $data['user_id'] = auth()->id();
+                        return $data;
+                    })
+                    ->label('Add Reply'),
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
