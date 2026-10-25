@@ -51,12 +51,12 @@ class HomeController extends Controller
 
         $featuredProducts = $productsQuery->latest()->take(12)->get();
 
-        // Auto store status based on time (07:00 - 21:00 WIB)
+        // Auto store status based on time (07:00 - 17:00 WIB)
         $currentHour = (int) now('Asia/Jakarta')->format('H');
-        $isOpenNow = ($currentHour >= 7 && $currentHour < 21);
+        $isOpenNow = ($currentHour >= 7 && $currentHour < 17);
         $statusLabel = $isOpenNow ? 'Buka Sekarang' : 'Tutup';
         $statusNotice = $isOpenNow 
-            ? 'Toko buka pukul 07:00 - 21:00 WIB. Pengiriman same-day untuk order sebelum jam 15:00!'
+            ? 'Toko buka pukul 07:00 - 17:00 WIB. Pengiriman same-day untuk order sebelum jam 15:00!'
             : 'Toko tutup. Buka kembali jam 07:00 WIB. Anda tetap bisa browsing dan chat akan dibalas saat toko buka.';
 
         // Store Settings from DB
