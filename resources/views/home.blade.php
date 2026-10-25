@@ -136,11 +136,11 @@
 
                 <!-- Quick Category Pill Filter -->
                 <div class="flex items-center gap-2 overflow-x-auto pb-2 md:pb-0">
-                    <a href="{{ route('home') }}" class="px-4 py-2 rounded-pill text-xs font-bold {{ !$selectedCategory ? 'bg-charcoal text-white' : 'bg-ash text-charcoal hover:bg-border' }} transition">
+                    <a href="{{ route('home') }}#katalog-unggulan" class="px-4 py-2 rounded-pill text-xs font-bold {{ !$selectedCategory ? 'bg-charcoal text-white' : 'bg-ash text-charcoal hover:bg-border' }} transition">
                         Semua
                     </a>
                     @foreach($categories as $cat)
-                        <a href="{{ route('home', ['category' => $cat->slug]) }}" class="whitespace-nowrap px-4 py-2 rounded-pill text-xs font-bold {{ $selectedCategory === $cat->slug ? 'bg-coral text-white' : 'bg-ash text-charcoal hover:bg-border' }} transition">
+                        <a href="{{ route('home', ['category' => $cat->slug]) }}#katalog-unggulan" class="whitespace-nowrap px-4 py-2 rounded-pill text-xs font-bold {{ $selectedCategory === $cat->slug ? 'bg-coral text-white' : 'bg-ash text-charcoal hover:bg-border' }} transition">
                             {{ $cat->name }}
                         </a>
                     @endforeach
