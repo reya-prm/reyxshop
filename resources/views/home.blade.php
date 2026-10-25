@@ -413,7 +413,7 @@
             <!-- Google Maps Embed -->
             <div class="mt-12">
                 <h3 class="text-lg font-bold text-charcoal mb-4">Lokasi Toko Kami</h3>
-                <div class="rounded-card overflow-hidden border border-border relative pb-[56.25%] h-0">
+                <div class="rounded-card overflow-hidden border border-border relative" style="padding-bottom:56.25%; height:0;">
                     <iframe
                         src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d495.00750916306475!2d107.54783584246609!3d-7.002208627316598!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e68ef00468ebd19%3A0x3d5f9f46cd14a6b3!2sREYS%20HOME!5e0!3m2!1sid!2sid!4v1792919272897!5m2!1sid!2sid"
                         class="absolute top-0 left-0 w-full h-full"
