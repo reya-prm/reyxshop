@@ -20,7 +20,7 @@
                         Tentang Kami
                     </a>
                     <a href="{{ route('home') }}#contact" class="text-xs font-bold text-charcoal hover:text-coral transition">
-                        Kontak
+                        Lokasi
                     </a>
                 </div>
             </div>
@@ -129,7 +129,7 @@
                 Tentang Kami
             </a>
             <a href="{{ route('home') }}#contact" class="block text-xs font-bold text-charcoal hover:text-coral py-1.5">
-                Kontak
+                Lokasi
             </a>
 
             <!-- Store Info Mobile -->

@@ -288,14 +288,16 @@
                     </h2>
                     <div class="space-y-3 text-xs text-slate leading-relaxed">
                         <p>
-                            Didirikan di Klapanunggal sejak 2018, ReyxShop Kids adalah toko spesialis pakaian anak yang didedikasikan untuk orang tua Indonesia. Kami lebih dari sekadar penjual baju—kami memahami kebutuhan kenyamanan, keamanan, dan gaya untuk si kecil dalam berbagai aktivitas sehari-hari.
+                            ReyxShop Kids adalah toko pakaian anak yang menyediakan pilihan baju nyaman, rapi, dan bergaya untuk si kecil. Kami memahami bahwa anak butuh pakaian yang adem dipakai seharian, aman di kulit, dan tetap nyaman saat bermain, sekolah, maupun bepergian.
                         </p>
                         <p>
-                            Setiap produk kami melalui seleksi ketat: bahan katun lembut yang adem, jahitan rapi dan kuat, desain karakter yang disukai anak, dan ukuran yang sesuai dengan pertumbuhan anak. Kami memastikan kualitas tidak dikorbankan demi harga murah.
+                            Setiap produk kami pilih dengan teliti: bahan katun yang lembut dan menyerap keringat, jahitan kuat yang tahan dicuci berulang kali, serta desain karakter dan motif yang disukai anak-anak. Ukurannya juga kami sesuaikan dengan tumbuh kembang si kecil, jadi lebih mudah memilih yang pas.
                         </p>
                         <p>
-                            Melalui katalog online ini, kami ingin menyebarkan akses ke pakaian anak berkualitas tanpa harus ke pusat perbelanjaan besar. Anda bisa jelajahi koleksi, bandingkan varian, dan dapatkan saran dari admin yang berpengalaman.
+                            Koleksi kami mencakup kaos anak, celana, hingga setelan yang praktis dipadukan. Semuanya tersedia dengan harga yang ramah di kantong orang tua, tanpa mengorbankan kualitas.
                         </p>
+                        <p>
+                            Lewat katalog online ini, kamu bisa melihat koleksi dengan santai, membandingkan pilihan warna dan ukuran, membaca ulasan dari pembeli lain, dan bertanya langsung ke admin lewat fitur tanya jawab atau live chat. Kalau sudah cocok, pembelian bisa dilanjutkan lewat Shopee atau Tokopedia kami.
                     </div>
                     <div class="mt-6 flex flex-wrap gap-3">
                         <a href="{{ route('products.index') }}" class="px-5 py-2.5 rounded-pill bg-coral hover:bg-coral-hover text-white text-xs font-bold transition">
