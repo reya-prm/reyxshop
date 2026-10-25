@@ -303,9 +303,15 @@
                         <a href="{{ route('products.index') }}" class="px-5 py-2.5 rounded-pill bg-coral hover:bg-coral-hover text-white text-xs font-bold transition">
                             Lihat Katalog Lengkap
                         </a>
-                        <a href="{{ route('home') }}" class="px-5 py-2.5 rounded-pill bg-white hover:bg-ash text-charcoal border border-border text-xs font-bold transition">
+                        @auth
+                        <button onclick="if(window.Tawk_API){Tawk_API.toggle();}else{alert('Widget chat sedang dimuat, coba lagi.');}" class="px-5 py-2.5 rounded-pill bg-white hover:bg-ash text-charcoal border border-border text-xs font-bold transition">
+                            Chat Admin
+                        </button>
+                        @else
+                        <a href="{{ route('login') }}" class="px-5 py-2.5 rounded-pill bg-white hover:bg-ash text-charcoal border border-border text-xs font-bold transition">
                             Chat Admin
                         </a>
+                        @endauth
                     </div>
                 </div>
             </div>
