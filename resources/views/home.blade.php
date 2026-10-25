@@ -289,25 +289,25 @@
                 <div class="order-1 lg:order-2">
                     <p class="text-xs font-bold text-coral uppercase tracking-wider mb-3">Tentang Toko Kami</p>
                     <h2 class="text-2xl sm:text-3xl font-extrabold tracking-tight text-charcoal mb-4">
-                        ReyxShop – Toko Keluarga Pelestari Hobi Off-Road
+                        ReyxShop Kids – Toko Pakaian Anak Terpercaya
                     </h2>
                     <div class="space-y-3 text-xs text-slate leading-relaxed">
                         <p>
-                            Didirikan di Klapanunggal sejak 2018, ReyxShop adalah toko spesialis yang didedikasikan untuk komunitas trail dan motocross Indonesia. Kami lebih dari sekadar penjual gear—kami adalah sesama rider yang paham betul rintangan trek basah, tanjakan batu, dan medan ekstrem.
+                            Didirikan di Klapanunggal sejak 2018, ReyxShop Kids adalah toko spesialis pakaian anak yang didedikasikan untuk orang tua Indonesia. Kami lebih dari sekadar penjual baju—kami memahami kebutuhan kenyamanan, keamanan, dan gaya untuk si kecil dalam berbagai aktivitas sehari-hari.
                         </p>
                         <p>
-                            Setiap produk kami melalui seleksi ketat: helm dengan standar SNI, jersey dengan bahan quick-dry, boots dengan perlindungan ankle, dan armor yang tidak menghalangi gerak. Kami memastikan safety tidak dikorbankan demi harga murah.
+                            Setiap produk kami melalui seleksi ketat: bahan katun lembut yang adem, jahitan rapi dan kuat, desain karakter yang disukai anak, dan ukuran yang sesuai dengan pertumbuhan anak. Kami memastikan kualitas tidak dikorbankan demi harga murah.
                         </p>
                         <p>
-                            Melalui katalog online ini, kami ingin menyebarkan akses ke gear berkualitas tanpa harus ke kota besar. Anda bisa jelajahi koleksi, bandingkan varian, dan dapatkan saran dari admin yang berpengalaman.
+                            Melalui katalog online ini, kami ingin menyebarkan akses ke pakaian anak berkualitas tanpa harus ke pusat perbelanjaan besar. Anda bisa jelajahi koleksi, bandingkan varian, dan dapatkan saran dari admin yang berpengalaman.
                         </p>
                     </div>
                     <div class="mt-6 flex flex-wrap gap-3">
                         <a href="{{ route('products.index') }}" class="px-5 py-2.5 rounded-pill bg-coral hover:bg-coral-hover text-white text-xs font-bold transition">
                             Lihat Katalog Lengkap
                         </a>
-                        <a href="#contact" class="px-5 py-2.5 rounded-pill bg-white hover:bg-ash text-charcoal border border-border text-xs font-bold transition">
-                            Hubungi Kami
+                        <a href="{{ route('home') }}" class="px-5 py-2.5 rounded-pill bg-white hover:bg-ash text-charcoal border border-border text-xs font-bold transition">
+                            Chat Admin
                         </a>
                     </div>
                 </div>
@@ -321,16 +321,14 @@
             <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
                 <!-- Left: Contact Details + Maps -->
                 <div class="lg:col-span-2">
-                    <p class="text-xs font-bold text-coral uppercase tracking-wider mb-3">Kontak & Lokasi</p>
+                    <p class="text-xs font-bold text-coral uppercase tracking-wider mb-3">Lokasi</p>
                     <h2 class="text-2xl sm:text-3xl font-extrabold tracking-tight text-charcoal mb-6">
-                        Datang, Telepon, atau Chat—Kami Siap Melayani
+                        Lokasi Toko Kami
                     </h2>
                     <div class="grid grid-cols-1 gap-6">
                         <!-- Location & Plus Code Card -->
                         <div class="p-5 rounded-card border border-border bg-white space-y-2">
-                            <div class="w-10 h-10 rounded-xl bg-coral/10 text-coral flex items-center justify-center text-lg font-bold">
-                                📍
-                            </div>
+                            
                             <h4 class="font-bold text-sm text-charcoal">Lokasi & Plus Code</h4>
                             <p class="text-xs text-slate leading-relaxed">
                                 XGXX+44C<br>
