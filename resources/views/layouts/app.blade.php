@@ -84,32 +84,31 @@
                 Chat Admin
             </button>
         </div>
-        <!-- Load Tawk.to script once on page load -->
+        <!-- Tawk.to widget script -->
         <script type="text/javascript">
+        var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
         (function(){
-            if(window.Tawk_API) return; // already loaded
-            var Tawk_API = window.Tawk_API = {};
-            var s1=document.createElement("script");
-            var s0=document.getElementsByTagName("script")[0];
+            var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
             s1.async=true;
             s1.src='https://embed.tawk.to/672bb3d12480f5b4f59f6a8f/1ic1qr9fk';
             s1.charset='UTF-8';
             s1.setAttribute('crossorigin','*');
             s0.parentNode.insertBefore(s1,s0);
         })();
-        // Fallback load on click if script failed to load
+        
+        // Button click handler with retry
         document.getElementById('chat-admin-btn').addEventListener('click', function(){
-            if(window.Tawk_API && typeof window.Tawk_API.toggle === 'function'){
-                window.Tawk_API.toggle();
-            } else {
-                var s=document.createElement('script');
-                s.async=true;
-                s.src='https://embed.tawk.to/672bb3d12480f5b4f59f6a8f/1ic1qr9fk';
-                s.charset='UTF-8';
-                s.setAttribute('crossorigin','*');
-                document.head.appendChild(s);
-                alert('Chat widget sedang dimuat, coba lagi setelah beberapa detik.');
-            }
+            var attempts = 0;
+            var checkTawk = setInterval(function(){
+                attempts++;
+                if(window.Tawk_API && window.Tawk_API.toggle){
+                    clearInterval(checkTawk);
+                    Tawk_API.toggle();
+                } else if(attempts > 10) {
+                    clearInterval(checkTawk);
+                    alert('Widget chat tidak dapat dimuat. Coba refresh halaman.');
+                }
+            }, 500);
         });
         </script>
     @endif
