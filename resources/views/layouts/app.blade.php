@@ -35,17 +35,17 @@
             {{ $slot ?? '' }}
         </main>
     <!-- Footer with location link -->
-    <footer class="bg-charcoal text-ash py-4 mt-12">
+    <footer class="bg-charcoal text-white py-6 mt-12">
         <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between px-4">
-            <div class="text-xs text-ash mb-2 md:mb-0">
+            <div class="text-xs text-slate-300 mb-2 md:mb-0">
                 © {{ date('Y') }} ReyxShop – All rights reserved.
             </div>
             <div class="flex items-center gap-2 text-xs">
-                <svg class="w-4 h-4 text-ash" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <svg class="w-4 h-4 text-slate-300" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/>
                     <circle cx="12" cy="9" r="2.5"/>
                 </svg>
-                <a href="https://www.google.com/maps/search/?api=1&query=Jl.+Komp.+Alam+Satria+3+No+560,%20Klapanunggal%20I,+Mekarjaya%20City%20Kabupaten%20Bandung,%20Jawa%20Barat%2030096" target="_blank" class="underline hover:text-coral text-ash">Jl. Komp. Alam Satria 3 No 560, Klapanunggal I – 30096</a>
+                <a href="https://www.google.com/maps/search/?api=1&query=Jl.+Komp.+Alam+Satria+3+No+560,%20Klapanunggal%20I,+Mekarjaya%20City%20Kabupaten%20Bandung,%20Jawa%20Barat%2030096" target="_blank" class="underline hover:text-coral text-slate-300">Jl. Komp. Alam Satria 3 No 560, Klapanunggal I – 30096</a>
             </div>
         </div>
     </footer>
