@@ -319,6 +319,12 @@
                         <a href="{{ route('products.index') }}" class="px-5 py-2.5 rounded-pill bg-coral hover:bg-coral-hover text-white text-xs font-bold transition">
                             Lihat Katalog Lengkap
                         </a>
+                        <a href="https://id.shp.ee/zA9z9C1n" target="_blank" class="px-5 py-2.5 rounded-pill bg-slate-700 hover:bg-slate-800 text-white text-xs font-bold transition flex items-center gap-2">
+                            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M12.956 6.304C9.365 6.304 6.444 9.223 6.444 12.81c0 3.586 2.921 6.505 6.512 6.505 3.588 0 6.51-2.919 6.51-6.505 0-3.587-2.922-6.506-6.51-6.506zm2.504 9.288H9.87c-.16 0-.29-.13-.29-.29v-.58c0-.16.13-.29.29-.29h5.59c.16 0 .29.13.29.29v.58c0 .16-.13.29-.29.29zm-.73-2.605H10.6c-.16 0-.29-.13-.29-.29v-.58c0-.16.13-.29.29-.29h3.13c.16 0 .29.13.29.29v.58c0 .16-.13.29-.29.29zM16.99 4.268c-.78-.5-1.73-.78-2.72-.78-3.04 0-5.5 2.46-5.5 5.5 0 1.01.28 2 .8 2.83l-3.6 3.6c-.2.2-.2.51 0 .71.1.1.23.15.36.15.13 0 .26-.05.35-.15l3.6-3.6c.83.52 1.82.8 2.83.8 3.04 0 5.5-2.46 5.5-5.5 0-.99-.28-1.94-.78-2.72z"/>
+                            </svg>
+                            Kunjungi Toko di Shopee
+                        </a>
                         @auth
                         <button onclick="if(window.Tawk_API){Tawk_API.toggle();}else{alert('Widget chat sedang dimuat, coba lagi.');}" class="px-5 py-2.5 rounded-pill bg-white hover:bg-ash text-charcoal border border-border text-xs font-bold transition">
                             Chat Admin
