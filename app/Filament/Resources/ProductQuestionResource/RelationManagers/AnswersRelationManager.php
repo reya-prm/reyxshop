@@ -43,8 +43,7 @@ class AnswersRelationManager extends RelationManager
             ])
             ->headerActions([
                 Tables\Actions\CreateAction::make()
-                    ->using(function (array $data) {
-                        // Store admin id automatically
+                    ->mutateFormDataUsing(function (array $data): array {
                         $data['user_id'] = auth()->id();
                         return $data;
                     })
