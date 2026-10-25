@@ -2,7 +2,10 @@
 
 namespace App\Providers;
 
+use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\ServiceProvider;
+use Spatie\Permission\Models\Role;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -20,13 +23,15 @@ class AppServiceProvider extends ServiceProvider
     public function boot(): void
     {
         // Filament panel access – admin & operator allowed, customer denied
-        \Illuminate\Support\Facades\Gate::define('viewFilament', function ($user) {
+        Gate::define('viewFilament', function ($user) {
             return $user->hasAnyRole(['admin', 'operator']);
         });
         // Ensure default roles exist
-        \Spatie\Permission\Models\Role::firstOrCreate(['name' => 'admin']);
-        \Spatie\Permission\Models\Role::firstOrCreate(['name' => 'operator']);
-        \Spatie\Permission\Models\Role::firstOrCreate(['name' => 'customer']);
+        if (Schema::hasTable('roles')) {
+            Role::firstOrCreate(['name' => 'admin']);
+            Role::firstOrCreate(['name' => 'operator']);
+            Role::firstOrCreate(['name' => 'customer']);
+        }
 
     }
 }

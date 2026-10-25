@@ -25,7 +25,6 @@ class AdminPanelProvider extends PanelProvider
         return $panel
             ->default()
             ->id('admin')
-            ->theme('light')
             ->path('admin')
             ->login()
             ->colors([
