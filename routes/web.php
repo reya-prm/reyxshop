@@ -16,6 +16,16 @@ Route::get('/force-logout', function() {
     return redirect('/login')->with('status', 'Sesi dihapus paksa, silakan login ulang.');
 })->name('force.logout');
 
+// Hard-block admin routes for non-admin users
+Route::middleware(['web', 'auth'])->group(function() {
+    Route::get('/admin/{any}', function() {
+        $user = Auth::user();
+        if (!$user || !$user->canAccessPanel(\Filament\Facades\Filament::getDefaultPanel())) {
+            abort(403, 'Access denied. You do not have permission to access the admin panel.');
+        }
+    })->where('any', '.*');
+});
+
 Route::get('/', [HomeController::class, 'index'])->name('home');
 
 // Redirect legacy /home to the new home route
