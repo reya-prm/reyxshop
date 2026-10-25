@@ -334,30 +334,6 @@
                         Datang, Telepon, atau Chat—Kami Siap Melayani
                     </h2>
                     <div class="grid grid-cols-1 gap-6">
-                        <!-- Email & Social -->
-                        <div class="p-5 rounded-card border border-border bg-white space-y-2">
-                            <div class="w-10 h-10 rounded-xl bg-coral/10 text-coral flex items-center justify-center text-lg font-bold">
-                                ✉️
-                            </div>
-                            <h4 class="font-bold text-sm text-charcoal">Email & Sosial Media</h4>
-                            <p class="text-xs text-slate leading-relaxed">
-                                Pertanyaan formal, kerjasama, atau bulk order:
-                            </p>
-                            <div class="space-y-2 mt-2">
-                                <a href="mailto:admin@reyxshop.local" class="block text-xs font-bold text-charcoal hover:text-coral transition">
-                                    ✉️ admin@reyxshop.local
-                                </a>
-                                <div class="flex items-center gap-3">
-                                    <a href="https://instagram.com/reyxshop" target="_blank" class="text-slate hover:text-coral transition">
-                                        <span class="text-xs font-bold">📷 Instagram</span>
-                                    </a>
-                                    <a href="https://facebook.com/reyxshop" target="_blank" class="text-slate hover:text-coral transition">
-                                        <span class="text-xs font-bold">👥 Facebook</span>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-
                         <!-- Location & Plus Code Card -->
                         <div class="p-5 rounded-card border border-border bg-white space-y-2">
                             <div class="w-10 h-10 rounded-xl bg-coral/10 text-coral flex items-center justify-center text-lg font-bold">
