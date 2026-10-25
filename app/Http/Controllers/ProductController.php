@@ -12,6 +12,7 @@ use Artesaos\SEOTools\Facades\OpenGraph;
 use Artesaos\SEOTools\Facades\SEOMeta;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\View\View;
 
 class ProductController extends Controller
@@ -122,15 +123,25 @@ class ProductController extends Controller
                 ->withErrors(['review' => 'Anda sudah memberikan ulasan untuk produk ini.']);
         }
 
-        $product->reviews()->create([
-            'user_id' => auth()->id(),
-            'rating' => $validated['rating'],
-            'content' => $validated['content'],
-            'status' => 'approved', // Auto-approve, no moderation
-        ]);
+        DB::beginTransaction();
+        try {
+            $product->reviews()->create([
+                'user_id' => auth()->id(),
+                'rating' => $validated['rating'],
+                'content' => $validated['content'],
+                'status' => 'approved', // Auto-approve, no moderation
+            ]);
 
-        return redirect()->route('products.show', $product->slug)
-            ->with('success', 'Ulasan Anda berhasil dikirim. Terima kasih!');
+            DB::commit();
+
+            return redirect()->route('products.show', $product->slug)
+                ->with('success', 'Ulasan Anda berhasil dikirim. Terima kasih!');
+        } catch (\Throwable $e) {
+            DB::rollBack();
+
+            return redirect()->route('products.show', $product->slug)
+                ->with('error', 'Gagal menyimpan ulasan. Silakan coba kembali.');
+        }
     }
 
     /**
@@ -142,13 +153,23 @@ class ProductController extends Controller
 
         $validated = $request->validated();
 
-        $product->questions()->create([
-            'user_id' => auth()->id(),
-            'question' => $validated['question'],
-            'status' => 'pending',
-        ]);
+        DB::beginTransaction();
+        try {
+            $product->questions()->create([
+                'user_id' => auth()->id(),
+                'question' => $validated['question'],
+                'status' => 'pending',
+            ]);
 
-        return redirect()->route('products.show', $product->slug)
-            ->with('success', 'Pertanyaan Anda telah kami terima! Admin akan segera memberikan jawaban.');
+            DB::commit();
+
+            return redirect()->route('products.show', $product->slug)
+                ->with('success', 'Pertanyaan Anda telah kami terima! Admin akan segera memberikan jawaban.');
+        } catch (\Throwable $e) {
+            DB::rollBack();
+
+            return redirect()->route('products.show', $product->slug)
+                ->with('error', 'Gagal mengirim pertanyaan. Silakan coba kembali.');
+        }
     }
 }

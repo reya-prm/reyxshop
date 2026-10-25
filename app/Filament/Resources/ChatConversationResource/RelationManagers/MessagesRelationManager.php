@@ -9,6 +9,7 @@ use Filament\Forms\Form;
 use Filament\Resources\RelationManagers\RelationManager;
 use Filament\Tables;
 use Filament\Tables\Table;
+use Illuminate\Support\Facades\DB;
 
 class MessagesRelationManager extends RelationManager
 {
@@ -72,7 +73,14 @@ class MessagesRelationManager extends RelationManager
                         return $data;
                     })
                     ->after(function (ChatMessage $record) {
-                        $record->conversation->update(['last_message_at' => now()]);
+                        DB::beginTransaction();
+                        try {
+                            $record->conversation->update(['last_message_at' => now()]);
+                            DB::commit();
+                        } catch (\Throwable $e) {
+                            DB::rollBack();
+                        }
+
                         try {
                             event(new MessageSent($record));
                         } catch (\Throwable $e) {

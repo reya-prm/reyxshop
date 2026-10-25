@@ -54,9 +54,16 @@ class ImagesRelationManager extends RelationManager
                         // If is_primary is set, ensure only one primary per product
                         if (! empty($data['is_primary'])) {
                             $productId = $this->getOwnerRecord()->id;
-                            DB::table('product_images')
-                                ->where('product_id', $productId)
-                                ->update(['is_primary' => false]);
+                            DB::beginTransaction();
+                            try {
+                                DB::table('product_images')
+                                    ->where('product_id', $productId)
+                                    ->update(['is_primary' => false]);
+                                DB::commit();
+                            } catch (\Throwable $e) {
+                                DB::rollBack();
+                                throw $e;
+                            }
                         }
 
                         return $data;
@@ -69,11 +76,18 @@ class ImagesRelationManager extends RelationManager
                             ->where('is_primary', true)
                             ->exists();
                         if (! $hasPrimary) {
-                            DB::table('product_images')
-                                ->where('product_id', $productId)
-                                ->orderBy('id', 'asc')
-                                ->limit(1)
-                                ->update(['is_primary' => true]);
+                            DB::beginTransaction();
+                            try {
+                                DB::table('product_images')
+                                    ->where('product_id', $productId)
+                                    ->orderBy('id', 'asc')
+                                    ->limit(1)
+                                    ->update(['is_primary' => true]);
+                                DB::commit();
+                            } catch (\Throwable $e) {
+                                DB::rollBack();
+                                throw $e;
+                            }
                         }
                     }),
             ])
@@ -82,10 +96,17 @@ class ImagesRelationManager extends RelationManager
                     ->mutateFormDataUsing(function (array $data, $record): array {
                         // If toggling primary on edit, un‑primary other images
                         if (! empty($data['is_primary'])) {
-                            DB::table('product_images')
-                                ->where('product_id', $record->product_id)
-                                ->where('id', '!=', $record->id)
-                                ->update(['is_primary' => false]);
+                            DB::beginTransaction();
+                            try {
+                                DB::table('product_images')
+                                    ->where('product_id', $record->product_id)
+                                    ->where('id', '!=', $record->id)
+                                    ->update(['is_primary' => false]);
+                                DB::commit();
+                            } catch (\Throwable $e) {
+                                DB::rollBack();
+                                throw $e;
+                            }
                         }
 
                         return $data;
@@ -94,12 +115,19 @@ class ImagesRelationManager extends RelationManager
                     ->after(function ($record) {
                         // If deleted image was primary, promote another if exists
                         if ($record->is_primary) {
-                            DB::table('product_images')
-                                ->where('product_id', $record->product_id)
-                                ->where('id', '!=', $record->id)
-                                ->orderBy('sort_order')
-                                ->limit(1)
-                                ->update(['is_primary' => true]);
+                            DB::beginTransaction();
+                            try {
+                                DB::table('product_images')
+                                    ->where('product_id', $record->product_id)
+                                    ->where('id', '!=', $record->id)
+                                    ->orderBy('sort_order')
+                                    ->limit(1)
+                                    ->update(['is_primary' => true]);
+                                DB::commit();
+                            } catch (\Throwable $e) {
+                                DB::rollBack();
+                                throw $e;
+                            }
                         }
                     }),
             ])

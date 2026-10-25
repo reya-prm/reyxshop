@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
@@ -132,5 +133,41 @@ class Product extends Model
         $avg = $this->approvedReviews->avg('rating');
 
         return $avg ? round((float) $avg, 1) : 5.0;
+    }
+
+    /**
+     * Update product stock safely using MySQL Stored Procedure (with atomic row lock),
+     * or fallback safely in testing/non-MySQL environments.
+     */
+    public function updateStockViaProcedure(int $quantityDelta): void
+    {
+        DB::beginTransaction();
+        try {
+            if (DB::getDriverName() === 'mysql') {
+                DB::statement('CALL sp_update_product_stock(?, ?)', [$this->id, $quantityDelta]);
+                $this->refresh();
+            } else {
+                $newStock = max(0, (int) $this->stock + $quantityDelta);
+                $this->update(['stock' => $newStock]);
+            }
+            DB::commit();
+        } catch (\Throwable $e) {
+            DB::rollBack();
+            throw $e;
+        }
+    }
+
+    /**
+     * Get final price calculated directly by MySQL Function when available.
+     */
+    public function getDbFinalPrice(): float
+    {
+        if (DB::getDriverName() === 'mysql') {
+            $result = DB::selectOne('SELECT fn_product_final_price(?) AS final_price', [$this->id]);
+
+            return $result ? (float) $result->final_price : (float) $this->price;
+        }
+
+        return (float) $this->price;
     }
 }

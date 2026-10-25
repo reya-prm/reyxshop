@@ -6,6 +6,7 @@ use App\Events\MessageSent;
 use App\Models\ChatConversation;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class ChatController extends Controller
 {
@@ -60,13 +61,24 @@ class ChatController extends Controller
             ]
         );
 
-        $message = $conversation->messages()->create([
-            'user_id' => $request->user()->id,
-            'sender_type' => 'customer',
-            'message' => $validated['message'],
-        ]);
+        DB::beginTransaction();
+        try {
+            $message = $conversation->messages()->create([
+                'user_id' => $request->user()->id,
+                'sender_type' => 'customer',
+                'message' => $validated['message'],
+            ]);
 
-        $conversation->update(['last_message_at' => now()]);
+            $conversation->update(['last_message_at' => now()]);
+            DB::commit();
+        } catch (\Throwable $e) {
+            DB::rollBack();
+
+            return response()->json([
+                'status' => 'error',
+                'message' => 'Gagal mengirim pesan chat.',
+            ], 500);
+        }
 
         // Broadcast to private channel
         try {
