@@ -4,8 +4,17 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ChatController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProductController;
-use App\Http\Controllers\SitemapController;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
+
+Route::get('/force-logout', function() {
+    Auth::logout();
+    Session::flush();
+    request()->session()->invalidate();
+    request()->session()->regenerateToken();
+    return redirect('/login')->with('status', 'Sesi dihapus paksa, silakan login ulang.');
+})->name('force.logout');
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
 
