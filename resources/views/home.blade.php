@@ -46,14 +46,6 @@
                         >
                             Jelajahi Katalog ↓
                         </a>
-                        <a 
-                            href="mailto:admin@reyxshop.local" 
-                            target="_blank" 
-                            class="px-6 py-3.5 rounded-pill font-bold text-sm bg-white hover:bg-ash text-charcoal border border-border transition text-center flex items-center justify-center gap-2"
-                        >
-                            <span class="text-coral">✉️</span>
-                            Email Admin
-                        </a>
                                 </div>
                 </div>
 
