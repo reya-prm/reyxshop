@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Support\Facades\URL;
 use Illuminate\Support\ServiceProvider;
 use Spatie\Permission\Models\Role;
 
@@ -22,6 +23,17 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
+        // Force HTTPS untuk Cloudflare Tunnel, Reverse Proxy, atau Production
+        if (
+            $this->app->environment('production') ||
+            request()->header('x-forwarded-proto') === 'https' ||
+            request()->server->get('HTTP_X_FORWARDED_PROTO') === 'https' ||
+            str_starts_with((string) config('app.url'), 'https://')
+        ) {
+            URL::forceScheme('https');
+            request()->server->set('HTTPS', 'on');
+        }
+
         // Filament panel access – admin & operator allowed, customer denied
         Gate::define('viewFilament', function ($user) {
             return $user->hasAnyRole(['admin', 'operator']);
@@ -32,6 +44,5 @@ class AppServiceProvider extends ServiceProvider
             Role::firstOrCreate(['name' => 'operator']);
             Role::firstOrCreate(['name' => 'customer']);
         }
-
     }
 }

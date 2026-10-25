@@ -1,0 +1,9 @@
+/node_modules
+/vendor
+.env
+.env.backup
+.env.production
+.git
+.github
+.phpunit.result.cache
+npm-debug.log
