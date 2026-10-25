@@ -65,6 +65,7 @@
                                 src="https://images.unsplash.com/photo-1558981403-c5f9899a28bc?w=900&auto=format&fit=crop&q=80" 
                                 alt="Motocross Rider ReyxShop" 
                                 class="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-500"
+                                onerror="this.onerror=null;this.src='{{ asset('images/placeholder-product.svg') }}';"
                             >
                             <div class="absolute inset-0 bg-gradient-to-t from-charcoal/80 via-transparent to-transparent"></div>
                             
@@ -167,6 +168,7 @@
                                     alt="{{ $product->name }}" 
                                     class="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-500"
                                     loading="lazy"
+                                    onerror="this.onerror=null;this.src='{{ asset('images/placeholder-product.svg') }}';"
                                 >
                                 <!-- Badges -->
                                 <div class="absolute top-3 left-3 flex flex-col gap-1.5 items-start">
@@ -297,6 +299,7 @@
                                 src="https://images.unsplash.com/photo-1561056044-89a68f3fa279?w=900&auto=format&fit=crop&q=80" 
                                 alt="Toko ReyxShop" 
                                 class="w-full h-full object-cover object-center"
+                                onerror="this.onerror=null;this.src='{{ asset('images/placeholder-product.svg') }}';"
                             >
                         </div>
                         <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-white to-transparent p-4">

@@ -39,6 +39,7 @@
                         src="{{ $product->image_url }}" 
                         alt="{{ $product->name }}" 
                         class="w-full h-full object-cover object-center transition-all duration-300"
+                        onerror="this.onerror=null;this.src='{{ asset('images/placeholder-product.svg') }}';"
                     >
                     <div class="absolute top-4 left-4">
                         <span class="px-3 py-1 rounded-pill text-xs font-bold uppercase tracking-wider bg-charcoal text-white shadow-xs">
@@ -56,7 +57,7 @@
                                 onclick="document.getElementById('main-product-image').src='{{ $img->url }}'"
                                 class="w-20 h-20 rounded-card overflow-hidden border-2 border-border hover:border-coral focus:border-coral-hover transition shrink-0 cursor-pointer"
                             >
-                                <img src="{{ $img->url }}" alt="Thumbnail {{ $index + 1 }}" class="w-full h-full object-cover">
+                                <img src="{{ $img->url }}" alt="Thumbnail {{ $index + 1 }}" class="w-full h-full object-cover" onerror="this.onerror=null;this.src='{{ asset('images/placeholder-product.svg') }}';">
                             </button>
                         @endforeach
                     </div>
@@ -357,7 +358,7 @@
                     @foreach($relatedProducts as $rel)
                         <a href="{{ route('products.show', $rel->slug) }}" class="group bg-white p-4 rounded-card border border-border hover:shadow-floating transition">
                             <div class="aspect-4/3 rounded-card overflow-hidden bg-ash mb-3">
-                                <img src="{{ $rel->image_url }}" alt="{{ $rel->name }}" class="w-full h-full object-cover group-hover:scale-105 transition duration-300">
+                                <img src="{{ $rel->image_url }}" alt="{{ $rel->name }}" class="w-full h-full object-cover group-hover:scale-105 transition duration-300" onerror="this.onerror=null;this.src='{{ asset('images/placeholder-product.svg') }}';">
                             </div>
                             <h4 class="font-bold text-xs text-charcoal group-hover:text-coral transition line-clamp-1">{{ $rel->name }}</h4>
                             <p class="font-extrabold text-charcoal text-sm mt-1">Rp {{ number_format($rel->price, 0, ',', '.') }}</p>

@@ -6,11 +6,10 @@ use App\Http\Requests\StoreProductQuestionRequest;
 use App\Http\Requests\StoreReviewRequest;
 use App\Models\Category;
 use App\Models\Product;
-use App\Models\ProductQuestion;
 use App\Models\Review;
 use App\Models\StoreSetting;
-use Artesaos\SEOTools\Facades\SEOMeta;
 use Artesaos\SEOTools\Facades\OpenGraph;
+use Artesaos\SEOTools\Facades\SEOMeta;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
@@ -33,7 +32,7 @@ class ProductController extends Controller
         if ($search) {
             $query->where(function ($q) use ($search) {
                 $q->where('name', 'like', "%{$search}%")
-                  ->orWhere('description', 'like', "%{$search}%");
+                    ->orWhere('description', 'like', "%{$search}%");
             });
         }
 
@@ -46,9 +45,9 @@ class ProductController extends Controller
         $products = $query->latest()->paginate(9)->withQueryString();
 
         // SEO meta tags for catalog page
-        SEOMeta::setTitle('Katalog Produk – ' . config('app.name'));
+        SEOMeta::setTitle('Katalog Produk – '.config('app.name'));
         SEOMeta::setDescription('Jelajahi semua produk off‑road, motor, dan aksesoris di ReyxShop. Filter kategori, cari, baca ulasan, beli via marketplace.');
-        SEOMeta::addKeyword(['off‑road','motor','helm','baju','sparepart','competizione','apex','fox','racing']);
+        SEOMeta::addKeyword(['off‑road', 'motor', 'helm', 'baju', 'sparepart', 'competizione', 'apex', 'fox', 'racing']);
         OpenGraph::setTitle('Katalog Produk ReyxShop');
         OpenGraph::setDescription(SEOMeta::getDescription());
         OpenGraph::setUrl(url()->current());
@@ -75,15 +74,15 @@ class ProductController extends Controller
             ->firstOrFail();
 
         // SEO meta for product detail page
-        SEOMeta::setTitle($product->name . ' – ReyxShop');
+        SEOMeta::setTitle($product->name.' – ReyxShop');
         SEOMeta::setDescription(substr(strip_tags($product->description ?? ''), 0, 150));
         SEOMeta::setCanonical(url()->current());
         SEOMeta::addKeyword(['off‑road', $product->category->name ?? 'product', $product->name]);
         OpenGraph::setTitle($product->name);
         OpenGraph::setDescription(SEOMeta::getDescription());
         OpenGraph::setUrl(url()->current());
-        if ($product->images->first()) {
-            OpenGraph::addImage(url('storage/' . $product->images->first()->image_path));
+        if ($product->images->isNotEmpty()) {
+            OpenGraph::addImage($product->image_url);
         }
         OpenGraph::addProperty('type', 'product');
 

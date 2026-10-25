@@ -83,6 +83,7 @@
                                 src="{{ $product->image_url }}" 
                                 alt="{{ $product->name }}" 
                                 class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                                onerror="this.onerror=null;this.src='{{ asset('images/placeholder-product.svg') }}';"
                             >
                             <div class="absolute top-3 left-3 flex flex-col gap-1 items-start">
                                 <span class="px-2.5 py-1 rounded-pill text-[10px] font-bold uppercase bg-charcoal text-white">

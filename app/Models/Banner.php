@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Storage;
 
 class Banner extends Model
 {
@@ -44,8 +45,27 @@ class Banner extends Model
 
     public function getImageUrlAttribute(): string
     {
-        return str_starts_with($this->image_path, 'http')
-            ? $this->image_path
-            : asset('storage/' . $this->image_path);
+        if (empty($this->image_path)) {
+            return asset('images/placeholder-product.svg');
+        }
+
+        if (str_starts_with($this->image_path, 'http://') || str_starts_with($this->image_path, 'https://')) {
+            return $this->image_path;
+        }
+
+        $trimmed = ltrim($this->image_path, '/');
+        if (str_starts_with($trimmed, 'storage/')) {
+            $trimmed = substr($trimmed, 8);
+        }
+
+        if (Storage::disk('public')->exists($trimmed)) {
+            return Storage::disk('public')->url($trimmed);
+        }
+
+        if (file_exists(public_path($trimmed))) {
+            return asset($trimmed);
+        }
+
+        return asset('images/placeholder-product.svg');
     }
 }

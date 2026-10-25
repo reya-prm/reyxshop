@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
 class Product extends Model
@@ -99,13 +100,28 @@ class Product extends Model
     public function getImageUrlAttribute(): string
     {
         $primary = $this->images->firstWhere('is_primary', true) ?? $this->images->first();
-        if ($primary) {
-            return str_starts_with($primary->image_path, 'http')
-                ? $primary->image_path
-                : asset('storage/' . $primary->image_path);
+        if ($primary && ! empty($primary->image_path)) {
+            $path = $primary->image_path;
+
+            if (str_starts_with($path, 'http://') || str_starts_with($path, 'https://')) {
+                return $path;
+            }
+
+            $trimmed = ltrim($path, '/');
+            if (str_starts_with($trimmed, 'storage/')) {
+                $trimmed = substr($trimmed, 8);
+            }
+
+            if (Storage::disk('public')->exists($trimmed)) {
+                return Storage::disk('public')->url($trimmed);
+            }
+
+            if (file_exists(public_path($trimmed))) {
+                return asset($trimmed);
+            }
         }
 
-        return 'https://images.unsplash.com/photo-1558981403-c5f9899a28bc?w=800';
+        return asset('images/placeholder-product.svg');
     }
 
     /**
@@ -114,6 +130,7 @@ class Product extends Model
     public function getAverageRatingAttribute(): float
     {
         $avg = $this->approvedReviews->avg('rating');
-        return $avg ? round((float)$avg, 1) : 5.0;
+
+        return $avg ? round((float) $avg, 1) : 5.0;
     }
 }
