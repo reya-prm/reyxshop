@@ -38,7 +38,13 @@ class ReviewResource extends Resource
                 Forms\Components\Textarea::make('content')
                     ->required()
                     ->columnSpanFull(),
-                Forms\Components\TextInput::make('status')
+                Forms\Components\Select::make('status')
+                    ->options([
+                        'pending' => 'Pending (Baru)',
+                        'approved' => 'Approved (Disetujui)',
+                        'rejected' => 'Rejected (Ditolak)',
+                    ])
+                    ->default('pending')
                     ->required()
                     ->maxLength(255)
                     ->default('pending'),

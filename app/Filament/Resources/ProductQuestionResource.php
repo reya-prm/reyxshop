@@ -33,7 +33,12 @@ class ProductQuestionResource extends Resource
                 Forms\Components\Textarea::make('question')
                     ->required()
                     ->columnSpanFull(),
-                Forms\Components\TextInput::make('status')
+                Forms\Components\Select::make('status')
+                    ->options([
+                        'pending' => 'Pending (Baru)',
+                        'answered' => 'Answered (Dijawab)',
+                    ])
+                    ->default('pending')
                     ->required()
                     ->maxLength(255)
                     ->default('pending'),
