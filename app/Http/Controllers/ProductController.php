@@ -100,7 +100,11 @@ class ProductController extends Controller
             'lazada_url' => StoreSetting::getValue('lazada_url', 'https://lazada.co.id'),
         ];
 
-        return view('products.show', compact('product', 'relatedProducts', 'storeSettings'));
+        $userReview = auth()->check()
+            ? $product->reviews()->where('user_id', auth()->id())->first()
+            : null;
+
+        return view('products.show', compact('product', 'relatedProducts', 'storeSettings', 'userReview'));
     }
 
     /**

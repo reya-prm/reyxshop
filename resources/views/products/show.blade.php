@@ -233,33 +233,66 @@
                     <!-- Review Submission Form -->
                     <div class="bg-white p-5 rounded-card border border-border shadow-xs">
                         <h4 class="text-xs font-bold text-charcoal uppercase tracking-wider mb-3">Tulis Ulasan Anda</h4>
+                        @php
+                            $userReview = $userReview ?? (Auth::check() ? $product->reviews()->where('user_id', Auth::id())->first() : null);
+                        @endphp
+
                         @auth
-                            @if(Auth::user()->hasVerifiedEmail())
-                                @if(!$product->reviews()->where('user_id', \Illuminate\Support\Facades\Auth::id())->exists())
-                                    <form action="{{ route('products.reviews.store', $product->slug) }}" method="POST" class="space-y-3">
-                                        @csrf
-                                        <div>
-                                            <select name="rating" required class="w-full px-3 py-2 text-xs rounded-xl border border-border focus:outline-hidden focus:ring-2 focus:ring-coral bg-white">
-                                                <option value="5">★★★★★ — Sangat Puas (5 Bintang)</option>
-                                                <option value="4">★★★★☆ — Puas (4 Bintang)</option>
-                                                <option value="3">★★★☆☆ — Cukup (3 Bintang)</option>
-                                                <option value="2">★★☆☆☆ — Kurang (2 Bintang)</option>
-                                                <option value="1">★☆☆☆☆ — Kecewa (1 Bintang)</option>
-                                            </select>
+                            @if($userReview)
+                                <div class="space-y-3">
+                                    <div class="p-3.5 bg-emerald-50 border border-emerald-200 text-emerald-800 text-xs rounded-xl flex items-center gap-2">
+                                        <svg class="w-4 h-4 shrink-0 text-emerald-600" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+                                        </svg>
+                                        <span class="font-bold">Anda sudah mengulas produk ini</span>
+                                    </div>
+                                    <div class="p-4 bg-ash border border-border rounded-xl space-y-2 text-xs">
+                                        <div class="flex items-center justify-between text-slate">
+                                            <strong class="text-charcoal">{{ Auth::user()->name }} (Ulasan Anda)</strong>
+                                            <span>{{ $userReview->created_at->diffForHumans() }}</span>
                                         </div>
-                                        <div>
-                                            <textarea name="content" rows="3" placeholder="Bagikan pengalaman Anda (opsional)..." class="w-full px-3 py-2 text-xs rounded-xl border border-border focus:outline-hidden focus:ring-2 focus:ring-coral"></textarea>
+                                        <div class="text-amber-500 font-bold">
+                                            @for($i = 0; $i < $userReview->rating; $i++) ★ @endfor
+                                            <span class="text-slate font-normal">({{ $userReview->rating }}/5)</span>
                                         </div>
-                                        <button type="submit" class="w-full py-2 px-4 rounded-pill bg-coral hover:bg-coral-hover text-white font-bold text-xs transition">Kirim Ulasan</button>
-                                    </form>
-                                @else
-                                    <div class="p-4 bg-green-100 text-green-800 text-xs rounded-card">Anda sudah memberi rating untuk produk ini.</div>
-                                @endif
+                                        @if($userReview->content)
+                                            <p class="text-slate leading-relaxed">{{ $userReview->content }}</p>
+                                        @endif
+                                        @if($userReview->reply)
+                                            <div class="mt-2 pt-2 border-t border-border pl-3 border-l-2 border-coral bg-white p-2.5 rounded-card text-[11px] text-slate">
+                                                <strong class="text-coral block mb-0.5">Balasan Resmi Admin ReyxShop:</strong>
+                                                {{ $userReview->reply->content }}
+                                            </div>
+                                        @endif
+                                    </div>
+                                </div>
+                            @elseif(Auth::user()->hasVerifiedEmail())
+                                <form action="{{ route('products.reviews.store', $product->slug) }}" method="POST" class="space-y-3">
+                                    @csrf
+                                    <div>
+                                        <select name="rating" required class="w-full px-3 py-2 text-xs rounded-xl border border-border focus:outline-hidden focus:ring-2 focus:ring-coral bg-white">
+                                            <option value="5">★★★★★ — Sangat Puas (5 Bintang)</option>
+                                            <option value="4">★★★★☆ — Puas (4 Bintang)</option>
+                                            <option value="3">★★★☆☆ — Cukup (3 Bintang)</option>
+                                            <option value="2">★★☆☆☆ — Kurang (2 Bintang)</option>
+                                            <option value="1">★☆☆☆☆ — Kecewa (1 Bintang)</option>
+                                        </select>
+                                    </div>
+                                    <div>
+                                        <textarea name="content" rows="3" placeholder="Bagikan pengalaman Anda (opsional)..." class="w-full px-3 py-2 text-xs rounded-xl border border-border focus:outline-hidden focus:ring-2 focus:ring-coral"></textarea>
+                                    </div>
+                                    <button type="submit" class="w-full py-2 px-4 rounded-pill bg-coral hover:bg-coral-hover text-white font-bold text-xs transition">Kirim Ulasan</button>
+                                </form>
                             @else
                                 <div class="p-4 bg-yellow-100 text-yellow-800 text-xs rounded-card">Verifikasi email Anda untuk dapat menulis ulasan.</div>
                             @endif
                         @else
-                            <a href="{{ route('login') }}" class="block w-full py-2 px-4 bg-coral text-white text-center rounded-pill hover:bg-coral-hover text-xs font-bold">Login untuk menulis review</a>
+                            <div class="p-4 bg-ash border border-border rounded-xl text-center space-y-2">
+                                <p class="text-xs text-slate">Silakan masuk ke akun Anda untuk menulis ulasan produk.</p>
+                                <a href="{{ route('login') }}" class="inline-block w-full py-2 px-4 bg-coral text-white text-center rounded-pill hover:bg-coral-hover text-xs font-bold transition">
+                                    Login untuk Menulis Ulasan
+                                </a>
+                            </div>
                         @endauth
                     </div>
 

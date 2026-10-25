@@ -1,10 +1,12 @@
 <?php
 
 use App\Models\Category;
+use App\Models\ChatConversation;
+use App\Models\MarketplaceLink;
 use App\Models\Product;
 use App\Models\ProductImage;
 use App\Models\ProductVariant;
-use App\Models\MarketplaceLink;
+use App\Models\Review;
 use App\Models\StoreSetting;
 use App\Models\User;
 
@@ -77,7 +79,7 @@ test('products catalog page displays products and filters by category', function
 });
 
 test('product detail page displays product information, variants, and marketplace links', function () {
-    $response = $this->get('/products/' . $this->product->slug);
+    $response = $this->get('/products/'.$this->product->slug);
 
     $response->assertStatus(200);
     $response->assertSee('Jersey Fox Legion Enduro');
@@ -89,12 +91,12 @@ test('customer can submit product review with validation', function () {
     $user = User::factory()->create();
     $user->markEmailAsVerified();
 
-    $response = $this->actingAs($user)->post('/products/' . $this->product->slug . '/reviews', [
+    $response = $this->actingAs($user)->post('/products/'.$this->product->slug.'/reviews', [
         'rating' => 5,
         'content' => 'Barang sangat bagus, jahitan rapi untuk trabas!',
     ]);
 
-    $response->assertRedirect('/products/' . $this->product->slug);
+    $response->assertRedirect('/products/'.$this->product->slug);
     $response->assertSessionHas('success');
 
     $this->assertDatabaseHas('reviews', [
@@ -104,15 +106,57 @@ test('customer can submit product review with validation', function () {
     ]);
 });
 
+test('guest user sees login prompt instead of review form', function () {
+    $response = $this->get('/products/'.$this->product->slug);
+
+    $response->assertStatus(200);
+    $response->assertSee('Login untuk Menulis Ulasan');
+    $response->assertDontSee('Kirim Ulasan');
+    $response->assertDontSee('Anda sudah mengulas produk ini');
+});
+
+test('authenticated user who has not reviewed sees review form', function () {
+    $user = User::factory()->create();
+    $user->markEmailAsVerified();
+
+    $response = $this->actingAs($user)->get('/products/'.$this->product->slug);
+
+    $response->assertStatus(200);
+    $response->assertSee('Kirim Ulasan');
+    $response->assertDontSee('Login untuk Menulis Ulasan');
+    $response->assertDontSee('Anda sudah mengulas produk ini');
+});
+
+test('authenticated user who already reviewed sees already reviewed message and their review', function () {
+    $user = User::factory()->create();
+    $user->markEmailAsVerified();
+
+    Review::create([
+        'product_id' => $this->product->id,
+        'user_id' => $user->id,
+        'rating' => 5,
+        'content' => 'Produk original sangat mantap!',
+        'status' => 'approved',
+    ]);
+
+    $response = $this->actingAs($user)->get('/products/'.$this->product->slug);
+
+    $response->assertStatus(200);
+    $response->assertSee('Anda sudah mengulas produk ini');
+    $response->assertSee('Produk original sangat mantap!');
+    $response->assertDontSee('Kirim Ulasan');
+    $response->assertDontSee('Login untuk Menulis Ulasan');
+});
+
 test('customer can submit product question with validation', function () {
     $user = User::factory()->create();
     $user->markEmailAsVerified();
 
-    $response = $this->actingAs($user)->post('/products/' . $this->product->slug . '/questions', [
+    $response = $this->actingAs($user)->post('/products/'.$this->product->slug.'/questions', [
         'question' => 'Apakah celananya anti air saat melewati sungai?',
     ]);
 
-    $response->assertRedirect('/products/' . $this->product->slug);
+    $response->assertRedirect('/products/'.$this->product->slug);
     $response->assertSessionHas('success');
 
     $this->assertDatabaseHas('product_questions', [
@@ -143,7 +187,7 @@ test('customer can send and retrieve live chat messages', function () {
         'messages',
     ]);
     // Verify conversation exists in DB and matches sent ID
-    $dbConversationId = \App\Models\ChatConversation::where('user_id', $user->id)->value('id');
+    $dbConversationId = ChatConversation::where('user_id', $user->id)->value('id');
     $this->assertEquals($conversationId, $dbConversationId);
     $this->assertEquals($dbConversationId, $messagesResponse->json('conversation_id'));
 });
