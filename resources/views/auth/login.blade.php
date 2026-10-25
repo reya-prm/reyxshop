@@ -1,7 +1,11 @@
 <x-guest-layout>
+    <!-- Logo -->
+    <div class="flex justify-center mb-6">
+        <img src="{{ asset('logo.png') }}" alt="ReyxShop" class="h-16">
+    </div>
     <!-- Session Status -->
     <x-auth-session-status class="mb-4" :status="session('status')" />
-
+    
     <form method="POST" action="{{ route('login') }}">
         @csrf
 
