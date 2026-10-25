@@ -6,7 +6,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     {!! SEO::generate() !!}
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <title>ReyxShop Kids</title>
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
