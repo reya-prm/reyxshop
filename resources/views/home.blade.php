@@ -99,7 +99,9 @@
                     >
                         <div>
                             <div class="w-10 h-10 rounded-xl bg-orange-50 text-coral flex items-center justify-center font-bold text-lg mb-3 group-hover:scale-110 group-hover:bg-coral group-hover:text-white transition-all">
-                                🏍️
+                                <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"/>
+                                </svg>
                             </div>
                             <h3 class="font-bold text-charcoal group-hover:text-coral transition text-sm">
                                 {{ $category->name }}
