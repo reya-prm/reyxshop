@@ -6,6 +6,8 @@ use App\Models\Banner;
 use App\Models\Category;
 use App\Models\Product;
 use App\Models\StoreSetting;
+use Artesaos\SEOTools\Facades\OpenGraph;
+use Artesaos\SEOTools\Facades\SEOMeta;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 
@@ -16,6 +18,11 @@ class HomeController extends Controller
      */
     public function index(Request $request): View
     {
+        SEOMeta::setTitle('ReyxShop Kids – Pusat Pakaian Anak Berkualitas');
+        SEOMeta::setDescription('Pusat belanja online pakaian anak berkualitas, modis, dan nyaman di ReyxShop Kids.');
+        OpenGraph::setTitle('ReyxShop Kids – Pusat Pakaian Anak Berkualitas');
+        OpenGraph::setDescription('Pusat belanja online pakaian anak berkualitas, modis, dan nyaman di ReyxShop Kids.');
+
         $search = $request->query('search');
         $selectedCategory = $request->query('category');
 

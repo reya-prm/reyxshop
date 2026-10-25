@@ -7,8 +7,6 @@
     <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
     {!! SEO::generate() !!}
 
-    <title>ReyxShop Kids</title>
-
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
