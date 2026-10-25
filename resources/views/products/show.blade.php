@@ -254,9 +254,11 @@
                                     <button type="submit" class="w-full py-2 px-4 rounded-pill bg-coral hover:bg-coral-hover text-white font-bold text-xs transition">Kirim Ulasan</button>
                                 </form>
                             @else
-                                @unless(auth()->check() && auth()->user()->isAdmin())
+                                @if(auth()->check() && auth()->user()->isAdmin())
+                                    <div class="p-4 bg-slate-100 text-slate-600 text-xs rounded-card">Admin tidak dapat menulis ulasan produk.</div>
+                                @else
                                     <div class="p-4 bg-yellow-100 text-yellow-800 text-xs rounded-card">Verifikasi email Anda untuk dapat menulis ulasan.</div>
-                                @endunless
+                                @endif
                             @endif
                         @else
                             <div class="p-4 bg-ash border border-border rounded-xl text-center space-y-2">
@@ -319,9 +321,11 @@
                                     <button type="submit" class="w-full py-2 px-4 rounded-pill bg-coral hover:bg-coral-hover text-white font-bold text-xs transition">Kirim Pertanyaan</button>
                                 </form>
                             @else
-                                @unless(auth()->check() && auth()->user()->isAdmin())
+                                @if(auth()->check() && auth()->user()->isAdmin())
+                                    <div class="p-4 bg-slate-100 text-slate-600 text-xs rounded-card">Admin tidak dapat mengajukan pertanyaan produk.</div>
+                                @else
                                     <div class="p-4 bg-yellow-100 text-yellow-800 text-xs rounded-card">Verifikasi email Anda untuk dapat bertanya.</div>
-                                @endunless
+                                @endif
                             @endif
                         @else
                             <a href="{{ route('login') }}" class="block w-full py-2 px-4 bg-coral text-white text-center rounded-pill hover:bg-coral-hover text-xs font-bold">Login untuk bertanya</a>
