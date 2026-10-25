@@ -12,8 +12,8 @@ class StoreReviewRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        // Only authenticated & verified users can submit reviews
-        return \Illuminate\Support\Facades\Auth::check() && \Illuminate\Support\Facades\Auth::user()->hasVerifiedEmail();
+        // Only authenticated users can submit reviews
+        return \Illuminate\Support\Facades\Auth::check();
     }
 
     /**

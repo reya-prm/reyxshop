@@ -12,8 +12,8 @@ class StoreProductQuestionRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        // Only authenticated & verified users can ask questions
-        return \Illuminate\Support\Facades\Auth::check() && \Illuminate\Support\Facades\Auth::user()->hasVerifiedEmail();
+        // Only authenticated users can ask questions
+        return \Illuminate\Support\Facades\Auth::check();
     }
 
     /**
