@@ -13,9 +13,9 @@
                 <span>/</span>
                 <span class="text-charcoal font-semibold">Katalog Produk</span>
             </nav>
-            <h1 class="text-3xl sm:text-4xl font-extrabold tracking-tight">Katalog Produk Off-Road & Motocross</h1>
+            <h1 class="text-3xl sm:text-4xl font-extrabold tracking-tight">Katalog Pakaian Anak</h1>
             <p class="text-xs sm:text-sm text-slate mt-2 max-w-2xl">
-                Temukan perlengkapan riding terbaik dari berbagai kategori. Seluruh produk original dapat dipesan via marketplace resmi ReyxShop.
+                Temukan pakaian anak berkualitas dari berbagai kategori. Seluruh produk dapat dipesan via Shopee resmi ReyxShop Kids.
             </p>
         </div>
     </div>
@@ -33,7 +33,7 @@
                         type="text" 
                         name="search" 
                         value="{{ $search }}" 
-                        placeholder="Cari nama produk, apparel, helm, boots..." 
+                        placeholder="Cari nama produk, kaos, celana, setelan..." 
                         class="w-full pl-10 pr-4 py-2.5 text-xs rounded-xl border border-border focus:outline-hidden focus:ring-2 focus:ring-coral focus:border-transparent"
                     >
                     <svg class="w-4 h-4 text-slate absolute left-3.5 top-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">

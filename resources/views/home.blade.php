@@ -127,7 +127,7 @@
                         Katalog Unggulan
                     </span>
                     <h2 class="text-2xl sm:text-3xl font-extrabold tracking-tight text-charcoal mt-2">
-                        Produk Terpopuler ReyxShop
+                        Produk Kami
                     </h2>
                     <p class="text-xs text-slate mt-1">
                         Pilih produk dan nikmati kemudahan bertransaksi via Shopee.
