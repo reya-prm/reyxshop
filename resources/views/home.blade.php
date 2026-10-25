@@ -308,13 +308,19 @@
                             Kunjungi Toko di Shopee
                         </a>
                         @auth
-                        <button onclick="if(window.Tawk_API){Tawk_API.toggle();}else{alert('Widget chat sedang dimuat, coba lagi.');}" class="px-5 py-2.5 rounded-pill bg-white hover:bg-ash text-charcoal border border-border text-xs font-bold transition">
-                            Chat Admin
-                        </button>
+                            @if(auth()->user()->isAdmin())
+                                <span class="px-5 py-2.5 rounded-pill bg-slate-200 text-slate-500 border border-slate-300 text-xs font-bold cursor-not-allowed" title="Admin tidak dapat chat dengan diri sendiri">
+                                    Chat Admin
+                                </span>
+                            @else
+                                <button onclick="if(window.Tawk_API){Tawk_API.toggle();}else{alert('Widget chat sedang dimuat, coba lagi.');}" class="px-5 py-2.5 rounded-pill bg-white hover:bg-ash text-charcoal border border-border text-xs font-bold transition">
+                                    Chat Admin
+                                </button>
+                            @endif
                         @else
-                        <a href="{{ route('login') }}" class="px-5 py-2.5 rounded-pill bg-white hover:bg-ash text-charcoal border border-border text-xs font-bold transition">
-                            Chat Admin
-                        </a>
+                            <a href="{{ route('login') }}" class="px-5 py-2.5 rounded-pill bg-white hover:bg-ash text-charcoal border border-border text-xs font-bold transition">
+                                Chat Admin
+                            </a>
                         @endauth
                     </div>
                 </div>
