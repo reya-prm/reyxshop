@@ -1,4 +1,4 @@
-# 🚀 ReyxShop Production Deployment Guide
+# 🚀 ReyxShop Kids Production Deployment Guide
 
 ## Pre-Deployment Checklist
 

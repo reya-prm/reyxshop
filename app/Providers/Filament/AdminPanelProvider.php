@@ -33,7 +33,7 @@ class AdminPanelProvider extends PanelProvider
             ])
             ->darkMode(false) // Disable dark mode, force light mode
             ->font('Plus Jakarta Sans')
-            ->brandLogo(asset('logo.png'))
+            ->brandLogo(asset('logo.png')) // keep same logo, but you may replace file later
             ->discoverResources(in: app_path('Filament/Resources'), for: 'App\\Filament\\Resources')
             ->discoverPages(in: app_path('Filament/Pages'), for: 'App\\Filament\\Pages')
             ->pages([

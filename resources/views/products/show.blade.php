@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', $product->name . ' — ReyxShop Official')
+@section('title', $product->name . ' — ReyxShop Kids Official')
 @section('meta_description', Str::limit(strip_tags($product->description), 150))
 
 @section('content')

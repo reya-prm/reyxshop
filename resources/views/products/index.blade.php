@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
-@section('title', 'Katalog Lengkap Perlengkapan Motocross & Off-Road — ReyxShop')
-@section('meta_description', 'Jelajahi seluruh katalog resmi gear off-road, jersey motocross, helm trail, boots, dan aksesoris di ReyxShop. Filter berdasarkan kategori dan beli langsung via marketplace.')
+@section('title', 'Katalog Pakaian Anak — ReyxShop Kids')
+@section('meta_description', 'Jelajahi seluruh katalog pakaian anak ReyxShop Kids. Filter berdasarkan kategori, ukuran, warna, dan harga. Beli via marketplace.')
 
 @section('content')
 

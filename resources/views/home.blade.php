@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
-@section('title', 'ReyxShop — Katalog Resmi Perlengkapan Off-Road & Motocross')
-@section('meta_description', 'Katalog toko keluarga ReyxShop: Perlengkapan motocross, helm trail, jersey set, boots enduro, dan proteksi tubuh original.')
+@section('title', 'ReyxShop Kids — Katalog Pakaian Anak Berkualitas & Nyaman')
+@section('meta_description', 'Katalog toko keluarga ReyxShop Kids: Pakaian anak, kaos setelan, celana kargo, dan baju harian anak original dan nyaman.')
 
 @section('content')
 
@@ -18,14 +18,14 @@
                     </div>
                     
                     <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight leading-tight text-charcoal">
-                        Perlengkapan Off-Road <br>
+                        Pakaian Anak Berkualitas <br>
                         <span class="text-coral">
-                            Terbaik untuk Setiap Trek!
+                            Nyaman untuk Si Kecil!
                         </span>
                     </h1>
 
                     <p class="text-slate text-base sm:text-lg max-w-2xl mx-auto lg:mx-0 leading-relaxed font-normal">
-                        Koleksi lengkap jersey motocross, helm trail, sepatu boots enduro, dan body protector original. Pesan mudah, hangat, dan terpercaya langsung via <span class="font-semibold text-charcoal">Shopee</span>, <span class="font-semibold text-charcoal">Lazada</span>, atau <span class="font-semibold text-charcoal">Email</span>.
+                        Koleksi lengkap kaos anak, celana kargo, setelan, jaket, dan pakaian harian original. Pesan mudah dan terpercaya langsung via <span class="font-semibold text-charcoal">Shopee</span>, <span class="font-semibold text-charcoal">Lazada</span>, atau <span class="font-semibold text-charcoal">Email</span>.
                     </p>
 
                     <!-- Store Status Quick Notice -->
@@ -90,7 +90,7 @@
                 <div>
                     <p class="text-xs font-bold text-coral uppercase tracking-wider">Kategori Pilihan</p>
                     <h2 class="text-2xl sm:text-3xl font-extrabold tracking-tight text-charcoal mt-1">
-                        Perlengkapan Trabas & Motocross
+                        Pilihan Kategori Pakaian Anak
                     </h2>
                 </div>
                 <a href="{{ route('products.index') }}" class="text-xs font-bold text-coral hover:text-coral-hover transition flex items-center gap-1">

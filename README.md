@@ -1,15 +1,15 @@
 <div align="center">
 
-# 🏍️ ReyxShop
+# 👕 ReyxShop Kids
 
-**Toko Keluarga Digital untuk Komunitas Off-Road Indonesia**
+**Toko Keluarga Digital untuk Pakaian Anak Berkualitas**
 
 [![Laravel](https://img.shields.io/badge/Laravel-11.x-FF2D20?style=for-the-badge&logo=laravel&logoColor=white)](https://laravel.com)
 [![Filament](https://img.shields.io/badge/Filament-3.x-FFAA00?style=for-the-badge)](https://filamentphp.com)
 [![PHP](https://img.shields.io/badge/PHP-8.2+-777BB4?style=for-the-badge&logo=php&logoColor=white)](https://php.net)
 [![Tests](https://img.shields.io/badge/tests-48%20passing-success?style=for-the-badge)](.)
 
-*Platform e-commerce modern dengan integrasi marketplace, live chat real-time, dan sistem review terverifikasi untuk perlengkapan motocross & trail.*
+*Platform katalog modern dengan integrasi marketplace, live chat real-time, dan sistem review terverifikasi untuk pakaian anak.*
 
 [Demo](#) · [Dokumentasi](./docs) · [Deployment Guide](./DEPLOY.md)
 
@@ -19,7 +19,7 @@
 
 ## 🎯 Overview
 
-ReyxShop adalah platform storefront digital yang menghubungkan toko keluarga dengan komunitas off-road. Dibangun dengan Laravel 11 dan Filament 3, sistem ini menyediakan katalog produk lengkap, integrasi ke marketplace (Shopee, Tokopedia, Blibli), live chat dengan admin, serta sistem review dan Q&A terverifikasi.
+ReyxShop Kids adalah platform storefront digital yang menghubungkan toko keluarga dengan orang tua yang mencari pakaian anak berkualitas. Dibangun dengan Laravel 11 dan Filament 3, sistem ini menyediakan katalog produk lengkap, integrasi ke marketplace (Shopee, Tokopedia, Blibli), live chat dengan admin, serta sistem review dan Q&A terverifikasi.
 
 ### ✨ Key Features
 
