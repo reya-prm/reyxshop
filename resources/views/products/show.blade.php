@@ -375,7 +375,7 @@
                         </div>
                     @else
                         <div class="p-6 bg-white rounded-card border border-border text-center text-xs text-slate">
-                            Punya pertanyaan tentang spesifikasi atau kecocokan produk ini? Tuliskan pertanyaan Anda di atas atau langsung hubungi kami via WhatsApp.
+                            Punya pertanyaan tentang spesifikasi atau kecocokan produk ini? Tuliskan pertanyaan Anda di atas atau langsung hubungi kami via live chat.
                         </div>
                     @endif
                 </div>

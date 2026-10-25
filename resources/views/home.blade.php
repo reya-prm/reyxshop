@@ -352,60 +352,7 @@
                     </h2>
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                         <!-- Address -->
-                        <div class="p-5 rounded-card border border-border bg-white space-y-2">
-                            <div class="w-10 h-10 rounded-xl bg-coral/10 text-coral flex items-center justify-center text-lg font-bold">
-                                📍
-                            </div>
-                            <h4 class="font-bold text-sm text-charcoal">Lokasi Toko</h4>
-                            <p class="text-xs text-slate leading-relaxed">
-                                Jl. Komp. Alam Satria 3 No 560<br>
-                                Klapanunggal I, Mekarjaya City<br>
-                                Kabupaten Bandung, Jawa Barat 30096
-                            </p>
-                            <a 
-                                href="https://www.google.com/maps/search/?api=1&query=Jl.+Komp.+Alam+Satria+3+No+560,+Klapanunggal+I,+Mekarjaya+City+Kabupaten+Bandung,+Jawa+Barat+30096" 
-                                target="_blank"
-                                class="inline-flex items-center gap-1 text-xs font-bold text-coral hover:underline mt-2"
-                            >
-                                <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                    <path stroke-linecap="round" stroke-linejoin="round" d="M9 6.75V15m6-6v8.25m.503 3.498 4.875-2.437c.381-.19.622-.58.622-1.006V4.82c0-.836-.88-1.38-1.628-1.006l-3.869 1.934a1.125 1.125 0 0 1-1.006 0L9.503 3.252a1.125 1.125 0 0 0-1.006 0L3.622 5.689C2.88 6.064 2 5.52 2 4.82v8.25c0 .426.241.816.622 1.006l4.875 2.437a1.125 1.125 0 0 0 1.006 0Z" />
-                                </svg>
-                                Buka di Google Maps
-                            </a>
-                        </div>
-
-                        <!-- Hours -->
-                        <div class="p-5 rounded-card border border-border bg-white space-y-2">
-                            <div class="w-10 h-10 rounded-xl bg-coral/10 text-coral flex items-center justify-center text-lg font-bold">
-                                🕒
-                            </div>
-                            <h4 class="font-bold text-sm text-charcoal">Jam Operasional</h4>
-                            <p class="text-xs text-slate leading-relaxed">
-                                <strong class="text-charcoal">Senin–Jumat:</strong> 09:00–21:00 WIB<br>
-                                <strong class="text-charcoal">Sabtu:</strong> 08:00–22:00 WIB<br>
-                                <strong class="text-charcoal">Minggu & Hari Libur:</strong> 10:00–18:00 WIB
-                            </p>
-                        </div>
-
-                        <!-- Phone & WhatsApp -->
-                        <div class="p-5 rounded-card border border-border bg-white space-y-2">
-                            <div class="w-10 h-10 rounded-xl bg-coral/10 text-coral flex items-center justify-center text-lg font-bold">
-                                📞
-                            </div>
-                            <h4 class="font-bold text-sm text-charcoal">Telepon & WhatsApp</h4>
-                            <p class="text-xs text-slate leading-relaxed">
-                                Konsultasi ukuran, ready stock, atau pertanyaan produk:
-                            </p>
-                            <div class="space-y-2">
-                                <a href="tel:+6281234567890" class="block text-xs font-bold text-charcoal hover:text-coral transition">
-                                    📞 +62 812‑3456‑7890
-                                </a>
-                                <a href="mailto:admin@reyxshop.local" 
-                                   target="_blank"
-                                   class="inline-flex items-center gap-2 px-4 py-2 rounded-pill bg-coral hover:bg-coral-hover text-white text-xs font-bold transition">
-                                    ✉️ Email Admin
-                                </a>
-                            </div>
+                        
                         </div>
 
                         <!-- Email & Social -->
@@ -439,7 +386,7 @@
                     <div class="p-5 rounded-card border border-border bg-white sticky top-24">
                         <h4 class="font-bold text-sm text-charcoal mb-3">Kirim Pesan Cepat</h4>
                         <p class="text-xs text-slate mb-4">
-                            Ada pertanyaan spesifik? Tulis di sini, admin kami akan balas via email atau WhatsApp.
+                            Ada pertanyaan spesifik? Tulis di sini, admin kami akan balas via email.
                         </p>
                         <form action="#" method="POST" class="space-y-3">
                             @csrf
@@ -447,7 +394,7 @@
                                 <input type="text" placeholder="Nama Anda" class="w-full px-3 py-2 text-xs rounded-xl border border-border focus:outline-hidden focus:ring-2 focus:ring-coral bg-white">
                             </div>
                             <div>
-                                <input type="email" placeholder="Email / WhatsApp" class="w-full px-3 py-2 text-xs rounded-xl border border-border focus:outline-hidden focus:ring-2 focus:ring-coral bg-white">
+                                <input type="email" placeholder="Email" class="w-full px-3 py-2 text-xs rounded-xl border border-border focus:outline-hidden focus:ring-2 focus:ring-coral bg-white">
                             </div>
                             <div>
                                 <textarea rows="3" placeholder="Pesan..." class="w-full px-3 py-2 text-xs rounded-xl border border-border focus:outline-hidden focus:ring-2 focus:ring-coral bg-white"></textarea>
@@ -457,7 +404,7 @@
                             </button>
                         </form>
                         <p class="text-[10px] text-slate mt-4 text-center">
-                            Atau langsung chat via WhatsApp untuk respons lebih cepat.
+                            
                         </p>
                     </div>
                 </div>
