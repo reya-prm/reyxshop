@@ -354,34 +354,6 @@
                         </div>
                     </div>
                 </div>
-
-                <!-- Right: Quick Message -->
-                <div class="lg:col-span-1">
-                    <div class="p-5 rounded-card border border-border bg-white sticky top-24">
-                        <h4 class="font-bold text-sm text-charcoal mb-3">Kirim Pesan Cepat</h4>
-                        <p class="text-xs text-slate mb-4">
-                            Ada pertanyaan spesifik? Tulis di sini, admin kami akan balas via email.
-                        </p>
-                        <form action="#" method="POST" class="space-y-3">
-                            @csrf
-                            <div>
-                                <input type="text" placeholder="Nama Anda" class="w-full px-3 py-2 text-xs rounded-xl border border-border focus:outline-hidden focus:ring-2 focus:ring-coral bg-white">
-                            </div>
-                            <div>
-                                <input type="email" placeholder="Email" class="w-full px-3 py-2 text-xs rounded-xl border border-border focus:outline-hidden focus:ring-2 focus:ring-coral bg-white">
-                            </div>
-                            <div>
-                                <textarea rows="3" placeholder="Pesan..." class="w-full px-3 py-2 text-xs rounded-xl border border-border focus:outline-hidden focus:ring-2 focus:ring-coral bg-white"></textarea>
-                            </div>
-                            <button type="submit" class="w-full py-2.5 px-4 rounded-pill bg-coral hover:bg-coral-hover text-white text-xs font-bold transition">
-                                Kirim Pesan
-                            </button>
-                        </form>
-                        <p class="text-[10px] text-slate mt-4 text-center">
-                            
-                        </p>
-                    </div>
-                </div>
             </div>
         </div>
     </section>
