@@ -51,12 +51,20 @@ class HomeController extends Controller
 
         $featuredProducts = $productsQuery->latest()->take(12)->get();
 
+        // Auto store status based on time (07:00 - 17:00 WIB)
+        $currentHour = (int) now('Asia/Jakarta')->format('H');
+        $isOpenNow = ($currentHour >= 7 && $currentHour < 17);
+        $statusLabel = $isOpenNow ? 'Buka Sekarang' : 'Tutup';
+        $statusNotice = $isOpenNow 
+            ? 'Toko buka pukul 07:00 - 17:00 WIB. Pengiriman same-day untuk order sebelum jam 15:00!'
+            : 'Toko tutup. Buka kembali jam 07:00 WIB. Anda tetap bisa browsing dan chat akan dibalas saat toko buka.';
+
         // Store Settings from DB
         $storeSettings = [
-            'store_name' => StoreSetting::getValue('store_name', 'ReyxShop Off-Road & Motocross Gear'),
-            'is_open' => StoreSetting::getValue('is_open', true),
-            'status_label' => StoreSetting::getValue('status_label', 'Buka Hari Ini'),
-            'status_notice' => StoreSetting::getValue('status_notice', 'Toko buka pukul 08:30 - 18:00 WIB. Pengiriman cepat setiap hari kerja!'),
+            'store_name' => StoreSetting::getValue('store_name', 'ReyxShop Kids - Pakaian Anak Berkualitas'),
+            'is_open' => $isOpenNow,
+            'status_label' => $statusLabel,
+            'status_notice' => $statusNotice,
             'whatsapp_number' => StoreSetting::getValue('whatsapp_number', '6281234567890'),
             'whatsapp_display' => StoreSetting::getValue('whatsapp_display', '+62 812-3456-7890'),
             'address' => StoreSetting::getValue('address', 'Jl. Jalur Trabas No. 49, Kawasan Motocross Arena, Indonesia'),

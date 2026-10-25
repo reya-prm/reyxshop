@@ -277,11 +277,6 @@
                                 onerror="this.onerror=null;this.src='{{ asset('images/placeholder-product.svg') }}';"
                             >
                         </div>
-                        <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-white to-transparent p-4">
-                            <span class="px-3 py-1 rounded-pill text-[10px] font-bold uppercase bg-coral text-white">
-                                Lokasi Nyata
-                            </span>
-                        </div>
                     </div>
                 </div>
 
