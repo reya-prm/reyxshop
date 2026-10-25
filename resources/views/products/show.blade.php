@@ -174,21 +174,6 @@
 
 
 
-                    <!-- Email Direct Contact -->
-                    <a 
-                        href="mailto:admin@reyxshop.local?subject=Pertanyaan%20Produk%20{{ urlencode($product->name) }}" 
-                        target="_blank" 
-                        class="flex items-center justify-between p-3.5 rounded-card bg-gradient-to-r from-coral to-coral-hover hover:from-coral-hover hover:to-coral text-white font-bold text-sm shadow-md shadow-coral/20 transition transform hover:-translate-y-0.5"
-                    >
-                        <div class="flex items-center gap-3">
-                            <span class="w-8 h-8 rounded-lg bg-white/20 flex items-center justify-center font-black">✉️</span>
-                            <div>
-                                <span class="block text-xs uppercase tracking-wide opacity-90">Konsultasi / Order Cepat</span>
-                                <span class="font-bold text-sm">Email Admin ReyxShop</span>
-                            </div>
-                        </div>
-                        <span class="text-base">&rarr;</span>
-                    </a>
                 </div>
 
                 <!-- Description -->

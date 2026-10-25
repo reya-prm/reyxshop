@@ -25,7 +25,7 @@
                     </h1>
 
                     <p class="text-slate text-base sm:text-lg max-w-2xl mx-auto lg:mx-0 leading-relaxed font-normal">
-                        Koleksi lengkap kaos anak, celana kargo, setelan, jaket, dan pakaian harian original. Pesan mudah dan terpercaya langsung via <span class="font-semibold text-charcoal">Shopee</span> atau <span class="font-semibold text-charcoal">Email</span>.
+                        Koleksi lengkap kaos anak, celana kargo, setelan, jaket, dan pakaian harian original. Pesan mudah dan terpercaya langsung via <span class="font-semibold text-charcoal">Shopee</span>.
                     </p>
 
                     <!-- Store Status Quick Notice -->
@@ -138,7 +138,7 @@
                         Produk Terpopuler ReyxShop
                     </h2>
                     <p class="text-xs text-slate mt-1">
-                        Pilih produk dan nikmati kemudahan bertransaksi via Shopee atau email.
+                        Pilih produk dan nikmati kemudahan bertransaksi via Shopee.
                     </p>
                 </div>
 
@@ -235,14 +235,6 @@
                                                 title="Shopee"
                                             >
                                                 Shopee
-                                            </a>
-                                            <a 
-                                                href="mailto:admin@reyxshop.local?subject=Pertanyaan%20Produk%20{{ urlencode($product->name) }}" 
-                                                target="_blank" 
-                                                class="py-2 text-center rounded-xl bg-coral/10 hover:bg-coral/20 text-coral text-[11px] font-bold border border-coral/20 transition"
-                                                title="Email"
-                                            >
-                                                Email
                                             </a>
                                         </div>
                                     </div>
