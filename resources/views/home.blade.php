@@ -99,9 +99,7 @@
                     >
                         <div>
                             <div class="w-10 h-10 rounded-xl bg-orange-50 text-coral flex items-center justify-center font-bold text-lg mb-3 group-hover:scale-110 group-hover:bg-coral group-hover:text-white transition-all">
-                                <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"/>
-                                </svg>
+                                <img src="{{ asset('category-icons/' . $category->slug . '.png') }}" alt="{{ $category->name }}" class="w-6 h-6" onerror="this.onerror=null;this.src='{{ asset('images/bag-icon.svg') }}';" />
                             </div>
                             <h3 class="font-bold text-charcoal group-hover:text-coral transition text-sm">
                                 {{ $category->name }}
@@ -138,11 +136,11 @@
 
                 <!-- Quick Category Pill Filter -->
                 <div class="flex items-center gap-2 overflow-x-auto pb-2 md:pb-0">
-                    <a href="{{ route('home') }}#katalog-unggulan" class="px-4 py-2 rounded-pill text-xs font-bold {{ !$selectedCategory ? 'bg-charcoal text-white' : 'bg-ash text-charcoal hover:bg-border' }} transition">
+                    <a href="{{ route('home') }}" class="px-4 py-2 rounded-pill text-xs font-bold {{ !$selectedCategory ? 'bg-charcoal text-white' : 'bg-ash text-charcoal hover:bg-border' }} transition">
                         Semua
                     </a>
                     @foreach($categories as $cat)
-                        <a href="{{ route('home', ['category' => $cat->slug]) }}#katalog-unggulan" class="whitespace-nowrap px-4 py-2 rounded-pill text-xs font-bold {{ $selectedCategory === $cat->slug ? 'bg-coral text-white' : 'bg-ash text-charcoal hover:bg-border' }} transition">
+                        <a href="{{ route('products.index', ['category' => $cat->slug]) }}" class="whitespace-nowrap px-4 py-2 rounded-pill text-xs font-bold {{ $selectedCategory === $cat->slug ? 'bg-coral text-white' : 'bg-ash text-charcoal hover:bg-border' }} transition">
                             {{ $cat->name }}
                         </a>
                     @endforeach
