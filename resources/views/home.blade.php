@@ -344,17 +344,13 @@
     <section class="py-16 bg-ash border-t border-border" id="contact">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
-                <!-- Left: Contact Details -->
+                <!-- Left: Contact Details + Maps -->
                 <div class="lg:col-span-2">
                     <p class="text-xs font-bold text-coral uppercase tracking-wider mb-3">Kontak & Lokasi</p>
                     <h2 class="text-2xl sm:text-3xl font-extrabold tracking-tight text-charcoal mb-6">
                         Datang, Telepon, atau Chat—Kami Siap Melayani
                     </h2>
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                        <!-- Address -->
-                        
-                        </div>
-
                         <!-- Email & Social -->
                         <div class="p-5 rounded-card border border-border bg-white space-y-2">
                             <div class="w-10 h-10 rounded-xl bg-coral/10 text-coral flex items-center justify-center text-lg font-bold">
@@ -377,6 +373,21 @@
                                     </a>
                                 </div>
                             </div>
+                        </div>
+                    </div>
+
+                    <!-- Google Maps Embed (inside left column) -->
+                    <div class="mt-6">
+                        <h3 class="text-base font-bold text-charcoal mb-3">Lokasi Toko Kami</h3>
+                        <div class="rounded-card overflow-hidden border border-border relative" style="padding-bottom:45%; height:0;">
+                            <iframe
+                                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d495.00750916306475!2d107.54783584246609!3d-7.002208627316598!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e68ef00468ebd19%3A0x3d5f9f46cd14a6b3!2sREYS%20HOME!5e0!3m2!1sid!2sid!4v1792919272897!5m2!1sid!2sid"
+                                class="absolute top-0 left-0 w-full h-full"
+                                style="border:0;"
+                                allowfullscreen=""
+                                loading="lazy"
+                                referrerpolicy="strict-origin-when-cross-origin"
+                            ></iframe>
                         </div>
                     </div>
                 </div>
@@ -407,21 +418,6 @@
                             
                         </p>
                     </div>
-                </div>
-            </div>
-
-            <!-- Google Maps Embed -->
-            <div class="mt-12">
-                <h3 class="text-lg font-bold text-charcoal mb-4">Lokasi Toko Kami</h3>
-                <div class="rounded-card overflow-hidden border border-border relative" style="padding-bottom:56.25%; height:0;">
-                    <iframe
-                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d495.00750916306475!2d107.54783584246609!3d-7.002208627316598!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e68ef00468ebd19%3A0x3d5f9f46cd14a6b3!2sREYS%20HOME!5e0!3m2!1sid!2sid!4v1792919272897!5m2!1sid!2sid"
-                        class="absolute top-0 left-0 w-full h-full"
-                        style="border:0;"
-                        allowfullscreen=""
-                        loading="lazy"
-                        referrerpolicy="strict-origin-when-cross-origin"
-                    ></iframe>
                 </div>
             </div>
         </div>
