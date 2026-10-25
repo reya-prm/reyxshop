@@ -62,8 +62,8 @@
                     <div class="relative mx-auto max-w-md rounded-card bg-white p-3 border border-border shadow-floating">
                         <div class="overflow-hidden rounded-xl relative group aspect-4/3 bg-ash">
                             <img 
-                                src="https://images.unsplash.com/photo-1558981403-c5f9899a28bc?w=900&auto=format&fit=crop&q=80" 
-                                alt="Motocross Rider ReyxShop" 
+                                src="https://images.unsplash.com/photo-1503454537195-1dcabb73ffb9?w=900&auto=format&fit=crop&q=80" 
+                                alt="Pakaian Anak ReyxShop Kids" 
                                 class="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-500"
                                 onerror="this.onerror=null;this.src='{{ asset('images/placeholder-product.svg') }}';"
                             >
@@ -73,7 +73,7 @@
                                 <span class="px-2.5 py-1 rounded-pill text-[10px] font-bold uppercase bg-coral text-white mb-1 inline-block">
                                     Ready Stock
                                 </span>
-                                <h3 class="text-base font-bold text-white">Jersey, Helm, Boots & Armor Original</h3>
+                                <h3 class="text-base font-bold text-white">Kaos, Celana, Setelan & Jaket Anak Original</h3>
                             </div>
                         </div>
                     </div>
