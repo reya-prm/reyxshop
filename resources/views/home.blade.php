@@ -360,3 +360,25 @@
     </section>
 
 @endsection
+
+@push('scripts')
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const pillLinks = document.querySelectorAll('a[href*="#katalog-unggulan"]');
+    pillLinks.forEach(link => {
+        link.addEventListener('click', function(e) {
+            e.preventDefault();
+            const href = this.getAttribute('href');
+            const url = new URL(href, window.location.origin);
+            const params = new URLSearchParams(url.search);
+            const category = params.get('category') || '';
+            const currentParams = new URLSearchParams(window.location.search);
+            currentParams.set('category', category);
+            const newUrl = window.location.pathname + '?' + currentParams.toString() + '#katalog-unggulan';
+            window.history.replaceState(null, '', newUrl);
+            window.location.reload();
+        });
+    });
+});
+</script>
+@endpush
