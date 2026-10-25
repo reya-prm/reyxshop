@@ -7,8 +7,13 @@
 
     <!-- Flash Notification -->
     @if(session('success'))
-        <div class="bg-emerald-600 text-white py-3 px-4 text-xs font-semibold text-center">
-            ✓ {{ session('success') }}
+        <div class="bg-emerald-600 text-white py-3 px-4 text-xs font-semibold text-center flex items-center justify-center gap-2">
+            <span>✓</span> {{ session('success') }}
+        </div>
+    @endif
+    @if(session('error'))
+        <div class="bg-red-600 text-white py-3 px-4 text-xs font-semibold text-center flex items-center justify-center gap-2">
+            <span>⚠️</span> {{ session('error') }}
         </div>
     @endif
 
@@ -239,21 +244,36 @@
                             @elseif(Auth::user()->isAdmin())
                                 <div class="p-4 bg-slate-100 text-slate-600 text-xs rounded-card">Admin tidak dapat menulis ulasan produk.</div>
                             @else
-                                <form action="{{ route('products.reviews.store', $product->slug) }}" method="POST" class="space-y-3">
+                                <form action="{{ route('products.reviews.store', $product->slug) }}" method="POST" class="space-y-3" onsubmit="this.querySelector('button[type=submit]').disabled = true;">
                                     @csrf
+                                    @if($errors->has('review'))
+                                        <div class="p-3 bg-red-50 border border-red-200 text-red-700 text-xs rounded-xl font-medium">
+                                            {{ $errors->first('review') }}
+                                        </div>
+                                    @endif
                                     <div>
+                                        <label class="block text-[11px] font-semibold text-slate mb-1">Beri Bintang:</label>
                                         <select name="rating" required class="w-full px-3 py-2 text-xs rounded-xl border border-border focus:outline-hidden focus:ring-2 focus:ring-coral bg-white">
-                                            <option value="5">★★★★★ — Sangat Puas (5 Bintang)</option>
-                                            <option value="4">★★★★☆ — Puas (4 Bintang)</option>
-                                            <option value="3">★★★☆☆ — Cukup (3 Bintang)</option>
-                                            <option value="2">★★☆☆☆ — Kurang (2 Bintang)</option>
-                                            <option value="1">★☆☆☆☆ — Kecewa (1 Bintang)</option>
+                                            <option value="5" {{ old('rating') == '5' ? 'selected' : '' }}>★★★★★ — Sangat Puas (5 Bintang)</option>
+                                            <option value="4" {{ old('rating') == '4' ? 'selected' : '' }}>★★★★☆ — Puas (4 Bintang)</option>
+                                            <option value="3" {{ old('rating') == '3' ? 'selected' : '' }}>★★★☆☆ — Cukup (3 Bintang)</option>
+                                            <option value="2" {{ old('rating') == '2' ? 'selected' : '' }}>★★☆☆☆ — Kurang (2 Bintang)</option>
+                                            <option value="1" {{ old('rating') == '1' ? 'selected' : '' }}>★☆☆☆☆ — Kecewa (1 Bintang)</option>
                                         </select>
+                                        @error('rating')
+                                            <p class="text-xs text-red-500 mt-1">{{ $message }}</p>
+                                        @enderror
                                     </div>
                                     <div>
-                                        <textarea name="content" rows="3" placeholder="Bagikan pengalaman Anda (opsional)..." class="w-full px-3 py-2 text-xs rounded-xl border border-border focus:outline-hidden focus:ring-2 focus:ring-coral"></textarea>
+                                        <label class="block text-[11px] font-semibold text-slate mb-1">Ulasan Tertulis (Opsional):</label>
+                                        <textarea name="content" rows="3" placeholder="Bagikan pengalaman Anda mengenai kualitas produk, ukuran, atau kenyamanan..." class="w-full px-3 py-2 text-xs rounded-xl border border-border focus:outline-hidden focus:ring-2 focus:ring-coral">{{ old('content') }}</textarea>
+                                        @error('content')
+                                            <p class="text-xs text-red-500 mt-1">{{ $message }}</p>
+                                        @enderror
                                     </div>
-                                    <button type="submit" class="w-full py-2 px-4 rounded-pill bg-coral hover:bg-coral-hover text-white font-bold text-xs transition">Kirim Ulasan</button>
+                                    <button type="submit" class="w-full py-2.5 px-4 rounded-pill bg-coral hover:bg-coral-hover text-white font-bold text-xs transition shadow-sm hover:shadow-md flex items-center justify-center gap-1.5">
+                                        <span>⭐</span> Kirim Ulasan
+                                    </button>
                                 </form>
                             @endif
                         @else
@@ -311,12 +331,17 @@
                             @if(Auth::user()->isAdmin())
                                 <div class="p-4 bg-slate-100 text-slate-600 text-xs rounded-card">Admin tidak dapat mengajukan pertanyaan produk.</div>
                             @else
-                                <form action="{{ route('products.questions.store', $product->slug) }}" method="POST" class="space-y-3">
+                                <form action="{{ route('products.questions.store', $product->slug) }}" method="POST" class="space-y-3" onsubmit="this.querySelector('button[type=submit]').disabled = true;">
                                     @csrf
                                     <div>
-                                        <textarea name="question" rows="3" required placeholder="Tanyakan spesifikasi ukuran, kompatibilitas motor..." class="w-full px-3 py-2 text-xs rounded-xl border border-border focus:outline-hidden focus:ring-2 focus:ring-coral"></textarea>
+                                        <textarea name="question" rows="3" required placeholder="Tanyakan spesifikasi ukuran, kompatibilitas motor..." class="w-full px-3 py-2 text-xs rounded-xl border border-border focus:outline-hidden focus:ring-2 focus:ring-coral">{{ old('question') }}</textarea>
+                                        @error('question')
+                                            <p class="text-xs text-red-500 mt-1">{{ $message }}</p>
+                                        @enderror
                                     </div>
-                                    <button type="submit" class="w-full py-2 px-4 rounded-pill bg-coral hover:bg-coral-hover text-white font-bold text-xs transition">Kirim Pertanyaan</button>
+                                    <button type="submit" class="w-full py-2.5 px-4 rounded-pill bg-coral hover:bg-coral-hover text-white font-bold text-xs transition shadow-sm hover:shadow-md flex items-center justify-center gap-1.5">
+                                        <span>💬</span> Kirim Pertanyaan
+                                    </button>
                                 </form>
                             @endif
                         @else

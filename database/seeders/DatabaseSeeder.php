@@ -204,7 +204,7 @@ class DatabaseSeeder extends Seeder
                 'slug' => 'goggle-100-armega-hiper-lens',
                 'price' => 625000,
                 'stock' => 18,
-                'description' => "Lensa Ultra HD berdefinisi tinggi yang meningkatkan kontras tekstur tanah dan bebatuan di trek balap.",
+                'description' => 'Lensa Ultra HD berdefinisi tinggi yang meningkatkan kontras tekstur tanah dan bebatuan di trek balap.',
                 'images' => [
                     ['path' => 'https://images.unsplash.com/photo-1517841905240-472988babdf9?w=800&auto=format&fit=crop&q=80', 'is_primary' => true],
                 ],
@@ -225,7 +225,7 @@ class DatabaseSeeder extends Seeder
                 'slug' => 'boots-off-road-gaerne-sg12',
                 'price' => 3450000,
                 'stock' => 5,
-                'description' => "Sepatu boots motocross legendaris dengan sistem engsel Dual Stage Pivot buatan Italia untuk keamanan ligamen dan ankle terbaik.",
+                'description' => 'Sepatu boots motocross legendaris dengan sistem engsel Dual Stage Pivot buatan Italia untuk keamanan ligamen dan ankle terbaik.',
                 'images' => [
                     ['path' => 'https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=800&auto=format&fit=crop&q=80', 'is_primary' => true],
                 ],
@@ -247,7 +247,7 @@ class DatabaseSeeder extends Seeder
                 'slug' => 'body-protector-thor-guardian',
                 'price' => 890000,
                 'stock' => 9,
-                'description' => "Rompi pelindung dada dan punggung dari lontaran batu dan benturan keras.",
+                'description' => 'Rompi pelindung dada dan punggung dari lontaran batu dan benturan keras.',
                 'images' => [
                     ['path' => 'https://images.unsplash.com/photo-1544816155-12df9643f363?w=800&auto=format&fit=crop&q=80', 'is_primary' => true],
                 ],
@@ -268,7 +268,7 @@ class DatabaseSeeder extends Seeder
                 'slug' => 'tas-hidropack-acerbis-aqua-2l',
                 'price' => 380000,
                 'stock' => 22,
-                'description' => "Tas punggung hidrasi tahan air dengan kompartemen botol minum dan kantung alat darurat di jalur trabas.",
+                'description' => 'Tas punggung hidrasi tahan air dengan kompartemen botol minum dan kantung alat darurat di jalur trabas.',
                 'images' => [
                     ['path' => 'https://images.unsplash.com/photo-1553062407-98eeb64c6a62?w=800&auto=format&fit=crop&q=80', 'is_primary' => true],
                 ],
@@ -287,7 +287,9 @@ class DatabaseSeeder extends Seeder
 
         foreach ($productsData as $pData) {
             $cat = $categories[$pData['category_slug']] ?? null;
-            if (!$cat) continue;
+            if (! $cat) {
+                continue;
+            }
 
             $product = Product::updateOrCreate(
                 ['slug' => $pData['slug']],
@@ -351,14 +353,14 @@ class DatabaseSeeder extends Seeder
             foreach ($pData['reviews'] as $revData) {
                 // Create or get customer user for this review
                 $customer = User::firstOrCreate(
-                    ['email' => strtolower(str_replace([' ', '(', ')'], ['', '', ''], $revData['customer_name'])) . '@customer.test'],
+                    ['email' => strtolower(str_replace([' ', '(', ')'], ['', '', ''], $revData['customer_name'])).'@customer.test'],
                     [
                         'name' => $revData['customer_name'],
                         'password' => bcrypt('password'),
                         'email_verified_at' => now(),
                     ]
                 );
-                
+
                 $review = Review::updateOrCreate(
                     [
                         'product_id' => $product->id,
@@ -371,7 +373,7 @@ class DatabaseSeeder extends Seeder
                     ]
                 );
 
-                if (!empty($revData['reply'])) {
+                if (! empty($revData['reply'])) {
                     ReviewReply::updateOrCreate(
                         ['review_id' => $review->id],
                         [
@@ -386,14 +388,14 @@ class DatabaseSeeder extends Seeder
             foreach ($pData['questions'] as $qData) {
                 // Create or get customer user for this question
                 $customer = User::firstOrCreate(
-                    ['email' => strtolower(str_replace([' ', '(', ')'], ['', '', ''], $qData['customer_name'])) . '@customer.test'],
+                    ['email' => strtolower(str_replace([' ', '(', ')'], ['', '', ''], $qData['customer_name'])).'@customer.test'],
                     [
                         'name' => $qData['customer_name'],
                         'password' => bcrypt('password'),
                         'email_verified_at' => now(),
                     ]
                 );
-                
+
                 $question = ProductQuestion::updateOrCreate(
                     [
                         'product_id' => $product->id,
@@ -405,7 +407,7 @@ class DatabaseSeeder extends Seeder
                     ]
                 );
 
-                if (!empty($qData['answer'])) {
+                if (! empty($qData['answer'])) {
                     QuestionAnswer::updateOrCreate(
                         ['question_id' => $question->id],
                         [

@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Events\MessageSent;
 use App\Models\ChatConversation;
-use App\Models\ChatMessage;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
@@ -70,7 +69,11 @@ class ChatController extends Controller
         $conversation->update(['last_message_at' => now()]);
 
         // Broadcast to private channel
-        event(new MessageSent($message));
+        try {
+            event(new MessageSent($message));
+        } catch (\Throwable $e) {
+            // Continue gracefully if websocket server is offline
+        }
 
         return response()->json([
             'status' => 'success',

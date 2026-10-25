@@ -1,30 +1,22 @@
 <?php
 
-use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ChatController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProductController;
-use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ProfileController;
+use Filament\Facades\Filament;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Session;
 
-Route::get('/force-logout', function() {
+Route::get('/force-logout', function () {
     Auth::logout();
     Session::flush();
     request()->session()->invalidate();
     request()->session()->regenerateToken();
+
     return redirect('/login')->with('status', 'Sesi dihapus paksa, silakan login ulang.');
 })->name('force.logout');
-
-// Hard-block admin routes for non-admin users
-Route::middleware(['web', 'auth'])->group(function() {
-    Route::get('/admin/{any}', function() {
-        $user = Auth::user();
-        if (!$user || !$user->canAccessPanel(\Filament\Facades\Filament::getDefaultPanel())) {
-            abort(403, 'Access denied. You do not have permission to access the admin panel.');
-        }
-    })->where('any', '.*');
-});
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
 
@@ -43,6 +35,7 @@ Route::get('/dashboard', function () {
     if (auth()->user()->hasRole('admin') || auth()->user()->hasRole('operator')) {
         return redirect('/admin');
     }
+
     return redirect()->route('home');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
@@ -53,10 +46,10 @@ Route::middleware('auth')->group(function () {
 
     // Interaksi Produk (Reviews & Q&A) - rate limited to prevent spam
     Route::post('/products/{slug}/reviews', [ProductController::class, 'storeReview'])
-        ->middleware('throttle:3,10')
+        ->middleware('throttle:30,1')
         ->name('products.reviews.store');
     Route::post('/products/{slug}/questions', [ProductController::class, 'storeQuestion'])
-        ->middleware('throttle:5,10')
+        ->middleware('throttle:30,1')
         ->name('products.questions.store');
 
     // Live Chat API endpoints

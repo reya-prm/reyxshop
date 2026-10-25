@@ -2,8 +2,8 @@
 
 namespace App\Http\Requests;
 
-use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Auth;
 
 class StoreProductQuestionRequest extends FormRequest
 {
@@ -13,7 +13,7 @@ class StoreProductQuestionRequest extends FormRequest
     public function authorize(): bool
     {
         // Only authenticated users can ask questions
-        return \Illuminate\Support\Facades\Auth::check();
+        return Auth::check();
     }
 
     /**
@@ -33,7 +33,7 @@ class StoreProductQuestionRequest extends FormRequest
     protected function prepareForValidation()
     {
         $this->merge([
-            'user_id' => \Illuminate\Support\Facades\Auth::id(),
+            'user_id' => Auth::id(),
         ]);
     }
 }

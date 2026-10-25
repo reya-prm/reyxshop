@@ -3,16 +3,14 @@
 namespace App\Filament\Resources;
 
 use App\Filament\Resources\ReviewResource\Pages;
-use App\Filament\Resources\ReviewResource\RelationManagers;
 use App\Filament\Resources\ReviewResource\RelationManagers\RepliesRelationManager;
 use App\Models\Review;
 use Filament\Forms;
 use Filament\Forms\Form;
+use Filament\Notifications\Notification;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
 
 class ReviewResource extends Resource
 {
@@ -45,9 +43,7 @@ class ReviewResource extends Resource
                         'rejected' => 'Rejected (Ditolak)',
                     ])
                     ->default('pending')
-                    ->required()
-                    ->maxLength(255)
-                    ->default('pending'),
+                    ->required(),
             ]);
     }
 
@@ -56,15 +52,20 @@ class ReviewResource extends Resource
         return $table
             ->columns([
                 Tables\Columns\TextColumn::make('product.name')
-                    ->numeric()
+                    ->searchable()
                     ->sortable(),
                 Tables\Columns\TextColumn::make('user.name')
-                    ->numeric()
-                    ->sortable(),
-                Tables\Columns\TextColumn::make('customer_name')
-                    ->searchable(),
+                    ->searchable()
+                    ->sortable()
+                    ->default(fn ($record) => $record->customer_name ?? 'Pelanggan'),
                 Tables\Columns\TextColumn::make('rating')
-                    ->numeric()
+                    ->badge()
+                    ->color(fn (int $state): string => match (true) {
+                        $state >= 4 => 'success',
+                        $state === 3 => 'warning',
+                        default => 'danger',
+                    })
+                    ->formatStateUsing(fn ($state) => str_repeat('★', (int) $state)." ({$state})")
                     ->sortable(),
                 Tables\Columns\TextColumn::make('status')
                     ->searchable(),
@@ -81,6 +82,45 @@ class ReviewResource extends Resource
                 //
             ])
             ->actions([
+                Tables\Actions\Action::make('reply')
+                    ->label('Balas')
+                    ->icon('heroicon-o-chat-bubble-oval-left-ellipsis')
+                    ->color('primary')
+                    ->visible(fn (Review $record) => ! $record->reply()->exists())
+                    ->form([
+                        Forms\Components\Textarea::make('content')
+                            ->label('Balasan Resmi Admin')
+                            ->required()
+                            ->maxLength(1000)
+                            ->rows(3),
+                    ])
+                    ->action(function (Review $record, array $data): void {
+                        $record->reply()->create([
+                            'user_id' => auth()->id(),
+                            'content' => $data['content'],
+                        ]);
+                        if ($record->status === 'pending') {
+                            $record->update(['status' => 'approved']);
+                        }
+
+                        Notification::make()
+                            ->title('Balasan ulasan berhasil disimpan')
+                            ->success()
+                            ->send();
+                    }),
+                Tables\Actions\Action::make('approve')
+                    ->label('Setujui')
+                    ->icon('heroicon-o-check-circle')
+                    ->color('success')
+                    ->visible(fn (Review $record) => $record->status === 'pending')
+                    ->action(function (Review $record): void {
+                        $record->update(['status' => 'approved']);
+
+                        Notification::make()
+                            ->title('Ulasan berhasil disetujui')
+                            ->success()
+                            ->send();
+                    }),
                 Tables\Actions\EditAction::make(),
             ])
             ->bulkActions([
@@ -93,7 +133,7 @@ class ReviewResource extends Resource
     public static function getRelations(): array
     {
         return [
-            RelationManagers\RepliesRelationManager::class,
+            RepliesRelationManager::class,
         ];
     }
 

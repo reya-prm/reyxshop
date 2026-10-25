@@ -4,10 +4,9 @@ namespace App\Filament\Widgets;
 
 use App\Models\ChatConversation;
 use App\Models\Product;
-use App\Models\Review;
 use App\Models\ProductQuestion;
+use App\Models\Review;
 use Filament\Widgets\Widget;
-use Illuminate\Support\Facades\DB;
 
 class AdminStatsOverview extends Widget
 {

@@ -7,8 +7,6 @@ use Filament\Forms\Form;
 use Filament\Resources\RelationManagers\RelationManager;
 use Filament\Tables;
 use Filament\Tables\Table;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
 
 class RepliesRelationManager extends RelationManager
 {
@@ -27,20 +25,34 @@ class RepliesRelationManager extends RelationManager
     public function table(Table $table): Table
     {
         return $table
-            ->recordTitleAttribute('content')
             ->columns([
-                Tables\Columns\TextColumn::make('content'),
+                Tables\Columns\TextColumn::make('content')
+                    ->wrap(),
+                Tables\Columns\TextColumn::make('user.name')
+                    ->label('Admin')
+                    ->default('Admin ReyxShop'),
+                Tables\Columns\TextColumn::make('created_at')
+                    ->label('Waktu')
+                    ->dateTime('d M Y, H:i')
+                    ->sortable(),
             ])
             ->filters([
                 //
             ])
             ->headerActions([
                 Tables\Actions\CreateAction::make()
-                    ->using(function (array $data) {
+                    ->label('Add Reply')
+                    ->mutateFormDataUsing(function (array $data): array {
                         $data['user_id'] = auth()->id();
+
                         return $data;
                     })
-                    ->label('Add Reply'),
+                    ->after(function ($record) {
+                        if ($record->review && $record->review->status === 'pending') {
+                            $record->review->update(['status' => 'approved']);
+                        }
+                    })
+                    ->successNotificationTitle('Balasan ulasan berhasil disimpan.'),
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),

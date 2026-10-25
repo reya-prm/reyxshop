@@ -1,8 +1,9 @@
 <?php
 
-use App\Models\User;
-use App\Models\Product;
 use App\Models\Category;
+use App\Models\Product;
+use App\Models\User;
+use Filament\Panel;
 use Spatie\Permission\Models\Role;
 
 test('guest cannot submit review or question', function () {
@@ -43,6 +44,6 @@ test('admin can access filament admin panel', function () {
     $admin->markEmailAsVerified();
 
     // Test canAccessPanel method directly
-    $panel = app(\Filament\Panel::class);
+    $panel = app(Panel::class);
     expect($admin->canAccessPanel($panel))->toBeTrue();
 });

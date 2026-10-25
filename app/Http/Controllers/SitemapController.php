@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Product;
 use App\Models\Category;
+use App\Models\Product;
 use Carbon\Carbon;
 use Illuminate\Http\Response;
 
@@ -17,8 +17,8 @@ class SitemapController extends Controller
         $products = Product::where('is_active', true)->get(['slug', 'updated_at']);
         $categories = Category::where('is_active', true)->get(['slug', 'updated_at']);
 
-        $xml = '<?xml version="1.0" encoding="UTF-8"?>' . "\n";
-        $xml .= '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">' . "\n";
+        $xml = '<?xml version="1.0" encoding="UTF-8"?>'."\n";
+        $xml .= '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">'."\n";
 
         // Static routes
         $static = [
@@ -33,12 +33,12 @@ class SitemapController extends Controller
 
         // Category pages
         foreach ($categories as $cat) {
-            $xml .= $this->url('/katalog/' . $cat->slug, $cat->updated_at);
+            $xml .= $this->url('/katalog/'.$cat->slug, $cat->updated_at);
         }
 
         // Product pages
         foreach ($products as $prod) {
-            $xml .= $this->url('/produk/' . $prod->slug, $prod->updated_at);
+            $xml .= $this->url('/produk/'.$prod->slug, $prod->updated_at);
         }
 
         $xml .= '</urlset>';
@@ -68,7 +68,7 @@ class SitemapController extends Controller
         $content .= "Disallow: /login\n";
         $content .= "Disallow: /register\n";
         $content .= "Disallow: /password-reset\n\n";
-        $content .= "Sitemap: " . url('/sitemap.xml') . "\n";
+        $content .= 'Sitemap: '.url('/sitemap.xml')."\n";
 
         return response($content, 200, ['Content-Type' => 'text/plain']);
     }

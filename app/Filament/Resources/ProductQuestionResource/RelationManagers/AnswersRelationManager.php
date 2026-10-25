@@ -2,7 +2,6 @@
 
 namespace App\Filament\Resources\ProductQuestionResource\RelationManagers;
 
-use App\Models\QuestionAnswer;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\RelationManagers\RelationManager;
@@ -45,6 +44,7 @@ class AnswersRelationManager extends RelationManager
                 Tables\Actions\CreateAction::make()
                     ->mutateFormDataUsing(function (array $data): array {
                         $data['user_id'] = auth()->id();
+
                         return $data;
                     })
                     ->after(function ($record) {

@@ -2,13 +2,13 @@
 
 namespace App\Filament\Resources\ChatConversationResource\RelationManagers;
 
+use App\Events\MessageSent;
 use App\Models\ChatMessage;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\RelationManagers\RelationManager;
 use Filament\Tables;
 use Filament\Tables\Table;
-use Illuminate\Database\Eloquent\Builder;
 
 class MessagesRelationManager extends RelationManager
 {
@@ -24,11 +24,12 @@ class MessagesRelationManager extends RelationManager
             ->schema([
                 Forms\Components\Select::make('sender_type')
                     ->options([
-                        'customer' => 'Customer',
                         'admin' => 'Admin',
                         'operator' => 'Operator',
                         'system' => 'System',
+                        'customer' => 'Customer',
                     ])
+                    ->default('admin')
                     ->required(),
                 Forms\Components\Textarea::make('message')
                     ->required()
@@ -49,6 +50,9 @@ class MessagesRelationManager extends RelationManager
                         'warning' => 'operator',
                         'gray' => 'system',
                     ]),
+                Tables\Columns\TextColumn::make('user.name')
+                    ->label('Pengirim')
+                    ->default(fn (ChatMessage $record) => $record->sender_type === 'customer' ? ($record->conversation->user->name ?? 'Customer') : 'Admin ReyxShop'),
                 Tables\Columns\TextColumn::make('message')
                     ->wrap()
                     ->limit(100),
@@ -60,7 +64,21 @@ class MessagesRelationManager extends RelationManager
             ->defaultSort('created_at', 'asc')
             ->headerActions([
                 Tables\Actions\CreateAction::make()
-                    ->label('Send Reply'),
+                    ->label('Send Reply')
+                    ->mutateFormDataUsing(function (array $data): array {
+                        $data['user_id'] = auth()->id();
+                        $data['sender_type'] = $data['sender_type'] ?? 'admin';
+
+                        return $data;
+                    })
+                    ->after(function (ChatMessage $record) {
+                        $record->conversation->update(['last_message_at' => now()]);
+                        try {
+                            event(new MessageSent($record));
+                        } catch (\Throwable $e) {
+                        }
+                    })
+                    ->successNotificationTitle('Pesan balasan berhasil dikirim.'),
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),

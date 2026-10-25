@@ -1,7 +1,6 @@
 <?php
 
 use App\Models\User;
-use App\Models\ChatConversation;
 use Spatie\Permission\Models\Role;
 
 test('guest cannot send chat message', function () {
@@ -21,7 +20,7 @@ test('customer can send and retrieve own messages, isolated from others', functi
     // A sends a message
     $this->actingAs($customerA);
     $sendA = $this->postJson(route('chat.send'), ['message' => 'Message from A'])->assertCreated();
-    
+
     // B sends a message
     $this->actingAs($customerB);
     $sendB = $this->postJson(route('chat.send'), ['message' => 'Message from B'])->assertCreated();

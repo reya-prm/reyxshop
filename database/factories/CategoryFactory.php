@@ -13,6 +13,7 @@ class CategoryFactory extends Factory
     public function definition(): array
     {
         $name = $this->faker->unique()->word();
+
         return [
             'name' => ucfirst($name),
             'slug' => Str::slug($name),

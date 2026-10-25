@@ -25,16 +25,17 @@ class ChatConversationPolicy
         if ($chatConversation->user_id === $user->id) {
             return true;
         }
+
         // Admin/operator
         return $user->hasRole(['admin', 'operator']);
     }
 
     /**
-     * Customer can create their own conversation.
+     * Customer or admin can create conversation.
      */
     public function create(User $user): bool
     {
-        return $user->hasVerifiedEmail();
+        return true;
     }
 
     /**

@@ -32,6 +32,11 @@ class ChatConversation extends Model
         return $this->hasMany(ChatMessage::class, 'conversation_id')->oldest();
     }
 
+    public function user(): BelongsTo
+    {
+        return $this->belongsTo(User::class);
+    }
+
     public function assignedUser(): BelongsTo
     {
         return $this->belongsTo(User::class, 'assigned_user_id');

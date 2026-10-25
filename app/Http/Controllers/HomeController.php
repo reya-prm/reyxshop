@@ -39,7 +39,7 @@ class HomeController extends Controller
         if ($search) {
             $productsQuery->where(function ($q) use ($search) {
                 $q->where('name', 'like', "%{$search}%")
-                  ->orWhere('description', 'like', "%{$search}%");
+                    ->orWhere('description', 'like', "%{$search}%");
             });
         }
 
@@ -55,7 +55,7 @@ class HomeController extends Controller
         $currentHour = (int) now('Asia/Jakarta')->format('H');
         $isOpenNow = ($currentHour >= 7 && $currentHour < 17);
         $statusLabel = $isOpenNow ? 'Buka Sekarang' : 'Tutup';
-        $statusNotice = $isOpenNow 
+        $statusNotice = $isOpenNow
             ? 'Toko buka pukul 07:00 - 17:00 WIB. Pengiriman same-day untuk order sebelum jam 15:00!'
             : 'Toko tutup. Buka kembali jam 07:00 WIB. Anda tetap bisa browsing dan chat akan dibalas saat toko buka.';
 

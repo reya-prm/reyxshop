@@ -2,25 +2,26 @@
 
 namespace App\Filament\Resources;
 
+use App\Events\MessageSent;
 use App\Filament\Resources\ChatConversationResource\Pages;
 use App\Filament\Resources\ChatConversationResource\RelationManagers;
 use App\Models\ChatConversation;
 use App\Models\User;
 use Filament\Forms;
 use Filament\Forms\Form;
+use Filament\Notifications\Notification;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
-use Illuminate\Database\Eloquent\Builder;
 
 class ChatConversationResource extends Resource
 {
     protected static ?string $model = ChatConversation::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-chat-bubble-left-right';
-    
+
     protected static ?string $navigationLabel = 'Chat Inbox';
-    
+
     protected static ?string $modelLabel = 'Conversation';
 
     public static function form(Form $form): Form
@@ -82,6 +83,34 @@ class ChatConversationResource extends Resource
                     ->relationship('assignedUser', 'name'),
             ])
             ->actions([
+                Tables\Actions\Action::make('reply')
+                    ->label('Balas')
+                    ->icon('heroicon-o-paper-airplane')
+                    ->color('primary')
+                    ->form([
+                        Forms\Components\Textarea::make('message')
+                            ->label('Pesan Balasan ke Pelanggan')
+                            ->required()
+                            ->maxLength(2000)
+                            ->rows(3),
+                    ])
+                    ->action(function (ChatConversation $record, array $data): void {
+                        $msg = $record->messages()->create([
+                            'user_id' => auth()->id(),
+                            'sender_type' => 'admin',
+                            'message' => $data['message'],
+                        ]);
+                        $record->update(['last_message_at' => now(), 'status' => 'open']);
+                        try {
+                            event(new MessageSent($msg));
+                        } catch (\Throwable $e) {
+                        }
+
+                        Notification::make()
+                            ->title('Pesan balasan berhasil dikirim ke pelanggan')
+                            ->success()
+                            ->send();
+                    }),
                 Tables\Actions\ViewAction::make(),
                 Tables\Actions\EditAction::make(),
             ])

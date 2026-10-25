@@ -3,9 +3,9 @@
 namespace App\Http\Middleware;
 
 use Closure;
+use Filament\Facades\Filament;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Filament\Facades\Filament;
 
 class RedirectIfNotAdmin
 {
@@ -15,10 +15,14 @@ class RedirectIfNotAdmin
     public function handle(Request $request, Closure $next)
     {
         $user = Auth::user();
-        // Jika tidak login atau tidak dapat mengakses panel Filament
-        if (! $user || ! $user->canAccessPanel(Filament::getDefaultPanel())) {
+        if (! $user) {
             return redirect('/login');
         }
+
+        if (! $user->canAccessPanel(Filament::getDefaultPanel())) {
+            abort(403, 'Akses ditolak. Halaman admin hanya diperuntukkan bagi Administrator dan Operator.');
+        }
+
         return $next($request);
     }
 }

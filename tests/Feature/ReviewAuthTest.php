@@ -14,7 +14,7 @@ test('guest cannot submit review', function () {
     $response->assertRedirect(route('login'));
 });
 
-test('authenticated user without email verification cannot submit review', function () {
+test('authenticated user without email verification can submit review', function () {
     $user = User::factory()->unverified()->create();
     $product = Product::factory()->create();
 
@@ -23,7 +23,8 @@ test('authenticated user without email verification cannot submit review', funct
         'content' => 'Great product!',
     ]);
 
-    $response->assertStatus(403);
+    $response->assertRedirect(route('products.show', $product->slug));
+    expect($product->reviews()->where('user_id', $user->id)->exists())->toBeTrue();
 });
 
 test('verified user can submit review', function () {

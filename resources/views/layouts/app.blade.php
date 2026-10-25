@@ -20,6 +20,88 @@
     <div class="min-h-screen bg-ash">
         @include('layouts.navigation')
 
+        <!-- Global Floating Toast Notifications -->
+        <div id="toast-container" class="fixed top-5 right-5 z-[9999] flex flex-col gap-3 max-w-md w-full px-4 pointer-events-none">
+            @if(session('success'))
+                <div class="toast-item pointer-events-auto flex items-start gap-3 p-4 rounded-xl bg-white border-l-4 border-emerald-500 shadow-xl transition-all duration-300 transform translate-y-0 opacity-100">
+                    <div class="text-emerald-500 mt-0.5 shrink-0">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                        </svg>
+                    </div>
+                    <div class="flex-1 text-xs">
+                        <p class="font-bold text-charcoal mb-0.5">Berhasil!</p>
+                        <p class="text-slate leading-relaxed">{{ session('success') }}</p>
+                    </div>
+                    <button type="button" onclick="this.closest('.toast-item').remove()" class="text-slate hover:text-charcoal p-1 rounded-md transition">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/></svg>
+                    </button>
+                </div>
+            @endif
+
+            @if(session('error'))
+                <div class="toast-item pointer-events-auto flex items-start gap-3 p-4 rounded-xl bg-white border-l-4 border-red-500 shadow-xl transition-all duration-300 transform translate-y-0 opacity-100">
+                    <div class="text-red-500 mt-0.5 shrink-0">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/>
+                        </svg>
+                    </div>
+                    <div class="flex-1 text-xs">
+                        <p class="font-bold text-charcoal mb-0.5">Peringatan / Gagal</p>
+                        <p class="text-slate leading-relaxed">{{ session('error') }}</p>
+                    </div>
+                    <button type="button" onclick="this.closest('.toast-item').remove()" class="text-slate hover:text-charcoal p-1 rounded-md transition">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/></svg>
+                    </button>
+                </div>
+            @endif
+
+            @if($errors->any() && !session('error'))
+                <div class="toast-item pointer-events-auto flex items-start gap-3 p-4 rounded-xl bg-white border-l-4 border-red-500 shadow-xl transition-all duration-300 transform translate-y-0 opacity-100">
+                    <div class="text-red-500 mt-0.5 shrink-0">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                        </svg>
+                    </div>
+                    <div class="flex-1 text-xs">
+                        <p class="font-bold text-charcoal mb-0.5">Terdapat Kesalahan Input</p>
+                        <p class="text-slate leading-relaxed">{{ $errors->first() }}</p>
+                    </div>
+                    <button type="button" onclick="this.closest('.toast-item').remove()" class="text-slate hover:text-charcoal p-1 rounded-md transition">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/></svg>
+                    </button>
+                </div>
+            @endif
+
+            @if(session('status'))
+                <div class="toast-item pointer-events-auto flex items-start gap-3 p-4 rounded-xl bg-white border-l-4 border-blue-500 shadow-xl transition-all duration-300 transform translate-y-0 opacity-100">
+                    <div class="text-blue-500 mt-0.5 shrink-0">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                        </svg>
+                    </div>
+                    <div class="flex-1 text-xs">
+                        <p class="font-bold text-charcoal mb-0.5">Informasi</p>
+                        <p class="text-slate leading-relaxed">{{ session('status') }}</p>
+                    </div>
+                    <button type="button" onclick="this.closest('.toast-item').remove()" class="text-slate hover:text-charcoal p-1 rounded-md transition">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/></svg>
+                    </button>
+                </div>
+            @endif
+        </div>
+
+        <script>
+            document.addEventListener('DOMContentLoaded', function () {
+                document.querySelectorAll('.toast-item').forEach(function (toast) {
+                    setTimeout(function () {
+                        toast.classList.add('opacity-0', 'translate-x-full');
+                        setTimeout(() => toast.remove(), 400);
+                    }, 6000);
+                });
+            });
+        </script>
+
         <!-- Page Heading -->
         @isset($header)
             <header class="bg-white shadow">

@@ -7,11 +7,10 @@ use App\Filament\Resources\ProductQuestionResource\RelationManagers;
 use App\Models\ProductQuestion;
 use Filament\Forms;
 use Filament\Forms\Form;
+use Filament\Notifications\Notification;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
 
 class ProductQuestionResource extends Resource
 {
@@ -39,9 +38,7 @@ class ProductQuestionResource extends Resource
                         'answered' => 'Answered (Dijawab)',
                     ])
                     ->default('pending')
-                    ->required()
-                    ->maxLength(255)
-                    ->default('pending'),
+                    ->required(),
             ]);
     }
 
@@ -50,15 +47,21 @@ class ProductQuestionResource extends Resource
         return $table
             ->columns([
                 Tables\Columns\TextColumn::make('product.name')
-                    ->numeric()
+                    ->searchable()
                     ->sortable(),
                 Tables\Columns\TextColumn::make('user.name')
-                    ->numeric()
-                    ->sortable(),
-                Tables\Columns\TextColumn::make('customer_name')
+                    ->searchable()
+                    ->sortable()
+                    ->default(fn ($record) => $record->customer_name ?? 'Pelanggan'),
+                Tables\Columns\TextColumn::make('question')
+                    ->wrap()
+                    ->limit(60)
                     ->searchable(),
-                Tables\Columns\TextColumn::make('status')
-                    ->searchable(),
+                Tables\Columns\BadgeColumn::make('status')
+                    ->colors([
+                        'warning' => 'pending',
+                        'success' => 'answered',
+                    ]),
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime()
                     ->sortable()
@@ -72,6 +75,30 @@ class ProductQuestionResource extends Resource
                 //
             ])
             ->actions([
+                Tables\Actions\Action::make('answer')
+                    ->label('Jawab')
+                    ->icon('heroicon-o-chat-bubble-bottom-center-text')
+                    ->color('success')
+                    ->visible(fn (ProductQuestion $record) => $record->status === 'pending')
+                    ->form([
+                        Forms\Components\Textarea::make('answer')
+                            ->label('Jawaban Admin')
+                            ->required()
+                            ->maxLength(2000)
+                            ->rows(3),
+                    ])
+                    ->action(function (ProductQuestion $record, array $data): void {
+                        $record->answers()->create([
+                            'user_id' => auth()->id(),
+                            'answer' => $data['answer'],
+                        ]);
+                        $record->update(['status' => 'answered']);
+
+                        Notification::make()
+                            ->title('Jawaban pertanyaan berhasil disimpan')
+                            ->success()
+                            ->send();
+                    }),
                 Tables\Actions\EditAction::make(),
             ])
             ->bulkActions([

@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class Review extends Model
@@ -40,6 +41,11 @@ class Review extends Model
     public function reply(): HasOne
     {
         return $this->hasOne(ReviewReply::class);
+    }
+
+    public function replies(): HasMany
+    {
+        return $this->hasMany(ReviewReply::class);
     }
 
     public function scopeApproved($query)

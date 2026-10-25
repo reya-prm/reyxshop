@@ -1,7 +1,6 @@
 <?php
 
 use App\Models\User;
-use App\Models\ChatConversation;
 use Spatie\Permission\Models\Role;
 
 test('guest cannot access chat messages or send messages', function () {
@@ -22,7 +21,7 @@ test('verified customer can fetch their conversation and send message', function
         ->assertJsonStructure(['conversation_id', 'messages']);
 
     $sendResponse = $this->postJson(route('chat.send'), [
-        'message' => 'Halo admin, tolong bantu pesanan saya.'
+        'message' => 'Halo admin, tolong bantu pesanan saya.',
     ]);
 
     $sendResponse->assertStatus(201)
@@ -46,6 +45,6 @@ test('message exceeding max length is rejected', function () {
     $longMessage = str_repeat('a', 2001);
 
     $this->postJson(route('chat.send'), [
-        'message' => $longMessage
+        'message' => $longMessage,
     ])->assertUnprocessable();
 });

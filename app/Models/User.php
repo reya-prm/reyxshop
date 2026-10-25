@@ -3,15 +3,19 @@
 namespace App\Models;
 
 use Database\Factories\UserFactory;
+use Filament\Models\Contracts\FilamentUser;
+use Filament\Panel;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Spatie\Permission\Traits\HasRoles;
 
-class User extends Authenticatable
+class User extends Authenticatable implements FilamentUser
 {
     /** @use HasFactory<UserFactory> */
-    use HasFactory, Notifiable, HasRoles;
+    use HasFactory, HasRoles, Notifiable;
 
     /**
      * The attributes that are mass assignable.
@@ -53,7 +57,7 @@ class User extends Authenticatable
      */
     public function isAdmin(): bool
     {
-        return $this->hasRole('admin');
+        return $this->role === 'admin' || $this->hasRole('admin');
     }
 
     /**
@@ -61,15 +65,15 @@ class User extends Authenticatable
      */
     public function isOperator(): bool
     {
-        return $this->hasAnyRole(['admin', 'operator']);
+        return in_array($this->role, ['admin', 'operator']) || $this->hasAnyRole(['admin', 'operator']);
     }
 
     /**
      * Determine if user can access Filament admin panel.
      */
-    public function canAccessPanel(\Filament\Panel $panel): bool
+    public function canAccessPanel(Panel $panel): bool
     {
-        return $this->isAdmin() || $this->hasRole('operator');
+        return $this->isAdmin() || $this->isOperator();
     }
 
     /**
@@ -80,4 +84,18 @@ class User extends Authenticatable
         return $this->isAdmin() || $this->hasRole('operator');
     }
 
+    public function reviews(): HasMany
+    {
+        return $this->hasMany(Review::class);
+    }
+
+    public function questions(): HasMany
+    {
+        return $this->hasMany(ProductQuestion::class);
+    }
+
+    public function chatConversation(): HasOne
+    {
+        return $this->hasOne(ChatConversation::class);
+    }
 }

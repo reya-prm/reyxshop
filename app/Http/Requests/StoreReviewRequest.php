@@ -2,8 +2,9 @@
 
 namespace App\Http\Requests;
 
-use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Validation\Rule;
 
 class StoreReviewRequest extends FormRequest
 {
@@ -13,7 +14,7 @@ class StoreReviewRequest extends FormRequest
     public function authorize(): bool
     {
         // Only authenticated users can submit reviews
-        return \Illuminate\Support\Facades\Auth::check();
+        return Auth::check();
     }
 
     /**
@@ -23,7 +24,7 @@ class StoreReviewRequest extends FormRequest
     {
         return [
             // rating 1‑5 integer
-            'rating' => ['required', 'integer', \Illuminate\Validation\Rule::in([1,2,3,4,5])],
+            'rating' => ['required', 'integer', Rule::in([1, 2, 3, 4, 5])],
             // content optional, trimmed, max 1000 chars
             'content' => ['nullable', 'string', 'max:1000'],
         ];
@@ -36,7 +37,7 @@ class StoreReviewRequest extends FormRequest
     protected function prepareForValidation()
     {
         $this->merge([
-            'user_id' => \Illuminate\Support\Facades\Auth::id(),
+            'user_id' => Auth::id(),
         ]);
     }
 }

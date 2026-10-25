@@ -102,12 +102,19 @@
 
         chatMessages.innerHTML = messages.map(msg => {
             const isUser = msg.sender === 'user' || msg.sender_type === 'customer';
+            let timeStr = '';
+            try {
+                const date = new Date(msg.created_at);
+                timeStr = date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+            } catch(e) {
+                timeStr = msg.created_at;
+            }
             return `
                 <div class="flex ${isUser ? 'justify-end' : 'justify-start'}">
                     <div class="max-w-[70%] ${isUser ? 'bg-coral text-white' : 'bg-white text-charcoal border border-border'} px-3 py-2 rounded-lg text-xs">
-                        ${!isUser ? '<div class="font-bold text-[10px] text-coral mb-1">Admin</div>' : ''}
+                        ${!isUser ? '<div class="font-bold text-[10px] text-coral mb-1">Admin ReyxShop</div>' : ''}
                         <div>${escapeHtml(msg.message)}</div>
-                        <div class="text-[10px] mt-1 opacity-70">${msg.created_at}</div>
+                        <div class="text-[10px] mt-1 opacity-70">${timeStr}</div>
                     </div>
                 </div>
             `;
@@ -122,6 +129,9 @@
         const message = chatInput.value.trim();
         if(!message) return;
 
+        const submitBtn = chatForm.querySelector('button[type="submit"]');
+        submitBtn.disabled = true;
+
         fetch('{{ route('chat.send') }}', {
             method: 'POST',
             headers: {
@@ -130,13 +140,24 @@
             },
             body: JSON.stringify({ message })
         })
-        .then(res => res.json())
+        .then(res => {
+            if (res.status === 429) {
+                throw new Error('Terlalu banyak pesan. Tunggu beberapa detik.');
+            }
+            if (!res.ok) {
+                throw new Error('Gagal mengirim pesan.');
+            }
+            return res.json();
+        })
         .then(data => {
             chatInput.value = '';
             loadMessages();
         })
         .catch(err => {
-            alert('Gagal mengirim pesan. Coba lagi.');
+            alert(err.message || 'Gagal mengirim pesan. Coba lagi.');
+        })
+        .finally(() => {
+            submitBtn.disabled = false;
         });
     });
 
