@@ -350,7 +350,7 @@
                     <h2 class="text-2xl sm:text-3xl font-extrabold tracking-tight text-charcoal mb-6">
                         Datang, Telepon, atau Chat—Kami Siap Melayani
                     </h2>
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="grid grid-cols-1 gap-6">
                         <!-- Email & Social -->
                         <div class="p-5 rounded-card border border-border bg-white space-y-2">
                             <div class="w-10 h-10 rounded-xl bg-coral/10 text-coral flex items-center justify-center text-lg font-bold">
