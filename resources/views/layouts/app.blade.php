@@ -51,14 +51,28 @@
     </footer>
     </div>
 
-    <!-- Tawk.to Live Chat - only for authenticated users -->
+    <!-- Chat Widget: Login prompt for guests, Tawk.to for authenticated users -->
+    @guest
+    <div class="fixed bottom-6 right-6 z-50">
+        <a href="{{ route('login') }}" class="flex items-center gap-2 px-4 py-3 bg-coral hover:bg-coral-hover text-white rounded-full shadow-lg transition-all hover:scale-105">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"/>
+            </svg>
+            <span class="text-sm font-bold">Chat Admin</span>
+        </a>
+        <div class="absolute bottom-full right-0 mb-2 w-48 bg-white text-charcoal text-xs p-3 rounded-lg shadow-lg opacity-0 hover:opacity-100 transition-opacity pointer-events-none">
+            Silakan login terlebih dahulu untuk chat dengan admin
+        </div>
+    </div>
+    @endguest
+
     @auth
     <script type="text/javascript">
     var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
     (function(){
     var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
     s1.async=true;
-    s1.src='https://embed.tawk.to/672bb3d12480f5b4f59f6a8f/1ic1qr9fk'; // ganti dengan ID properti Anda
+    s1.src='https://embed.tawk.to/672bb3d12480f5b4f59f6a8f/1ic1qr9fk';
     s1.charset='UTF-8';
     s1.setAttribute('crossorigin','*');
     s0.parentNode.insertBefore(s1,s0);

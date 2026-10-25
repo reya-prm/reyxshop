@@ -20,37 +20,22 @@ class KidsClothingSeeder extends Seeder
             ['value' => 'ReyxShop Kids - Pakaian Anak Berkualitas', 'type' => 'string']
         );
 
-        // Categories untuk pakaian anak
+        // Categories untuk pakaian anak (3 kategori)
         $categories = [
             [
-                'name' => 'Kaos Anak',
-                'slug' => 'kaos-anak',
-                'description' => 'Kaos anak berbahan katun nyaman untuk aktivitas sehari-hari.',
+                'name' => 'Baju',
+                'slug' => 'baju',
+                'description' => 'Kaos dan pakaian atas anak berbahan katun nyaman.',
             ],
             [
-                'name' => 'Celana Anak',
-                'slug' => 'celana-anak',
+                'name' => 'Celana',
+                'slug' => 'celana',
                 'description' => 'Celana panjang, celana pendek, celana kargo untuk anak.',
             ],
             [
-                'name' => 'Setelan Anak',
-                'slug' => 'setelan-anak',
+                'name' => 'Pakaian Set',
+                'slug' => 'pakaian-set',
                 'description' => 'Setelan kaos dan celana matching untuk anak.',
-            ],
-            [
-                'name' => 'Jaket & Hoodie',
-                'slug' => 'jaket-hoodie',
-                'description' => 'Jaket dan hoodie hangat untuk anak.',
-            ],
-            [
-                'name' => 'Baju Tidur',
-                'slug' => 'baju-tidur',
-                'description' => 'Piyama dan baju tidur nyaman untuk anak.',
-            ],
-            [
-                'name' => 'Aksesoris Anak',
-                'slug' => 'aksesoris-anak',
-                'description' => 'Topi, tas kecil, dan aksesoris pelengkap anak.',
             ],
         ];
 
@@ -68,9 +53,9 @@ class KidsClothingSeeder extends Seeder
         $this->command->info('✓ Kids clothing categories seeded');
 
         // Sample products (optional, bisa dihapus jika mau manual input)
-        $kaosCategory = Category::where('slug', 'kaos-anak')->first();
-        $celanaCategory = Category::where('slug', 'celana-anak')->first();
-        $setelanCategory = Category::where('slug', 'setelan-anak')->first();
+        $bajuCategory = Category::where('slug', 'baju')->first();
+        $celanaCategory = Category::where('slug', 'celana')->first();
+        $setCategory = Category::where('slug', 'pakaian-set')->first();
 
         $products = [
             [
@@ -78,7 +63,7 @@ class KidsClothingSeeder extends Seeder
                 'slug' => 'setelan-kaos-anak-karakter-naruto',
                 'description' => 'Setelan baju kaos dan celana pendek anak motif Naruto Shippuden. Bahan katun combed adem, cocok usia 2‑8 tahun.',
                 'price' => 89000,
-                'category_id' => $setelanCategory?->id,
+                'category_id' => $setCategory?->id,
                 'stock' => 50,
                 'is_active' => true,
             ],
@@ -87,7 +72,7 @@ class KidsClothingSeeder extends Seeder
                 'slug' => 'setelan-anak-motif-stitch-premium',
                 'description' => 'Setelan harian anak gambar Stitch menggemaskan. Bahan lembut tidak bikin gerah, cocok untuk main atau tidur.',
                 'price' => 95000,
-                'category_id' => $setelanCategory?->id,
+                'category_id' => $setCategory?->id,
                 'stock' => 45,
                 'is_active' => true,
             ],
@@ -96,7 +81,7 @@ class KidsClothingSeeder extends Seeder
                 'slug' => 'setelan-kaos-anak-tema-cars',
                 'description' => 'Setelan baju dan celana pendek anak motif mobil Cars. Sablon berkualitas tinggi tidak mudah luntur.',
                 'price' => 85000,
-                'category_id' => $setelanCategory?->id,
+                'category_id' => $setCategory?->id,
                 'stock' => 35,
                 'is_active' => true,
             ],
@@ -105,7 +90,7 @@ class KidsClothingSeeder extends Seeder
                 'slug' => 'kaos-katun-anak-karakter-superhero',
                 'description' => 'Kaos oblong anak motif superhero favorit. Bahan 100% katun combed 30s menyerap keringat dengan baik.',
                 'price' => 45000,
-                'category_id' => $kaosCategory?->id,
+                'category_id' => $bajuCategory?->id,
                 'stock' => 60,
                 'is_active' => true,
             ],
@@ -123,7 +108,7 @@ class KidsClothingSeeder extends Seeder
                 'slug' => 'setelan-kaos-anak-pokemon-pikachu',
                 'description' => 'Setelan kaos dan celana motif Pokemon Pikachu. Bahan adem dan lembut untuk anak aktif.',
                 'price' => 92000,
-                'category_id' => $setelanCategory?->id,
+                'category_id' => $setCategory?->id,
                 'stock' => 38,
                 'is_active' => true,
             ],
@@ -132,7 +117,7 @@ class KidsClothingSeeder extends Seeder
                 'slug' => 'kaos-anak-motif-dinosaurus-trex',
                 'description' => 'Kaos anak dengan gambar dinosaurus T-Rex keren. Bahan katun lembut dan sablon tidak mudah pudar.',
                 'price' => 42000,
-                'category_id' => $kaosCategory?->id,
+                'category_id' => $bajuCategory?->id,
                 'stock' => 55,
                 'is_active' => true,
             ],
@@ -141,7 +126,7 @@ class KidsClothingSeeder extends Seeder
                 'slug' => 'setelan-anak-karakter-spiderman',
                 'description' => 'Setelan kaos dan celana pendek tema Spiderman. Favorit anak laki-laki untuk main dan sekolah.',
                 'price' => 88000,
-                'category_id' => $setelanCategory?->id,
+                'category_id' => $setCategory?->id,
                 'stock' => 42,
                 'is_active' => true,
             ],
@@ -159,7 +144,7 @@ class KidsClothingSeeder extends Seeder
                 'slug' => 'setelan-kaos-anak-motif-mobil-truk',
                 'description' => 'Setelan harian anak gambar truk dan mobil konstruksi. Cocok untuk balita yang suka kendaraan.',
                 'price' => 79000,
-                'category_id' => $setelanCategory?->id,
+                'category_id' => $setCategory?->id,
                 'stock' => 40,
                 'is_active' => true,
             ],
@@ -168,7 +153,7 @@ class KidsClothingSeeder extends Seeder
                 'slug' => 'kaos-anak-karakter-doraemon',
                 'description' => 'Kaos anak motif Doraemon imut. Bahan katun combed halus dan nyaman dipakai.',
                 'price' => 48000,
-                'category_id' => $kaosCategory?->id,
+                'category_id' => $bajuCategory?->id,
                 'stock' => 52,
                 'is_active' => true,
             ],
@@ -177,7 +162,7 @@ class KidsClothingSeeder extends Seeder
                 'slug' => 'setelan-anak-mickey-mouse-disney',
                 'description' => 'Setelan resmi lisensi Disney motif Mickey Mouse. Bahan premium dan jahitan rapi.',
                 'price' => 105000,
-                'category_id' => $setelanCategory?->id,
+                'category_id' => $setCategory?->id,
                 'stock' => 30,
                 'is_active' => true,
             ],
@@ -195,7 +180,7 @@ class KidsClothingSeeder extends Seeder
                 'slug' => 'kaos-anak-motif-robot-transformer',
                 'description' => 'Kaos anak dengan gambar robot Transformer. Sablon 3D timbul keren dan awet.',
                 'price' => 52000,
-                'category_id' => $kaosCategory?->id,
+                'category_id' => $bajuCategory?->id,
                 'stock' => 45,
                 'is_active' => true,
             ],
@@ -204,7 +189,7 @@ class KidsClothingSeeder extends Seeder
                 'slug' => 'setelan-anak-tema-baby-shark',
                 'description' => 'Setelan kaos dan celana pendek motif Baby Shark yang disukai balita. Warna cerah dan ceria.',
                 'price' => 75000,
-                'category_id' => $setelanCategory?->id,
+                'category_id' => $setCategory?->id,
                 'stock' => 50,
                 'is_active' => true,
             ],
@@ -222,7 +207,7 @@ class KidsClothingSeeder extends Seeder
                 'slug' => 'setelan-kaos-anak-karakter-paw-patrol',
                 'description' => 'Setelan anak motif Paw Patrol (Chase, Marshall, Skye). Favorit balita untuk main dan tidur.',
                 'price' => 82000,
-                'category_id' => $setelanCategory?->id,
+                'category_id' => $setCategory?->id,
                 'stock' => 44,
                 'is_active' => true,
             ],
@@ -231,7 +216,7 @@ class KidsClothingSeeder extends Seeder
                 'slug' => 'kaos-anak-polos-warna-warni-set-3pcs',
                 'description' => 'Paket 3 kaos anak polos warna-warni. Bahan katun combed berkualitas, harga ekonomis.',
                 'price' => 99000,
-                'category_id' => $kaosCategory?->id,
+                'category_id' => $bajuCategory?->id,
                 'stock' => 65,
                 'is_active' => true,
             ],
