@@ -15,8 +15,8 @@ class ChatController extends Controller
      */
     public function getMessages(Request $request): JsonResponse
     {
-        // Only authenticated and verified users can access
-        if (! $request->user() || ! $request->user()->hasVerifiedEmail()) {
+        // Only authenticated users can access
+        if (! $request->user()) {
             abort(403, 'Login required');
         }
 
@@ -44,8 +44,8 @@ class ChatController extends Controller
      */
     public function sendMessage(Request $request): JsonResponse
     {
-        // Ensure authenticated and verified user
-        if (! $request->user() || ! $request->user()->hasVerifiedEmail()) {
+        // Ensure authenticated user
+        if (! $request->user()) {
             abort(403, 'Login required');
         }
 

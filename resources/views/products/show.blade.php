@@ -236,7 +236,9 @@
                                         @endif
                                     </div>
                                 </div>
-                            @elseif(Auth::user()->hasVerifiedEmail())
+                            @elseif(Auth::user()->isAdmin())
+                                <div class="p-4 bg-slate-100 text-slate-600 text-xs rounded-card">Admin tidak dapat menulis ulasan produk.</div>
+                            @else
                                 <form action="{{ route('products.reviews.store', $product->slug) }}" method="POST" class="space-y-3">
                                     @csrf
                                     <div>
@@ -253,12 +255,6 @@
                                     </div>
                                     <button type="submit" class="w-full py-2 px-4 rounded-pill bg-coral hover:bg-coral-hover text-white font-bold text-xs transition">Kirim Ulasan</button>
                                 </form>
-                            @else
-                                @if(auth()->check() && auth()->user()->isAdmin())
-                                    <div class="p-4 bg-slate-100 text-slate-600 text-xs rounded-card">Admin tidak dapat menulis ulasan produk.</div>
-                                @else
-                                    <div class="p-4 bg-yellow-100 text-yellow-800 text-xs rounded-card">Verifikasi email Anda untuk dapat menulis ulasan.</div>
-                                @endif
                             @endif
                         @else
                             <div class="p-4 bg-ash border border-border rounded-xl text-center space-y-2">
@@ -312,7 +308,9 @@
                     <div class="bg-white p-5 rounded-card border border-border shadow-xs">
                         <h4 class="text-xs font-bold text-charcoal uppercase tracking-wider mb-3">Ajukan Pertanyaan ke Admin</h4>
                         @auth
-                            @if(Auth::user()->hasVerifiedEmail())
+                            @if(Auth::user()->isAdmin())
+                                <div class="p-4 bg-slate-100 text-slate-600 text-xs rounded-card">Admin tidak dapat mengajukan pertanyaan produk.</div>
+                            @else
                                 <form action="{{ route('products.questions.store', $product->slug) }}" method="POST" class="space-y-3">
                                     @csrf
                                     <div>
@@ -320,12 +318,6 @@
                                     </div>
                                     <button type="submit" class="w-full py-2 px-4 rounded-pill bg-coral hover:bg-coral-hover text-white font-bold text-xs transition">Kirim Pertanyaan</button>
                                 </form>
-                            @else
-                                @if(auth()->check() && auth()->user()->isAdmin())
-                                    <div class="p-4 bg-slate-100 text-slate-600 text-xs rounded-card">Admin tidak dapat mengajukan pertanyaan produk.</div>
-                                @else
-                                    <div class="p-4 bg-yellow-100 text-yellow-800 text-xs rounded-card">Verifikasi email Anda untuk dapat bertanya.</div>
-                                @endif
                             @endif
                         @else
                             <a href="{{ route('login') }}" class="block w-full py-2 px-4 bg-coral text-white text-center rounded-pill hover:bg-coral-hover text-xs font-bold">Login untuk bertanya</a>
