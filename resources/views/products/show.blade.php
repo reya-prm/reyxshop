@@ -172,22 +172,7 @@
                         <span class="text-base">&rarr;</span>
                     </a>
 
-                    <!-- Lazada Button -->
-                    <a 
-                        href="{{ $lazadaUrl }}" 
-                        target="_blank" 
-                        rel="noopener" 
-                        class="flex items-center justify-between p-3.5 rounded-card bg-gradient-to-r from-indigo-600 to-indigo-700 hover:from-indigo-700 hover:to-indigo-800 text-white font-bold text-sm shadow-md shadow-indigo-600/20 transition transform hover:-translate-y-0.5"
-                    >
-                        <div class="flex items-center gap-3">
-                            <span class="w-8 h-8 rounded-lg bg-white/20 flex items-center justify-center font-black">L</span>
-                            <div>
-                                <span class="block text-xs uppercase tracking-wide opacity-90">Beli di Marketplace</span>
-                                <span class="font-bold text-sm">Buka Produk di Lazada Official</span>
-                            </div>
-                        </div>
-                        <span class="text-base">&rarr;</span>
-                    </a>
+
 
                     <!-- Email Direct Contact -->
                     <a 
