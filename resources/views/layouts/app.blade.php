@@ -45,7 +45,7 @@
                     <path stroke-linecap="round" stroke-linejoin="round" d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/>
                     <circle cx="12" cy="9" r="2.5"/>
                 </svg>
-                <a href="https://www.google.com/maps/place/REYS+HOME/@-7.002208627316598,107.54783584246609" target="_blank" class="underline hover:text-coral text-slate-300">REYS HOME, Katapang, Kec. Katapang, Kabupaten Bandung, Jawa Barat 40921</a>
+                <a href="https://www.google.com/maps/place/REYS+HOME/@-7.002208627316598,107.54783584246609" target="_blank" class="underline hover:text-coral text-slate-300">XGXX+44C, Katapang, Kec. Katapang, Kabupaten Bandung, Jawa Barat 40921</a>
             </div>
         </div>
     </footer>

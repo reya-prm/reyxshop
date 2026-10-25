@@ -374,6 +374,18 @@
                                 </div>
                             </div>
                         </div>
+
+                        <!-- Location & Plus Code Card -->
+                        <div class="p-5 rounded-card border border-border bg-white space-y-2">
+                            <div class="w-10 h-10 rounded-xl bg-coral/10 text-coral flex items-center justify-center text-lg font-bold">
+                                📍
+                            </div>
+                            <h4 class="font-bold text-sm text-charcoal">Lokasi & Plus Code</h4>
+                            <p class="text-xs text-slate leading-relaxed">
+                                XGXX+44C<br>
+                                Katapang, Kec. Katapang, Kabupaten Bandung, Jawa Barat 40921
+                            </p>
+                        </div>
                     </div>
 
                     <!-- Google Maps Embed (inside left column) -->
