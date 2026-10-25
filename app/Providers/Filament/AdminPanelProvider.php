@@ -31,6 +31,7 @@ class AdminPanelProvider extends PanelProvider
                 'primary' => Color::hex('#FF6B6B'), // coral
                 'gray' => Color::Slate,
             ])
+            ->darkMode(false) // Disable dark mode, force light mode
             ->font('Plus Jakarta Sans')
             ->brandLogo(asset('logo.png'))
             ->discoverResources(in: app_path('Filament/Resources'), for: 'App\\Filament\\Resources')
