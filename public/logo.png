@@ -1,4 +1,4 @@
-<svg xmlns='http://www.w3.org/2000/svg' width='200' height='60'>
-  <rect width='200' height='60' fill='%23FF6B6B'/>
-  <text x='50%' y='50%' dominant-baseline='middle' text-anchor='middle' font-family='sans-serif' font-size='28' fill='white'>ReyxShop</text>
+<svg width="200" height="80" xmlns="http://www.w3.org/2000/svg">
+  <rect width="200" height="80" fill="#FF6B6B"/>
+  <text x='50%' y='50%' dominant-baseline='middle' text-anchor='middle' font-family='sans-serif' font-size='24' font-weight='bold' fill='white'>ReyxShop Kids</text>
 </svg>
