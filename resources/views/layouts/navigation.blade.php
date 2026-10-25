@@ -4,8 +4,8 @@
         <div class="flex justify-between h-16 items-center">
             <!-- Logo + Brand -->
             <div class="flex items-center gap-10">
-                <a href="{{ route('home') }}" class="shrink-0">
-                    <x-application-logo class="block h-10 w-auto" />
+                <a href="{{ route('home') }}" class="shrink-0 flex items-center gap-2">
+                    <span class="text-lg font-extrabold text-coral">ReyxShop Kids</span>
                 </a>
 
                 <!-- Navigation Links Desktop -->
