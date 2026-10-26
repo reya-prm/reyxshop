@@ -125,10 +125,10 @@
             <a href="{{ route('products.index') }}" class="block text-xs font-bold text-charcoal hover:text-coral py-1.5 {{ request()->routeIs('products.*') ? 'text-coral' : '' }}">
                 Katalog
             </a>
-            <a href="{{ route('home') }}#about" class="block text-xs font-bold text-charcoal hover:text-coral py-1.5">
+            <a href="{{ route('home') }}#about" @click="open = false" class="block text-xs font-bold text-charcoal hover:text-coral py-1.5">
                 Tentang Kami
             </a>
-            <a href="{{ route('home') }}#contact" class="block text-xs font-bold text-charcoal hover:text-coral py-1.5">
+            <a href="{{ route('home') }}#contact" @click="open = false" class="block text-xs font-bold text-charcoal hover:text-coral py-1.5">
                 Lokasi
             </a>
 

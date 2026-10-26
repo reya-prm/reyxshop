@@ -162,5 +162,58 @@
         @include('components.chat-widget')
     @endif
     @endauth
+
+    <!-- Clean hash navigation & smooth scrolling -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // If the page loaded with a hash in the URL (e.g. /#about from another page)
+            if (window.location.hash) {
+                try {
+                    var initialTarget = document.querySelector(window.location.hash);
+                    if (initialTarget) {
+                        setTimeout(function () {
+                            initialTarget.scrollIntoView({ behavior: 'smooth' });
+                        }, 100);
+                    }
+                } catch (err) {}
+                // Clean the hash from the browser address bar immediately
+                history.replaceState(null, '', window.location.pathname + window.location.search);
+            }
+
+            // Intercept anchor clicks to internal sections so the hash isn't appended to the address bar
+            document.addEventListener('click', function (e) {
+                if (e.defaultPrevented) return;
+
+                var link = e.target.closest('a[href*="#"]');
+                if (!link) return;
+
+                var url;
+                try {
+                    url = new URL(link.href, window.location.origin);
+                } catch (err) {
+                    return;
+                }
+
+                // If this is a link to a section on the current page
+                if (url.pathname === window.location.pathname && url.hash && url.hash.length > 1) {
+                    // Do not override category filter links in home catalog
+                    if (url.searchParams.has('category')) return;
+
+                    try {
+                        var target = document.querySelector(url.hash);
+                        if (target) {
+                            e.preventDefault();
+                            target.scrollIntoView({ behavior: 'smooth' });
+
+                            // Ensure address bar remains clean without the hash
+                            if (window.location.hash) {
+                                history.replaceState(null, '', window.location.pathname + window.location.search);
+                            }
+                        }
+                    } catch (err) {}
+                }
+            });
+        });
+    </script>
 </body>
 </html>

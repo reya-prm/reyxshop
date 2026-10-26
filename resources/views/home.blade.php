@@ -264,7 +264,7 @@
 
 
     <!-- ABOUT SECTION -->
-    <section class="py-16 bg-white border-t border-border" id="about">
+    <section class="py-16 bg-white border-t border-border scroll-mt-16" id="about">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
                 <!-- Image -->
@@ -329,7 +329,7 @@
     </section>
 
     <!-- CONTACT SECTION -->
-    <section class="py-16 bg-ash border-t border-border" id="contact">
+    <section class="py-16 bg-ash border-t border-border scroll-mt-16" id="contact">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
                 <!-- Left: Contact Details + Maps -->
